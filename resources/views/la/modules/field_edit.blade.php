@@ -1,12 +1,12 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title", "Edit Field: ".$field->label)
-@section("contentheader_description", "from ".$module->model." module")
+@section("contentheader_description", "Listagem de from ".$module->model." module")
 @section("section", "Module ".$module->name)
 @section("section_url", url(config('laraadmin.adminRoute') . '/modules/'.$module->id))
 @section("sub_section", "Edit Field")
 
-@section("htmlheader_title", "Field Edit : ".$field->label)
+@section("htmlheader_title", "Listadem de Field Edit : ".$field->label)
 
 @section("main-content")
 <div class="box">
@@ -100,7 +100,7 @@
 					
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/modules/'.$module->id) }}">Cancel</a></button>
+						{!! Form::submit( 'Atualizar', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/modules/'.$module->id) }}">Cancelar</a></button>
 					</div>
 				{!! Form::close() !!}
 				

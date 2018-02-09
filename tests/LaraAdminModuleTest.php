@@ -42,7 +42,7 @@ class LaraAdminModuleTest extends TestCase
 			->see('modules listing')
 			->type('Students', 'name')
 			->type('fa-user-plus', 'icon')
-			->press('Submit');
+			->press('Enviar');
 	}
 
 	/**
@@ -56,7 +56,7 @@ class LaraAdminModuleTest extends TestCase
 			->see('modules listing')
 			->type('Students', 'name')
 			->type('fa-user-plus', 'icon')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Name', 'label')
 			->type('name', 'colname')
@@ -66,7 +66,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('10', 'minlength')
 			->type('100', 'maxlength')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('StudentsController')
 			->click('view_col_name')
 			->dontSee('view_col_name')
@@ -80,7 +80,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('10', 'minlength')
 			->type('1000', 'maxlength')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Is Public', 'label')
 			->type('is_public', 'colname')
@@ -95,7 +95,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('0', 'minlength')
 			->type('10', 'maxlength')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Price', 'label')
 			->type('price', 'colname')
@@ -104,7 +104,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('0', 'minlength')
 			->type('10', 'maxlength')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Date of Release', 'label')
 			->type('date_release', 'colname')
@@ -112,7 +112,7 @@ class LaraAdminModuleTest extends TestCase
 			->uncheck('unique')
 			->type('', 'defaultvalue')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Date of Release', 'label')
 			->type('date_release', 'colname')
@@ -120,7 +120,7 @@ class LaraAdminModuleTest extends TestCase
 			->uncheck('unique')
 			->type('', 'defaultvalue')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Start Time', 'label')
 			->type('time_started', 'colname')
@@ -128,7 +128,7 @@ class LaraAdminModuleTest extends TestCase
 			->uncheck('unique')
 			->type('', 'defaultvalue')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Weight', 'label')
 			->type('weight', 'colname')
@@ -138,7 +138,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('', 'minlength')
 			->type('', 'maxlength')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Publisher', 'label')
 			->type('publisher', 'colname')
@@ -147,7 +147,7 @@ class LaraAdminModuleTest extends TestCase
 			->check('required')
 			->select('list', 'popup_value_type')
 			->select(['Marvel', 'Bloomsbury', 'Universal'], 'popup_vals_list')
-			->press('Submit')
+			->press('Enviar')
 			->see('Marvel')
 			->see('Bloomsbury')
 			->see('Universal');
@@ -159,7 +159,7 @@ class LaraAdminModuleTest extends TestCase
 			->check('required')
 			->select('table', 'popup_value_type')
 			->select('employees', 'popup_vals_table')
-			->press('Submit')
+			->press('Enviar')
 			->see('@employees');
 		$this->see("StudentsController")
 			->type('Email', 'label')
@@ -170,14 +170,14 @@ class LaraAdminModuleTest extends TestCase
 			->type('', 'minlength')
 			->type('', 'maxlength')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		$this->see("StudentsController")
 			->type('Test File', 'label')
 			->type('test_file', 'colname')
 			->select('9', 'field_type')
 			->type('', 'defaultvalue')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('test_file');
 		$this->see("StudentsController")
 			->type('Pressure', 'label')
@@ -188,7 +188,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('', 'minlength')
 			->type('', 'maxlength')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('Pressure');
 		$this->see("StudentsController")
 			->type('Biography', 'label')
@@ -196,7 +196,7 @@ class LaraAdminModuleTest extends TestCase
 			->select('11', 'field_type')
 			->type('', 'defaultvalue')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('Biography');
 		$this->see("StudentsController")
 			->type('Profile Image', 'label')
@@ -204,7 +204,7 @@ class LaraAdminModuleTest extends TestCase
 			->select('12', 'field_type')
 			->type('', 'defaultvalue')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('profile_image');
 		$this->see("StudentsController")
 			->type('Pages', 'label')
@@ -215,7 +215,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('0', 'minlength')
 			->type('100', 'maxlength')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('pages');
 		$this->see("StudentsController")
 			->type('Mobile', 'label')
@@ -226,7 +226,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('0', 'minlength')
 			->type('20', 'maxlength')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('Mobile');
 		$this->see("StudentsController")
 			->type('Media Type', 'label')
@@ -236,7 +236,7 @@ class LaraAdminModuleTest extends TestCase
 			->check('required')
 			->select('list', 'popup_value_type')
 			->select(['Marvel', 'Bloomsbury', 'Universal'], 'popup_vals_list')
-			->press('Submit')
+			->press('Enviar')
 			->see('Media Type');
 		$this->see("StudentsController")
 			->type('Media Role', 'label')
@@ -246,7 +246,7 @@ class LaraAdminModuleTest extends TestCase
 			->check('required')
 			->select('table', 'popup_value_type')
 			->select('roles', 'popup_vals_table')
-			->press('Submit')
+			->press('Enviar')
 			->see('@roles');
 		$this->see("StudentsController")
 			->type('User Password', 'label')
@@ -256,7 +256,7 @@ class LaraAdminModuleTest extends TestCase
 			->check('required')
 			->type('0', 'minlength')
 			->type('64', 'maxlength')
-			->press('Submit')
+			->press('Enviar')
 			->see('User Password');
 		$this->see("StudentsController")
 			->type('User Status', 'label')
@@ -266,7 +266,7 @@ class LaraAdminModuleTest extends TestCase
 			->check('required')
 			->select('list', 'popup_value_type')
 			->select(['Marvel', 'Bloomsbury', 'Universal'], 'popup_vals_list')
-			->press('Submit')
+			->press('Enviar')
 			->see('User Status');
 		$this->see("StudentsController")
 			->type('Author', 'label')
@@ -277,7 +277,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('0', 'minlength')
 			->type('100', 'maxlength')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('Author');
 		$this->see("StudentsController")
 			->type('Genre', 'label')
@@ -287,7 +287,7 @@ class LaraAdminModuleTest extends TestCase
 			->check('required')
 			->select('list', 'popup_value_type')
 			->select(['Marvel', 'Bloomsbury', 'Universal'], 'popup_vals_list')
-			->press('Submit')
+			->press('Enviar')
 			->see('Genre');
 		$this->see("StudentsController")
 			->type('Description', 'label')
@@ -298,7 +298,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('', 'minlength')
 			->type('1000', 'maxlength')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('Description');
 		$this->see("StudentsController")
 			->type('Introduction', 'label')
@@ -309,7 +309,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('', 'minlength')
 			->type('100', 'maxlength')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('short_intro');
 		$this->see("StudentsController")
 			->type('Website', 'label')
@@ -320,7 +320,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('', 'minlength')
 			->type('100', 'maxlength')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('website');
 		$this->see("StudentsController")
 			->type('Test Files', 'label')
@@ -328,7 +328,7 @@ class LaraAdminModuleTest extends TestCase
 			->select('24', 'field_type')
 			->type('', 'defaultvalue')
 			->check('required')
-			->press('Submit')
+			->press('Enviar')
 			->see('test_files');
 		$response = $this->call('GET', '/admin/module_generate_migr_crud/'.$this->probable_module_id);
 		$this->assertEquals(200, $response->status());
@@ -362,7 +362,7 @@ class LaraAdminModuleTest extends TestCase
 			->see('modules listing')
 			->type('Students', 'name')
 			->type('fa-user-plus', 'icon')
-			->press('Submit')
+			->press('Enviar')
 			->see("StudentsController");
 		
 		// Create Name Field
@@ -375,7 +375,7 @@ class LaraAdminModuleTest extends TestCase
 			->type('10', 'minlength')
 			->type('100', 'maxlength')
 			->check('required')
-			->press('Submit');
+			->press('Enviar');
 		
 		// Edit Name Field - As it is
 		$this->see("StudentsController")

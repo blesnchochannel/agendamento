@@ -38,6 +38,8 @@
         </div><!-- /.box-body -->
       </div><!-- /.box -->
     </section>
+    <section class="col-lg-7 connectedSortable">
+    </section>
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
       <!-- Custom tabs (Charts with tabs)-->

@@ -6,9 +6,9 @@
 @section("contentheader_description", $user->$view_col)
 @section("section", "Users")
 @section("section_url", url(config('laraadmin.adminRoute') . '/users'))
-@section("sub_section", "Edit")
+@section("sub_section", "Editar")
 
-@section("htmlheader_title", "Users Edit : ".$user->$view_col)
+@section("htmlheader_title", "Listadem de Users Edit : ".$user->$view_col)
 
 @section("main-content")
 
@@ -41,7 +41,7 @@
 					--}}
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/users') }}">Cancel</a></button>
+						{!! Form::submit( 'Atualizar', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/users') }}">Cancelar</a></button>
 					</div>
 				{!! Form::close() !!}
 			</div>

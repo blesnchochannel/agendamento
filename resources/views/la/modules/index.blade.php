@@ -4,14 +4,14 @@
 use Dwij\Laraadmin\Models\Module;
 ?>
 
-@section("contentheader_title", "Modules")
-@section("contentheader_description", "modules listing")
-@section("section", "Modules")
-@section("sub_section", "Listing")
-@section("htmlheader_title", "Modules Listing")
+@section("contentheader_title", "Módulos")
+@section("contentheader_description", "Listagem de módulos")
+@section("section", "Módulos")
+@section("sub_section", "Listagem")
+@section("htmlheader_title", "Listadem de Módulos")
 
 @section("headerElems")
-<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Module</button>
+<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar Módulo</button>
 @endsection
 
 @section("main-content")
@@ -26,7 +26,7 @@ use Dwij\Laraadmin\Models\Module;
 			<th>Name</th>
 			<th>Table</th>
 			<th>Items</th>
-			<th>Actions</th>
+			<th>Ações</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -55,7 +55,7 @@ use Dwij\Laraadmin\Models\Module;
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Module</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Module</h4>
 			</div>
 			{!! Form::open(['route' => config('laraadmin.adminRoute') . '.modules.store', 'id' => 'module-add-form']) !!}
 			<div class="modal-body">
@@ -74,8 +74,8 @@ use Dwij\Laraadmin\Models\Module;
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				{!! Form::submit( 'Submit', ['class'=>'btn btn-success']) !!}
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				{!! Form::submit( 'Enviar', ['class'=>'btn btn-success']) !!}
 			</div>
 			{!! Form::close() !!}
 		</div>

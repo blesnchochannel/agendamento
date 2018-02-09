@@ -1,10 +1,10 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title", "Configuration")
-@section("contentheader_description", "")
+@section("contentheader_description", "Listagem de ")
 @section("section", "Configuration")
 @section("sub_section", "")
-@section("htmlheader_title", "Configuration")
+@section("htmlheader_title", "Listadem de Configuration")
 
 @section("headerElems")
 @endsection

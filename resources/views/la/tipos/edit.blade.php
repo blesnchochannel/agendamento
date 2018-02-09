@@ -6,9 +6,9 @@
 @section("contentheader_description", $tipo->$view_col)
 @section("section", "Tipos")
 @section("section_url", url(config('laraadmin.adminRoute') . '/tipos'))
-@section("sub_section", "Edit")
+@section("sub_section", "Editar")
 
-@section("htmlheader_title", "Tipos Edit : ".$tipo->$view_col)
+@section("htmlheader_title", "Listadem de Tipos Edit : ".$tipo->$view_col)
 
 @section("main-content")
 
@@ -37,7 +37,7 @@
 					--}}
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/tipos') }}">Cancel</a></button>
+						{!! Form::submit( 'Atualizar', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/tipos') }}">Cancelar</a></button>
 					</div>
 				{!! Form::close() !!}
 			</div>

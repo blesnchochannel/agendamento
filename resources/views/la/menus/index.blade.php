@@ -5,10 +5,10 @@ use Dwij\Laraadmin\Models\Module;
 ?>
 
 @section("contentheader_title", "Menus")
-@section("contentheader_description", "Editor")
+@section("contentheader_description", "Listagem de Editor")
 @section("section", "Menus")
 @section("sub_section", "Editor")
-@section("htmlheader_title", "Menu Editor")
+@section("htmlheader_title", "Listadem de Menu Editor")
 
 @section("headerElems")
 
@@ -102,8 +102,8 @@ use Dwij\Laraadmin\Models\Module;
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				{!! Form::submit( 'Submit', ['class'=>'btn btn-success']) !!}
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				{!! Form::submit( 'Enviar', ['class'=>'btn btn-success']) !!}
 			</div>
 			{!! Form::close() !!}
 		</div>

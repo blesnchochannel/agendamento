@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title", "Planos")
-@section("contentheader_description", "Planos listing")
+@section("contentheader_description", "Listagem de Planos")
 @section("section", "Planos")
-@section("sub_section", "Listing")
-@section("htmlheader_title", "Planos Listing")
+@section("sub_section", "Listagem")
+@section("htmlheader_title", "Listadem de Planos")
 
 @section("headerElems")
 @la_access("Planos", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Plano</button>
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Plano</button>
 @endla_access
 @endsection
 
@@ -34,7 +34,7 @@
 			<th>{{ $module->fields[$col]['label'] or ucfirst($col) }}</th>
 			@endforeach
 			@if($show_actions)
-			<th>Actions</th>
+			<th>Ações</th>
 			@endif
 		</tr>
 		</thead>
@@ -51,7 +51,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Plano</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Plano</h4>
 			</div>
 			{!! Form::open(['action' => 'LA\PlanosController@store', 'id' => 'plano-add-form']) !!}
 			<div class="modal-body">
@@ -65,8 +65,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				{!! Form::submit( 'Submit', ['class'=>'btn btn-success']) !!}
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				{!! Form::submit( 'Enviar', ['class'=>'btn btn-success']) !!}
 			</div>
 			{!! Form::close() !!}
 		</div>
@@ -91,7 +91,7 @@ $(function () {
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
-			searchPlaceholder: "Search"
+			searchPlaceholder: "Procurar"
 		},
 		@if($show_actions)
 		columnDefs: [ { orderable: false, targets: [-1] }],

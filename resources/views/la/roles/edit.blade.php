@@ -6,9 +6,9 @@
 @section("contentheader_description", $role->$view_col)
 @section("section", "Roles")
 @section("section_url", url(config('laraadmin.adminRoute') . '/roles'))
-@section("sub_section", "Edit")
+@section("sub_section", "Editar")
 
-@section("htmlheader_title", "Roles Edit : ".$role->$view_col)
+@section("htmlheader_title", "Listadem de Roles Edit : ".$role->$view_col)
 
 @section("main-content")
 
@@ -41,7 +41,7 @@
 					--}}
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/roles') }}">Cancel</a></button>
+						{!! Form::submit( 'Atualizar', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/roles') }}">Cancelar</a></button>
 					</div>
 				{!! Form::close() !!}
 			</div>

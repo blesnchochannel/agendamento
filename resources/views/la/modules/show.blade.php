@@ -244,7 +244,7 @@ use Dwij\Laraadmin\Models\Module;
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add {{ $module->model }} Field</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar {{ $module->model }} Field</h4>
 			</div>
 			{!! Form::open(['route' => config('laraadmin.adminRoute') . '.module_fields.store', 'id' => 'field-form']) !!}
 			{{ Form::hidden("module_id", $module->id) }}
@@ -325,8 +325,8 @@ use Dwij\Laraadmin\Models\Module;
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				{!! Form::submit( 'Submit', ['class'=>'btn btn-success']) !!}
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				{!! Form::submit( 'Enviar', ['class'=>'btn btn-success']) !!}
 			</div>
 			{!! Form::close() !!}
 		</div>

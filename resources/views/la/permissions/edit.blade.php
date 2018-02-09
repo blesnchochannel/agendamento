@@ -6,9 +6,9 @@
 @section("contentheader_description", $permission->$view_col)
 @section("section", "Permissions")
 @section("section_url", url(config('laraadmin.adminRoute') . '/permissions'))
-@section("sub_section", "Edit")
+@section("sub_section", "Editar")
 
-@section("htmlheader_title", "Permission Edit : ".$permission->$view_col)
+@section("htmlheader_title", "Listadem de Permission Edit : ".$permission->$view_col)
 
 @section("main-content")
 
@@ -39,7 +39,7 @@
 					--}}
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/permissions') }}">Cancel</a></button>
+						{!! Form::submit( 'Atualizar', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/permissions') }}">Cancelar</a></button>
 					</div>
 				{!! Form::close() !!}
 			</div>
