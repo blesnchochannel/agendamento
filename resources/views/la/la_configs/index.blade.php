@@ -1,10 +1,10 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Configuration")
-@section("contentheader_description", "Listagem de ")
-@section("section", "Configuration")
+@section("contentheader_title", "Configurações")
+@section("contentheader_description", "Listagem de Configurações")
+@section("section", "Configurações")
 @section("sub_section", "")
-@section("htmlheader_title", "Listadem de Configuration")
+@section("htmlheader_title", "Listadem de Configurações")
 
 @section("headerElems")
 @endsection
@@ -108,7 +108,7 @@
 			</div>
 		</div><!-- /.box-body -->
 		<div class="box-footer">
-			<button type="submit" class="btn btn-primary">Save</button>
+			<button type="submit" class="btn btn-primary">Salvar</button>
 		</div><!-- /.box-footer -->
 	</div><!-- /.box -->
 </form>

@@ -118,7 +118,7 @@
 									<?php
 									$datec = Auth::user()['created_at'];
 									?>
-									<small>Member since <?php echo date("M. Y", strtotime($datec)); ?></small>
+									<small>Membro desde <?php echo date("M. Y", strtotime($datec)); ?></small>
 								</p>
 							</li>
 							<!-- Menu Body -->

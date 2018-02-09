@@ -5,10 +5,10 @@ use Dwij\Laraadmin\Models\Module;
 ?>
 
 @section("contentheader_title", "Menus")
-@section("contentheader_description", "Listagem de Editor")
+@section("contentheader_description", "Listagem de Menus")
 @section("section", "Menus")
-@section("sub_section", "Editor")
-@section("htmlheader_title", "Listadem de Menu Editor")
+@section("sub_section", "Menus")
+@section("htmlheader_title", "Listadem de Menus")
 
 @section("headerElems")
 
@@ -23,8 +23,8 @@ use Dwij\Laraadmin\Models\Module;
 			<div class="col-md-4 col-lg-4">
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab-modules" data-toggle="tab">Modules</a></li>
-						<li><a href="#tab-custom-link" data-toggle="tab">Custom Links</a></li>
+						<li class="active"><a href="#tab-modules" data-toggle="tab">Módulos</a></li>
+						<li><a href="#tab-custom-link" data-toggle="tab">Links Customizados</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab-modules">
@@ -43,17 +43,17 @@ use Dwij\Laraadmin\Models\Module;
 									<input class="form-control" placeholder="URL" name="url" type="text" value="http://" data-rule-minlength="1" required>
 								</div>
 								<div class="form-group">
-									<label for="name" style="font-weight:normal;">Label</label>
+									<label for="name" style="font-weight:normal;">Título</label>
 									<input class="form-control" placeholder="Label" name="name" type="text" value=""  data-rule-minlength="1" required>
 								</div>
 								<div class="form-group">
-									<label for="icon" style="font-weight:normal;">Icon</label>
+									<label for="icon" style="font-weight:normal;">Ícone</label>
 									<div class="input-group">
 										<input class="form-control" placeholder="FontAwesome Icon" name="icon" type="text" value="fa-cube"  data-rule-minlength="1" required>
 										<span class="input-group-addon"></span>
 									</div>
 								</div>
-								<input type="submit" class="btn btn-primary pull-right mr10" value="Add to menu">
+								<input type="submit" class="btn btn-primary pull-right mr10" value="Adicionar ao menu">
 							{!! Form::close() !!}
 						</div>
 					</div><!-- /.tab-content -->
@@ -77,7 +77,7 @@ use Dwij\Laraadmin\Models\Module;
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Edit Menu Item</h4>
+				<h4 class="modal-title" id="myModalLabel">Editar o Item de Menu</h4>
 			</div>
 			{!! Form::open(['action' => ['\Dwij\Laraadmin\Controllers\MenuController@update', 1], 'id' => 'menu-edit-form']) !!}
 			<input name="_method" type="hidden" value="PUT">
@@ -89,11 +89,11 @@ use Dwij\Laraadmin\Models\Module;
 						<input class="form-control" placeholder="URL" name="url" type="text" value="http://" data-rule-minlength="1" required>
 					</div>
 					<div class="form-group">
-						<label for="name" style="font-weight:normal;">Label</label>
+						<label for="name" style="font-weight:normal;">Título</label>
 						<input class="form-control" placeholder="Label" name="name" type="text" value=""  data-rule-minlength="1" required>
 					</div>
 					<div class="form-group">
-						<label for="icon" style="font-weight:normal;">Icon</label>
+						<label for="icon" style="font-weight:normal;">Ícone</label>
 						<div class="input-group">
 							<input class="form-control" placeholder="FontAwesome Icon" name="icon" type="text" value="fa-cube"  data-rule-minlength="1" required>
 							<span class="input-group-addon"></span>

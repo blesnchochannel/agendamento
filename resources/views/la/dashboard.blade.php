@@ -1,8 +1,8 @@
 @extends('la.layouts.app')
 
-@section('htmlheader_title') Dashboard @endsection
-@section('contentheader_title') Dashboard @endsection
-@section('contentheader_description') Organisation Overview @endsection
+@section('htmlheader_title') Início @endsection
+@section('contentheader_title') Início @endsection
+@section('contentheader_description') Sistema de Agendamento @endsection
 
 @section('main-content')
 <!-- Main content -->
@@ -10,36 +10,6 @@
   <!-- Small boxes (Stat box) -->
   <!-- Main row -->
   <div class="row">
-    <section class="col-lg-5 connectedSortable">
-      <!-- Calendar -->
-      <div class="box box-solid bg-green-gradient">
-        <div class="box-header">
-          <i class="fa fa-calendar"></i>
-          <h3 class="box-title">Calendar</h3>
-          <!-- tools box -->
-          <div class="pull-right box-tools">
-            <!-- button with a dropdown -->
-            <div class="btn-group">
-              <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-              <ul class="dropdown-menu pull-right" role="menu">
-                <li><a href="#">Add new event</a></li>
-                <li><a href="#">Clear events</a></li>
-                <li class="divider"></li>
-                <li><a href="#">View calendar</a></li>
-              </ul>
-            </div>
-            <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-          </div><!-- /. tools -->
-        </div><!-- /.box-header -->
-        <div class="box-body no-padding">
-          <!--The calendar -->
-          <div id="calendar" style="width: 100%"></div>
-        </div><!-- /.box-body -->
-      </div><!-- /.box -->
-    </section>
-    <section class="col-lg-7 connectedSortable">
-    </section>
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
       <!-- Custom tabs (Charts with tabs)-->
