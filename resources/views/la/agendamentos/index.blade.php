@@ -18,7 +18,7 @@
 	<!-- Small boxes (Stat box) -->
 	<!-- Main row -->
 	<div class="row">
-		<section class="col-lg-5 connectedSortable">
+		<section class="col-lg-12 connectedSortable">
 			<div class="box box-solid bg-green-gradient">
 				<div class="box-header">
 					<i class="fa fa-calendar"></i>
@@ -46,7 +46,7 @@
 			</div><!-- /.box -->
 		</section>
 
-		<section class="col-lg-7 connectedSortable">
+		<section class="col-lg-12 connectedSortable">
 			@if (count($errors) > 0)
 			<div class="alert alert-danger">
 				<ul>

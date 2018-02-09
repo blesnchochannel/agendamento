@@ -55,14 +55,14 @@ use Dwij\Laraadmin\Models\Module;
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Adicionar Module</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Módulo</h4>
 			</div>
 			{!! Form::open(['route' => config('laraadmin.adminRoute') . '.modules.store', 'id' => 'module-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
 					<div class="form-group">
-						<label for="name">Module Name :</label>
-						{{ Form::text("name", null, ['class'=>'form-control', 'placeholder'=>'Module Name', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'required' => 'required']) }}
+						<label for="name">Nome do Módulo:</label>
+						{{ Form::text("name", null, ['class'=>'form-control', 'placeholder'=>'Nome do Módulo', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'required' => 'required']) }}
 					</div>
 					<div class="form-group">
 						<label for="icon">Ícone</label>
@@ -90,19 +90,19 @@ use Dwij\Laraadmin\Models\Module;
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
-				<h4 class="modal-title">Module Delete</h4>
+				<h4 class="modal-title">Apagando Módulo</h4>
 			</div>
 			<div class="modal-body">
-				<p>Do you really want to delete module <b id="moduleNameStr" class="text-danger"></b> ?</p>
-				<p>Following files will be deleted:</p>
+				<p>Você deseja realmente apagar o módulo <b id="moduleNameStr" class="text-danger"></b> ?</p>
+				<p>Os seguintes arquivos serão apagados:</p>
 				<div id="moduleDeleteFiles"></div>
-				<p class="text-danger">Note: Migration file will not be deleted but modified.</p>
+				<p class="text-danger">Observação: O arquivo da migração não será apagado, mas sim modificado.</p>
 			</div>
 			<div class="modal-footer">
 				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.modules.destroy', 0], 'id' => 'module_del_form', 'method' => 'delete', 'style'=>'display:inline']) }}
-					<button class="btn btn-danger btn-delete pull-left" type="submit">Yes</button>
+					<button class="btn btn-danger btn-delete pull-left" type="submit">Sim</button>
 				{{ Form::close() }}
-				<a data-dismiss="modal" class="btn btn-default pull-right" >No</a>				
+				<a data-dismiss="modal" class="btn btn-default pull-right" >Não</a>				
 			</div>
 		</div>
 		<!-- /.modal-content -->

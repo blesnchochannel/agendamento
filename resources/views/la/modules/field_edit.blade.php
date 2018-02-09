@@ -20,53 +20,53 @@
 					{{ Form::hidden("module_id", $module->id) }}
 					
 					<div class="form-group">
-						<label for="label">Field Label :</label>
-						{{ Form::text("label", null, ['class'=>'form-control', 'placeholder'=>'Field Label', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'required' => 'required']) }}
+						<label for="label">Nome do Campo :</label>
+						{{ Form::text("label", null, ['class'=>'form-control', 'placeholder'=>'Nome do Campo', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'required' => 'required']) }}
 					</div>
 					
 					<div class="form-group">
-						<label for="colname">Column Name :</label>
-						{{ Form::text("colname", null, ['class'=>'form-control', 'placeholder'=>'Column Name (lowercase)', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'data-rule-banned-words' => 'true', 'required' => 'required']) }}
+						<label for="colname">Nome da Coluna :</label>
+						{{ Form::text("colname", null, ['class'=>'form-control', 'placeholder'=>'Nome da Coluna (minúsculo)', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'data-rule-banned-words' => 'true', 'required' => 'required']) }}
 					</div>
 					
 					<div class="form-group">
-						<label for="field_type">UI Type:</label>
+						<label for="field_type">Tipo de Dado:</label>
 						{{ Form::select("field_type", $ftypes, null, ['class'=>'form-control', 'required' => 'required']) }}
 					</div>
 					
 					<div id="unique_val">
 						<div class="form-group">
-							<label for="unique">Unique:</label>
+							<label for="unique">Único:</label>
 							{{ Form::checkbox("unique", "unique") }}
 							<div class="Switch Round Off" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="defaultvalue">Default Value :</label>
-						{{ Form::text("defaultvalue", null, ['class'=>'form-control', 'placeholder'=>'Default Value']) }}
+						<label for="defaultvalue">Valor Padrão :</label>
+						{{ Form::text("defaultvalue", null, ['class'=>'form-control', 'placeholder'=>'Valor Padrão a ser exibido']) }}
 					</div>
 					
 					<div id="length_div">
 						<div class="form-group">
-							<label for="minlength">Minimum :</label>
-							{{ Form::number("minlength", null, ['class'=>'form-control', 'placeholder'=>'Default Value']) }}
+							<label for="minlength">Tamanho Mínimo :</label>
+							{{ Form::number("minlength", null, ['class'=>'form-control', 'placeholder'=>'Valor Padrão a ser exibido']) }}
 						</div>
 						
 						<div class="form-group">
-							<label for="maxlength">Maximum :</label>
-							{{ Form::number("maxlength", null, ['class'=>'form-control', 'placeholder'=>'Default Value']) }}
+							<label for="maxlength">Tamanho Máximo :</label>
+							{{ Form::number("maxlength", null, ['class'=>'form-control', 'placeholder'=>'Valor Padrão a ser exibido']) }}
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="required">Required:</label>
+						<label for="required">Obrigatório:</label>
 						{{ Form::checkbox("required", "required") }}
 						<div class="Switch Round Off" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>
 					</div>
 					
 					<div class="form-group values">
-						<label for="popup_vals">Values :</label>
+						<label for="popup_vals">Valores :</label>
 						<?php
 						$default_val = "";
 						$popup_value_type_table = false;
@@ -80,12 +80,12 @@
 						}
 						?>
 						<div class="radio" style="margin-bottom:20px;">
-							<label>{{ Form::radio("popup_value_type", "table", $popup_value_type_table) }} From Table</label>
-							<label>{{ Form::radio("popup_value_type", "list", $popup_value_type_list) }} From List</label>
+							<label>{{ Form::radio("popup_value_type", "table", $popup_value_type_table) }} De uma tabela</label>
+							<label>{{ Form::radio("popup_value_type", "list", $popup_value_type_list) }} De uma lista</label>
 						</div>
 						{{ Form::select("popup_vals_table", $tables, $default_val, ['class'=>'form-control', 'rel' => '']) }}
 						
-						<select class="form-control popup_vals_list" rel="taginput" multiple="1" data-placeholder="Add Multiple values (Press Enter to add)" name="popup_vals_list[]">
+						<select class="form-control popup_vals_list" rel="taginput" multiple="1" data-placeholder="Adicione Múltiplos Valores (Pressione Enter para adicionar)" name="popup_vals_list[]">
 							@if(is_array($default_val))
 								@foreach ($default_val as $value)
 									<option selected>{{ $value }}</option>

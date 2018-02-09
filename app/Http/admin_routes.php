@@ -64,4 +64,9 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::resource(config('laraadmin.adminRoute') . '/agendamentos', 'LA\AgendamentosController');
 	Route::get(config('laraadmin.adminRoute') . '/agendamento_dt_ajax', 'LA\AgendamentosController@dtajax');
 
+
+
+	/* ================== Agendas ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/agendas', 'LA\AgendasController');
+	Route::get(config('laraadmin.adminRoute') . '/agenda_dt_ajax', 'LA\AgendasController@dtajax');
 });
