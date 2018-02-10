@@ -14,6 +14,8 @@
 
 @section("main-content")
 
+<div id="demo"></div>
+
 <section class="content">
 	<!-- Small boxes (Stat box) -->
 	<!-- Main row -->
@@ -219,5 +221,19 @@
 
 				});
 			});
+		</script>
+		<script>
+
+			var xmlhttp = new XMLHttpRequest();
+
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					myObj = JSON.parse(this.responseText);
+					document.getElementById("demo").innerHTML = myObj.data;
+				}
+			};
+			xmlhttp.open("GET", "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", true);
+			xmlhttp.send();
+
 		</script>
 		@endpush

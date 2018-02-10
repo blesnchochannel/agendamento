@@ -24,6 +24,7 @@ class AgendasController extends Controller
 	public $show_action = true;
 	public $view_col = 'nome';
 	public $listing_cols = ['id', 'nome', 'aplicador', 'agendamentos'];
+	public $listing_cols_agendamentos = ['id', 'data', 'aplicador', 'paciente'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
@@ -53,8 +54,8 @@ class AgendasController extends Controller
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('laraadmin.adminRoute')."/");
-        }
+			return redirect(config('laraadmin.adminRoute')."/");
+		}
 	}
 
 	/**
@@ -76,7 +77,7 @@ class AgendasController extends Controller
 	public function store(Request $request)
 	{
 		if(Module::hasAccess("Agendas", "create")) {
-		
+
 			$rules = Module::validateRules("Agendas", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
@@ -237,6 +238,51 @@ class AgendasController extends Controller
 				
 				if(Module::hasAccess("Agendas", "delete")) {
 					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.agendas.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
+					$output .= Form::close();
+				}
+				$data->data[$i][] = (string)$output;
+			}
+		}
+		$out->setData($data);
+		return $out;
+	}
+
+	/**
+	 * Datatable Ajax fetch
+	 *
+	 * @return
+	 */
+	public function agenda_dados()
+	{
+		$values = DB::table('agendamentos')->select($this->listing_cols_agendamentos)->whereNull('deleted_at');
+		$out = Datatables::of($values)->make();
+		$data = $out->getData();
+
+		$fields_popup = ModuleFields::getModuleFields('Agendas');
+		
+		for($i=0; $i < count($data->data); $i++) {
+			for ($j=0; $j < count($this->listing_cols); $j++) { 
+				$col = $this->listing_cols[$j];
+				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
+					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
+				}
+				if($col == $this->view_col) {
+					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/agendamentos/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+				}
+				// else if($col == "author") {
+				//    $data->data[$i][$j];
+				// }
+			}
+			
+			if($this->show_action) {
+				$output = '';
+				if(Module::hasAccess("Agendas", "edit")) {
+					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/agendamentos/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+				}
+				
+				if(Module::hasAccess("Agendas", "delete")) {
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.agendamentos.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
