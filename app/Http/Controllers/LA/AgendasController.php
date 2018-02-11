@@ -23,6 +23,7 @@ class AgendasController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'nome';
+	public $view_col_agendamentos = 'data';
 	public $listing_cols = ['id', 'nome', 'aplicador', 'agendamentos'];
 	public $listing_cols_agendamentos = ['id', 'data', 'aplicador', 'paciente'];
 	
@@ -259,15 +260,16 @@ class AgendasController extends Controller
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('Agendas');
+		$fields_popup = ModuleFields::getModuleFields('Agendamentos');
 		
 		for($i=0; $i < count($data->data); $i++) {
-			for ($j=0; $j < count($this->listing_cols); $j++) { 
-				$col = $this->listing_cols[$j];
+
+			for ($j=0; $j < count($this->listing_cols_agendamentos); $j++) { 
+				$col = $this->listing_cols_agendamentos[$j];
 				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
-				if($col == $this->view_col) {
+				if($col == $this->view_col_agendamentos) {
 					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/agendamentos/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
@@ -275,19 +277,19 @@ class AgendasController extends Controller
 				// }
 			}
 			
-			if($this->show_action) {
+			/*if($this->show_action) {
 				$output = '';
-				if(Module::hasAccess("Agendas", "edit")) {
+				if(Module::hasAccess("Agendamentos", "edit")) {
 					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/agendamentos/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
-				if(Module::hasAccess("Agendas", "delete")) {
+				if(Module::hasAccess("Agendamentos", "delete")) {
 					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.agendamentos.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
 				$data->data[$i][] = (string)$output;
-			}
+			}*/
 		}
 		$out->setData($data);
 		return $out;
