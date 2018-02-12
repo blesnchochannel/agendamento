@@ -14,6 +14,7 @@
 
 @section("main-content")
 
+<div id="demo2"></div>
 <div id="demo"></div>
 
 <section class="content">
@@ -128,14 +129,14 @@
 								data[date.getFullYear() + i][j + 1][l].push({
 									startTime: "10:00",
 									endTime: "12:00",
-									text: "Some Event Here"
+									text: "O agendamento de hoje"
 								});
 							} catch (e) {
 								data[date.getFullYear() + i][j + 1][l] = [];
 								data[date.getFullYear() + i][j + 1][l].push({
 									startTime: "10:00",
 									endTime: "12:00",
-									text: "Some Event Here"
+									text: "O agendamento de hoje"
 								});
 							}
 						}
@@ -228,8 +229,30 @@
 
 			xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
+
+					var myObj, i, j, data = "";
+					
 					myObj = JSON.parse(this.responseText);
-					document.getElementById("demo").innerHTML = myObj.data;
+
+					for (i = 0; i < myObj.data.length; i++) {
+
+						for (j = 0; j < myObj.data[i].length; j++) {
+							if (myObj.data[i][j] == myObj.data[i][1]){
+								a = new Date(myObj.data[i][j]);
+								ano = a.getFullYear();
+								mes = a.getMonth();
+								dia = a.getDay();
+								hora = a.getHours();
+								minutos = a.getMinutes();
+								data += ano + "<br>" + mes + "<br>" + dia + "<br>" + hora + "<br>" + minutos + "<br>";
+								document.getElementById("demo").innerHTML = data;
+							}
+						}
+
+					}
+
+					//document.getElementById("demo").innerHTML = data.length;
+
 				}
 			};
 			xmlhttp.open("GET", "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", true);

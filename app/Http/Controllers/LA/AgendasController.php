@@ -269,9 +269,9 @@ class AgendasController extends Controller
 				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
-				if($col == $this->view_col_agendamentos) {
+				/*if($col == $this->view_col_agendamentos) {
 					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/agendamentos/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
-				}
+				}*/
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
 				// }
