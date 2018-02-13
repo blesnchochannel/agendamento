@@ -113,49 +113,90 @@
 
 			// function that creates dummy data for demonstration
 			function createDummyData() {
-				var date = new Date();
-				var data = {};
 
-				for (var i = 0; i < 10; i++) {
-					data[date.getFullYear() + i] = {};
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						var myObj, i, j, data = "";
+						var myObjData;
 
-					for (var j = 0; j < 12; j++) {
-						data[date.getFullYear() + i][j + 1] = {};
+						myObj = JSON.parse(this.responseText);
+						for (i = 0; i < myObj.data.length; i++) {
+							for (j = 0; j < myObj.data[i].length; j++) {
 
-						for (var k = 0; k < Math.ceil(Math.random() * 10); k++) {
-							var l = Math.ceil(Math.random() * 28);
+								/*if (myObj.data[i][j] == myObj.data[i][2]){
+									var aplicador = myObj.data[i][j];
+								}
 
-							try {
-								data[date.getFullYear() + i][j + 1][l].push({
-									startTime: "10:00",
-									endTime: "12:00",
-									text: "O agendamento de hoje"
-								});
-							} catch (e) {
-								data[date.getFullYear() + i][j + 1][l] = [];
-								data[date.getFullYear() + i][j + 1][l].push({
-									startTime: "10:00",
-									endTime: "12:00",
-									text: "O agendamento de hoje"
-								});
+								if (myObj.data[i][j] == myObj.data[i][3]){
+									var paciente = myObj.data[i][j];
+								}*/
+
+								if (myObj.data[i][j] == myObj.data[i][1]){
+									var a = new Date(myObj.data[i][j]);
+									var ano = a.getFullYear();
+									var mes = a.getMonth();
+									var dia = a.getDate();
+									var hora = a.getHours();
+									var minutos = a.getMinutes();								
+
+									data = {
+										[ano]: {
+											[mes]: {
+												[dia]: [
+												{
+													startTime: [hora + ":" + minutos],
+													endTime: "14:00",
+													text: "Teste"
+												}
+												]
+											}
+										}
+									}
+									myObjData += JSON.stringify(data);
+									
+								}
+								document.getElementById("demo").innerHTML = myObjData;							
 							}
+						}
+						//document.getElementById("demo").innerHTML = myObjData;
+
+						return data;
+					}
+				};
+				xmlhttp.open("GET", "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", true);
+				xmlhttp.send();			
+			}
+
+			/*function createDummyData() {
+				var data = {};
+				var myObjData;
+
+				data = {
+					2018: {
+						2: {
+							13: [
+							{
+								startTime: "10:00",
+								endTime: "16:00",
+								text: "Christmas"
+							}
+							]
 						}
 					}
 				}
 
+				myObjData += JSON.stringify(data);
+				document.getElementById("demo").innerHTML = myObjData;
+
 				return data;
-			}
+			}*/
 
-			// INSTEAD OF GRABBING THE DATA FROM AN AJAX REQUEST
-			// I WILL BE DEMONSTRATING THE SAME EFFECT THROUGH MEMORY
-			// THIS DEFEATS THE PURPOSE BUT IS SIMPLER TO UNDERSTAND
-			var serverData = createDummyData();
-
-			// stating variables in order for them to be global
-			var calendar, organizer;
+			// creating the dummy static data
+			var data = createDummyData();
 
 			// initializing a new calendar object, that will use an html container to create itself
-			calendar = new Calendar("calendarContainer", // id of html container for calendar
+			var calendar = new Calendar("calendarContainer", // id of html container for calendar
 				"small", // size of calendar, can be small | medium | large
 				[
 					"Domingo", // left most day of calendar labels
@@ -169,94 +210,84 @@
 					]
 					);
 
-			// This is gonna be similar to an ajax function that would grab
-			// data from the server; then when the data for a this current month
-			// is grabbed, you just add it to the data object of the form
-			// { year num: { month num: { day num: [ array of events ] } } }
-			function dataWithAjax(date, callback) {
-				var data = {};
+			// initializing a new organizer object, that will use an html container to create itself
+			var organizer = new Organizer("organizerContainer", // id of html container for calendar
+				calendar, // defining the calendar that the organizer is related to
+				data // giving the organizer the static data that should be displayed
+				);
 
-				try {
-					data[date.getFullYear()] = {};
-					data[date.getFullYear()][date.getMonth() + 1] = serverData[date.getFullYear()][date.getMonth() + 1];
-				} catch (e) {}
+			</script>
+			<script>
+				$(function () {
+					$("#example1").DataTable({
+						processing: true,
+						serverSide: true,
+						ajax: "{{ url(config('laraadmin.adminRoute') . '/agenda_dt_ajax') }}",
+						language: {
+							lengthMenu: "_MENU_",
+							search: "_INPUT_",
+							searchPlaceholder: "Procurar"
+						},
+						@if($show_actions)
+						columnDefs: [ { orderable: false, targets: [-1] }],
+						@endif
+					});
+					$("#agenda-add-form").validate({
 
-				callback(data);
-			};
-
-			window.onload = function() {
-				dataWithAjax(new Date(), function(data) {
-					// initializing a new organizer object, that will use an html container to create itself
-					organizer = new Organizer("organizerContainer", // id of html container for calendar
-						calendar, // defining the calendar that the organizer is related
-						data // small part of the data of type object
-						);
-
-					// after initializing the organizer, we need to initialize the onMonthChange
-					// there needs to be a callback parameter, this is what updates the organizer
-					organizer.onMonthChange = function(callback) {
-						dataWithAjax(organizer.calendar.date, function(data) {
-							organizer.data = data;
-							callback();
-						});
-					};
+					});
 				});
-			};
-		</script>
-		<script>
-			$(function () {
-				$("#example1").DataTable({
-					processing: true,
-					serverSide: true,
-					ajax: "{{ url(config('laraadmin.adminRoute') . '/agenda_dt_ajax') }}",
-					language: {
-						lengthMenu: "_MENU_",
-						search: "_INPUT_",
-						searchPlaceholder: "Procurar"
-					},
-					@if($show_actions)
-					columnDefs: [ { orderable: false, targets: [-1] }],
-					@endif
-				});
-				$("#agenda-add-form").validate({
+			</script>
+			<script>
 
-				});
-			});
-		</script>
-		<script>
-
-			var xmlhttp = new XMLHttpRequest();
-
+			/*var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-
 					var myObj, i, j, data = "";
+					var myObjData;
 					
 					myObj = JSON.parse(this.responseText);
-
 					for (i = 0; i < myObj.data.length; i++) {
-
 						for (j = 0; j < myObj.data[i].length; j++) {
-							if (myObj.data[i][j] == myObj.data[i][1]){
-								a = new Date(myObj.data[i][j]);
-								ano = a.getFullYear();
-								mes = a.getMonth();
-								dia = a.getDay();
-								hora = a.getHours();
-								minutos = a.getMinutes();
-								data += ano + "<br>" + mes + "<br>" + dia + "<br>" + hora + "<br>" + minutos + "<br>";
-								document.getElementById("demo").innerHTML = data;
+
+							if (myObj.data[i][j] == myObj.data[i][2]){
+								var aplicador = myObj.data[i][j];
 							}
+
+							if (myObj.data[i][j] == myObj.data[i][3]){
+								var paciente = myObj.data[i][j];
+							}
+
+							if (myObj.data[i][j] == myObj.data[i][1]){
+								var a = new Date(myObj.data[i][j]);
+								var ano = a.getFullYear();
+								var mes = a.getMonth();
+								var dia = a.getDate();
+								var hora = a.getHours();
+								var minutos = a.getMinutes();								
+
+								data = {
+									[ano]: {
+										[mes]: {
+											[dia]: [
+											{
+												startTime: [hora + ":" + minutos],
+												endTime: "14:00",
+												text: ["Aplicador: " + aplicador + " | Paciente: " + paciente]
+											}
+											]
+										}
+									}
+								}
+								myObjData += JSON.stringify(data);
+							}
+							document.getElementById("demo").innerHTML = myObjData;
 						}
-
 					}
-
 					//document.getElementById("demo").innerHTML = data.length;
-
 				}
 			};
 			xmlhttp.open("GET", "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", true);
-			xmlhttp.send();
-
+			xmlhttp.send();*/
+			
 		</script>
 		@endpush
