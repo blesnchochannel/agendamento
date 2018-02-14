@@ -18,7 +18,9 @@ class CreateAgendamentosTable extends Migration
     public function up()
     {
         Module::generate("Agendamentos", 'agendamentos', 'data', 'fa-calendar-plus-o', [
-            ["data", "Data", "Datetime", false, "", 0, 0, true],
+            ["data", "Data", "Date", false, "", 0, 0, true],
+            ["inicio", "Início", "Time", false, "", 0, 0, true],
+            ["fim", "Fim", "Time", false, "", 0, 0, true],
             ["aplicador", "Aplicador", "Dropdown", false, "", 0, 0, true, "@users"],
             ["paciente", "Paciente", "Dropdown", false, "", 0, 0, false, "@pacientes"],
         ]);

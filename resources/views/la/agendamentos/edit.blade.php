@@ -34,6 +34,8 @@
 					
 					{{--
 					@la_input($module, 'data')
+					@la_input($module, 'inicio')
+					@la_input($module, 'fim')
 					@la_input($module, 'aplicador')
 					@la_input($module, 'paciente')
 					--}}

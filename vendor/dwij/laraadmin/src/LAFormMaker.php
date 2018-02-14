@@ -166,26 +166,6 @@ class LAFormMaker
 					$out .= Form::text($field_name, $dval, $params);
 					$out .= "<span class='input-group-addon'><span class='fa fa-calendar'></span></span></div>";
 					break;
-				case 'Time':
-					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
-					
-					if($default_val == null) {
-						$default_val = $defaultvalue;
-					}
-					// Override the edit value
-					if(isset($row) && isset($row->$field_name)) {
-						$default_val = $row->$field_name;
-					}
-					
-					// ############### Remaining
-					$dval = $default_val;
-					if($default_val != "") {
-						$dval = date("H:i:s", strtotime($default_val));
-					}
-					$out .= "<div class='input-group time'>";
-					$out .= Form::text($field_name, $dval, $params);
-					$out .= "<span class='input-group-addon'><span class='fa fa-clock-o'></span></span></div>";
-					break;
 				case 'Decimal':
 					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
 					
@@ -570,6 +550,26 @@ class LAFormMaker
 					$params['data-rule-url'] = "true";
 					$out .= Form::text($field_name, $default_val, $params);
 					break;
+				case 'Time':
+					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
+					
+					if($default_val == null) {
+						$default_val = $defaultvalue;
+					}
+					// Override the edit value
+					if(isset($row) && isset($row->$field_name)) {
+						$default_val = $row->$field_name;
+					}
+					
+					// ############### Remaining
+					$dval = $default_val;
+					if($default_val != "") {
+						$dval = date("H:i", strtotime($default_val));
+					}
+					$out .= "<div class='input-group time'>";
+					$out .= Form::text($field_name, $dval, $params);
+					$out .= "<span class='input-group-addon'><span class='fa fa-clock-o'></span></span></div>";
+					break;	
 			}
 			$out .= '</div>';
 			return $out;
@@ -702,10 +702,6 @@ class LAFormMaker
 				case 'Datetime':
 					$dt = strtotime($value);
 					$value = date("d M Y, h:i A", $dt);
-					break;
-				case 'Time':
-					$dt = strtotime($value);
-					$value = date("H:i:s", $dt);
 					break;
 				case 'Decimal':
 					
@@ -856,6 +852,10 @@ class LAFormMaker
 					break;
 				case 'URL':
 					$value = '<a target="_blank" href="'.$value.'">'.$value.'</a>';
+					break;
+				case 'Time':
+					$dt = strtotime($value);
+					$value = date("H:i:s", $dt);
 					break;
 			}
 			

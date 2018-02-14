@@ -108,6 +108,8 @@
 					</div>
 					<div class="panel-body">
 						@la_display($module, 'data')
+						@la_display($module, 'inicio')
+						@la_display($module, 'fim')
 						@la_display($module, 'aplicador')
 						@la_display($module, 'paciente')
 					</div>

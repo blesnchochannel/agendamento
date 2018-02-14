@@ -23,7 +23,7 @@ class AgendamentosController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'data';
-	public $listing_cols = ['id', 'data', 'aplicador', 'paciente'];
+	public $listing_cols = ['id', 'data', 'inicio', 'fim', 'aplicador', 'paciente'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

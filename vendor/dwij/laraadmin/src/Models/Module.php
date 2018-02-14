@@ -693,6 +693,21 @@ class Module extends Model
 					$var->default("");
 				}
 				break;
+			case 'Time':
+				if($update) {
+					// Timestamp Edit Not working - http://stackoverflow.com/questions/34774628/how-do-i-make-doctrine-support-timestamp-columns
+					// Error Unknown column type "timestamp" requested. Any Doctrine type that you use has to be registered with \Doctrine\DBAL\Types\Type::addType()
+					// $var = $table->timestamp($field->colname)->change();
+				} else {
+					$var = $table->time($field->colname);
+				}
+				// $table->timestamp('created_at')->useCurrent();
+				if(isset($var) && $field->defaultvalue != "" && !starts_with($field->defaultvalue, "date")) {
+					$var->default($field->defaultvalue);
+				} else if($field->required) {
+					$var->default("01:01");
+				}
+				break;
 		}
 		
 		// set column unique
@@ -976,6 +991,15 @@ class Module extends Model
 					default:
 						$row->{$field['colname']} = $request->{$field['colname']};
 						break;
+					case 'Time':
+						#TODO: Bug fix
+						if($request->{$field['colname']} != "") {
+							//$date = $request->{$field['colname']};
+							//$d2 = date_parse_from_format("H:i:s",$date);
+							//$request->{$field['colname']} = date("H:i:s", substr($date, 11));
+						}
+						$row->{$field['colname']} = $request->{$field['colname']};
+						break;	
 				}
 			}
 		}

@@ -25,7 +25,7 @@ class AgendasController extends Controller
 	public $view_col = 'nome';
 	public $view_col_agendamentos = 'data';
 	public $listing_cols = ['id', 'nome', 'aplicador', 'agendamentos'];
-	public $listing_cols_agendamentos = ['id', 'data', 'aplicador', 'paciente'];
+	public $listing_cols_agendamentos = ['id', 'data', 'inicio', 'fim', 'aplicador', 'paciente'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
