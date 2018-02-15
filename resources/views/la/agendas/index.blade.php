@@ -14,7 +14,6 @@
 
 @section("main-content")
 
-<div id="demo2"></div>
 <div id="demo"></div>
 
 <section class="content">
@@ -111,89 +110,85 @@
 	<script>
 		"use strict";
 
-			// function that creates dummy data for demonstration
-			function createDummyData() {
+		function createDummyData() {
 
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						var myObj, i, j, data = "";
-						var myObjData;
+			var a = "";
+			var b = "";
+			var c = "";
+			var i = 0;
+			var j = 0;
+			var k = 0;
+			var inicio = [];
+			var fim = [];
+			var ano = [];
+			var mes = [];
+			var dia = [];
+			var dados = "";
+			var data = [];
+			var myObj = "";
+			var myObjData = "";
+			var teste = "";
 
-						myObj = JSON.parse(this.responseText);
-						for (i = 0; i < myObj.data.length; i++) {
-							for (j = 0; j < myObj.data[i].length; j++) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {						
+					myObj = JSON.parse(this.responseText);
 
-								/*if (myObj.data[i][j] == myObj.data[i][2]){
-									var aplicador = myObj.data[i][j];
-								}
+					for (i = 0; i < myObj.data.length; i++) {
+						for (j = 0; j < myObj.data[i].length; j++) {
 
-								if (myObj.data[i][j] == myObj.data[i][3]){
-									var paciente = myObj.data[i][j];
-								}*/
+							if (myObj.data[i][j] == myObj.data[i][1]){
+								c = new Date(myObj.data[i][j]);
+								ano.push(c.getFullYear());
+								mes.push(c.getMonth()+1);
+								dia.push(c.getDate());	
+							}
 
-								if (myObj.data[i][j] == myObj.data[i][1]){
-									var a = new Date(myObj.data[i][j]);
-									var ano = a.getFullYear();
-									var mes = a.getMonth();
-									var dia = a.getDate();
-									var hora = a.getHours();
-									var minutos = a.getMinutes();								
+							if (myObj.data[i][j] == myObj.data[i][2]){
+								a = myObj.data[i][j];
+								a = a.substr(0, 5);
+								inicio.push(a);
+							}
 
-									data = {
-										[ano]: {
-											[mes]: {
-												[dia]: [
-												{
-													startTime: [hora + ":" + minutos],
-													endTime: "14:00",
-													text: "Teste"
-												}
-												]
-											}
-										}
+							if (myObj.data[i][j] == myObj.data[i][3]){
+								b = myObj.data[i][j];
+								b = b.substr(0, 5);
+								fim.push(b);
+							}
+						}
+					}
+
+					for (k = 0; k < ano.length; k++) {
+						dados = {
+							[ano[k]]: {
+								[mes[k]]: {
+									[dia[k]]: [
+									{
+										startTime: [inicio[k]],
+										endTime: [fim[k]],
+										text: "Teste"
 									}
-									myObjData += JSON.stringify(data);
-									
+									]
 								}
-								document.getElementById("demo").innerHTML = myObjData;							
 							}
 						}
-						//document.getElementById("demo").innerHTML = myObjData;
-
-						return data;
+						data.push(dados);						
 					}
-				};
-				xmlhttp.open("GET", "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", true);
-				xmlhttp.send();			
-			}
-
-			/*function createDummyData() {
-				var data = {};
-				var myObjData;
-
-				data = {
-					2018: {
-						2: {
-							13: [
-							{
-								startTime: "10:00",
-								endTime: "16:00",
-								text: "Christmas"
-							}
-							]
-						}
-					}
+					myObjData += JSON.stringify(data);
+					document.getElementById("demo").innerHTML = myObjData;
 				}
 
-				myObjData += JSON.stringify(data);
-				document.getElementById("demo").innerHTML = myObjData;
-
 				return data;
-			}*/
+
+			};
+			xmlhttp.open("GET", "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", true);
+			xmlhttp.send();
+		}			
 
 			// creating the dummy static data
 			var data = createDummyData();
+
+			//document.getElementById("demo").innerHTML = data;
 
 			// initializing a new calendar object, that will use an html container to create itself
 			var calendar = new Calendar("calendarContainer", // id of html container for calendar
