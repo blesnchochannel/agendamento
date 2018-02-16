@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
     {
         Module::generate("Users", 'users', 'nome', 'fa-group', [
             ["nome", "Nome", "Name", false, "", 5, 250, true],
-            ["context_id", "Context", "Integer", false, "0", 0, 0, false],
+            ["context_id", "Context", "Integer", false, "", 0, 11, false],
             ["email", "Email", "Email", true, "", 0, 250, false],
             ["password", "Password", "Password", false, "123456", 6, 250, true],
             ["tipo", "Tipo", "Dropdown", false, "", 0, 0, true, "@tipos"],

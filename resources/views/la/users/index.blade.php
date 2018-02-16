@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Usuários")
-@section("contentheader_description", "Listagem de Usuários")
-@section("section", "Usuários")
+@section("contentheader_title", "Users")
+@section("contentheader_description", "Listagem de Users")
+@section("section", "Users")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Usuários")
+@section("htmlheader_title", "Listadem de Users")
 
 @section("headerElems")
 @la_access("Users", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar Usuário</button>
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  User</button>
 @endla_access
 @endsection
 
