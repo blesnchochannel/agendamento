@@ -14,6 +14,8 @@
 
 @section("main-content")
 
+<div></div>
+
 <div id="demo"></div>
 
 <section class="content">
@@ -110,8 +112,15 @@
 	<script>
 		"use strict";
 
-		function createDummyData() {
+		var myjson;
+		var myObjData = "";
 
+		$.getJSON("{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", loadDados);
+		
+		function loadDados(data){
+
+			myjson = data;
+			
 			var a = "";
 			var b = "";
 			var c = "";
@@ -124,73 +133,86 @@
 			var mes = [];
 			var dia = [];
 			var dados = "";
-			var data = [];
-			var myObj = "";
-			var myObjData = "";
-			var teste = "";
+			var datas = [];			
 
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {						
-					myObj = JSON.parse(this.responseText);
+			for (i = 0; i < myjson.data.length; i++) {
 
-					for (i = 0; i < myObj.data.length; i++) {
-						for (j = 0; j < myObj.data[i].length; j++) {
+				for (j = 0; j < myjson.data[i].length; j++) {
 
-							if (myObj.data[i][j] == myObj.data[i][1]){
-								c = new Date(myObj.data[i][j]);
-								ano.push(c.getFullYear());
-								mes.push(c.getMonth()+1);
-								dia.push(c.getDate());	
-							}
-
-							if (myObj.data[i][j] == myObj.data[i][2]){
-								a = myObj.data[i][j];
-								a = a.substr(0, 5);
-								inicio.push(a);
-							}
-
-							if (myObj.data[i][j] == myObj.data[i][3]){
-								b = myObj.data[i][j];
-								b = b.substr(0, 5);
-								fim.push(b);
-							}
-						}
+					if (myjson.data[i][j] == myjson.data[i][1]){
+						c = new Date(myjson.data[i][j]);
+						ano.push(c.getFullYear());
+						mes.push(c.getMonth()+1);
+						dia.push(c.getDate());	
 					}
 
-					for (k = 0; k < ano.length; k++) {
-						dados = {
-							[ano[k]]: {
-								[mes[k]]: {
-									[dia[k]]: [
-									{
-										startTime: [inicio[k]],
-										endTime: [fim[k]],
-										text: "Teste"
-									}
-									]
-								}
-							}
-						}
-						data.push(dados);						
+					if (myjson.data[i][j] == myjson.data[i][2]){
+						a = myjson.data[i][j];
+						a = a.substr(0, 5);
+						inicio.push(a);
 					}
-					myObjData += JSON.stringify(data);
-					document.getElementById("demo").innerHTML = myObjData;
+
+					if (myjson.data[i][j] == myjson.data[i][3]){
+						b = myjson.data[i][j];
+						b = b.substr(0, 5);
+						fim.push(b);
+					}
 				}
 
-				return data;
+			}
 
+			var mySetAno = new Set(ano);
+			console.log(mySetAno);
+			var mySetMes = new Set(mes);
+			console.log(mySetMes);
+			var mySetDia = new Set(dia);
+			console.log(mySetDia);
+
+			for (k = 0; k < ano.length; k++) {
+				dados = {
+					[ano[k]]: {
+						[mes[k]]: {
+							[dia[k]]: [
+							{
+								startTime: [inicio[k]],
+								endTime: [fim[k]],
+								text: "Teste"
+							}
+							]
+						}
+					}
+				}
+				datas.push(dados);						
+			}
+
+			createDummyData(datas);
+
+		}
+
+		function createDummyData(datas) {
+
+			myObjData = JSON.stringify(datas);
+			document.getElementById("demo").innerHTML = myObjData;			
+			//return datas;			
+		}		
+
+		/*function createDummyData() {
+			data =
+			{"2018":
+				{"2":
+					{"10":
+						[{"startTime":["10:00"],"endTime":["11:00"],"text":"Teste"},
+						{"startTime":["11:00"],"endTime":["12:00"],"text":"Teste"}]
+					}
+				}
 			};
-			xmlhttp.open("GET", "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", true);
-			xmlhttp.send();
-		}			
+			return data;
+		}*/		
 
-			// creating the dummy static data
-			var data = createDummyData();
+		// creating the dummy static data
+		var data = createDummyData();		
 
-			//document.getElementById("demo").innerHTML = data;
-
-			// initializing a new calendar object, that will use an html container to create itself
+		// initializing a new calendar object, that will use an html container to create itself
 			var calendar = new Calendar("calendarContainer", // id of html container for calendar
 				"small", // size of calendar, can be small | medium | large
 				[
@@ -205,7 +227,7 @@
 					]
 					);
 
-			// initializing a new organizer object, that will use an html container to create itself
+		// initializing a new organizer object, that will use an html container to create itself
 			var organizer = new Organizer("organizerContainer", // id of html container for calendar
 				calendar, // defining the calendar that the organizer is related to
 				data // giving the organizer the static data that should be displayed
@@ -231,58 +253,5 @@
 
 					});
 				});
-			</script>
-			<script>
-
-			/*var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					var myObj, i, j, data = "";
-					var myObjData;
-					
-					myObj = JSON.parse(this.responseText);
-					for (i = 0; i < myObj.data.length; i++) {
-						for (j = 0; j < myObj.data[i].length; j++) {
-
-							if (myObj.data[i][j] == myObj.data[i][2]){
-								var aplicador = myObj.data[i][j];
-							}
-
-							if (myObj.data[i][j] == myObj.data[i][3]){
-								var paciente = myObj.data[i][j];
-							}
-
-							if (myObj.data[i][j] == myObj.data[i][1]){
-								var a = new Date(myObj.data[i][j]);
-								var ano = a.getFullYear();
-								var mes = a.getMonth();
-								var dia = a.getDate();
-								var hora = a.getHours();
-								var minutos = a.getMinutes();								
-
-								data = {
-									[ano]: {
-										[mes]: {
-											[dia]: [
-											{
-												startTime: [hora + ":" + minutos],
-												endTime: "14:00",
-												text: ["Aplicador: " + aplicador + " | Paciente: " + paciente]
-											}
-											]
-										}
-									}
-								}
-								myObjData += JSON.stringify(data);
-							}
-							document.getElementById("demo").innerHTML = myObjData;
-						}
-					}
-					//document.getElementById("demo").innerHTML = data.length;
-				}
-			};
-			xmlhttp.open("GET", "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", true);
-			xmlhttp.send();*/
-			
-		</script>
-		@endpush
+			</script>			
+			@endpush
