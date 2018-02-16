@@ -113,9 +113,32 @@
 		"use strict";
 
 		var myjson;
+		var dados = {};
 		var myObjData = "";
+		var date = new Date();
+		var data;
 
-		$.getJSON("{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", loadDados);
+		$(document).ready(function (e) {
+
+			/*$.ajax({
+				url: "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}",
+				type: "GET",
+				data: "data",
+				async: false,
+				success: function (data) {
+					loadDados(data);
+				}
+			});*/
+
+			$.get("{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", function(data, status){
+				if (status === "success"){
+					loadDados(data);
+				}				
+			});
+
+			//$.getJSON("{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}", loadDados);
+
+		});
 		
 		function loadDados(data){
 
@@ -124,6 +147,8 @@
 			var a = "";
 			var b = "";
 			var c = "";
+			var d = "";
+			var e = "";
 			var i = 0;
 			var j = 0;
 			var k = 0;
@@ -132,7 +157,8 @@
 			var ano = [];
 			var mes = [];
 			var dia = [];
-			var dados = "";
+			var aplicador = [];
+			var paciente = [];
 			var datas = [];			
 
 			for (i = 0; i < myjson.data.length; i++) {
@@ -143,7 +169,7 @@
 						c = new Date(myjson.data[i][j]);
 						ano.push(c.getFullYear());
 						mes.push(c.getMonth()+1);
-						dia.push(c.getDate());	
+						dia.push(c.getDate()+1);	
 					}
 
 					if (myjson.data[i][j] == myjson.data[i][2]){
@@ -157,62 +183,55 @@
 						b = b.substr(0, 5);
 						fim.push(b);
 					}
+
+					if (myjson.data[i][j] == myjson.data[i][4]){
+						d = myjson.data[i][j];
+						aplicador.push(d);
+					}
+
+					if (myjson.data[i][j] == myjson.data[i][5]){
+						e = myjson.data[i][j];
+						paciente.push(e);
+					}
+
 				}
 
 			}
 
-			var mySetAno = new Set(ano);
-			console.log(mySetAno);
-			var mySetMes = new Set(mes);
-			console.log(mySetMes);
-			var mySetDia = new Set(dia);
-			console.log(mySetDia);
+			for (var i = 0; i < 10; i++) {
+				dados[date.getFullYear() + i] = {};					
 
-			for (k = 0; k < ano.length; k++) {
-				dados = {
-					[ano[k]]: {
-						[mes[k]]: {
-							[dia[k]]: [
-							{
-								startTime: [inicio[k]],
-								endTime: [fim[k]],
-								text: "Teste"
-							}
-							]
-						}
-					}
+				for (var j = 0; j < 12; j++) {
+					dados[date.getFullYear() + i][j + 1] = {};					
 				}
-				datas.push(dados);						
 			}
 
-			createDummyData(datas);
+			for (var k = 0; k < ano.length; k++) {
 
-		}
-
-		function createDummyData(datas) {
-
-			myObjData = JSON.stringify(datas);
-			document.getElementById("demo").innerHTML = myObjData;			
-			//return datas;			
-		}		
-
-		/*function createDummyData() {
-			data =
-			{"2018":
-				{"2":
-					{"10":
-						[{"startTime":["10:00"],"endTime":["11:00"],"text":"Teste"},
-						{"startTime":["11:00"],"endTime":["12:00"],"text":"Teste"}]
-					}
+				try {
+					dados[ano[k]][mes[k]][dia[k]].push({
+						startTime: [inicio[k]],
+						endTime: [fim[k]],
+						text: ["Aplicador: " + aplicador[k] + " Paciente: " + paciente[k]]
+					});
+				} catch (e) {
+					dados[ano[k]][mes[k]][dia[k]] = [];
+					dados[ano[k]][mes[k]][dia[k]].push({
+						startTime: [inicio[k]],
+						endTime: [fim[k]],
+						text: ["Aplicador: " + aplicador[k] + " Paciente: " + paciente[k]]
+					});
 				}
-			};
-			return data;
-		}*/		
+			}
 
-		// creating the dummy static data
-		var data = createDummyData();		
+			function createDummyData(dados) {
 
-		// initializing a new calendar object, that will use an html container to create itself
+				return dados;
+			}
+
+			data = createDummyData(dados);
+
+			// initializing a new calendar object, that will use an html container to create itself
 			var calendar = new Calendar("calendarContainer", // id of html container for calendar
 				"small", // size of calendar, can be small | medium | large
 				[
@@ -233,25 +252,28 @@
 				data // giving the organizer the static data that should be displayed
 				);
 
-			</script>
-			<script>
-				$(function () {
-					$("#example1").DataTable({
-						processing: true,
-						serverSide: true,
-						ajax: "{{ url(config('laraadmin.adminRoute') . '/agenda_dt_ajax') }}",
-						language: {
-							lengthMenu: "_MENU_",
-							search: "_INPUT_",
-							searchPlaceholder: "Procurar"
-						},
-						@if($show_actions)
-						columnDefs: [ { orderable: false, targets: [-1] }],
-						@endif
-					});
-					$("#agenda-add-form").validate({
+			
+		}
 
-					});
-				});
-			</script>			
-			@endpush
+	</script>
+	<script>
+		$(function () {
+			$("#example1").DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: "{{ url(config('laraadmin.adminRoute') . '/agenda_dt_ajax') }}",
+				language: {
+					lengthMenu: "_MENU_",
+					search: "_INPUT_",
+					searchPlaceholder: "Procurar"
+				},
+				@if($show_actions)
+				columnDefs: [ { orderable: false, targets: [-1] }],
+				@endif
+			});
+			$("#agenda-add-form").validate({
+
+			});
+		});
+	</script>			
+	@endpush
