@@ -17,6 +17,16 @@
 <script src="{{ asset('la-assets/plugins/stickytabs/jquery.stickytabs.js') }}" type="text/javascript"></script>
 <script src="{{ asset('la-assets/plugins/slimScroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
 
+<script src="{{ asset('/la-assets/js/bootstrap-colorpicker.min.js') }}"></script>
+
+<script src="{{ asset('/la-assets/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('/la-assets/js/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('/la-assets/js/jszip.min.js') }}"></script>
+<script src="{{ asset('/la-assets/js/pdfmake.min.js') }}"></script>
+<script src="{{ asset('/la-assets/js/vfs_fonts.js') }}"></script>
+<script src="{{ asset('/la-assets/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('/la-assets/js/buttons.print.min.js') }}"></script>
+
 
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

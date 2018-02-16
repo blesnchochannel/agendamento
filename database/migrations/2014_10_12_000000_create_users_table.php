@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             ["email", "Email", "Email", true, "", 0, 250, false],
             ["password", "Password", "Password", false, "123456", 6, 250, true],
             ["tipo", "Tipo", "Dropdown", false, "", 0, 0, true, "@tipos"],
+            ["color", "Color", "Color", true, "", 0, 0, false],
         ]);
 		
 		/*

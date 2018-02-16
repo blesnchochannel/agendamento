@@ -708,6 +708,27 @@ class Module extends Model
 					$var->default("01:01");
 				}
 				break;
+			case 'Color':
+				$var = null;
+				if($field->maxlength == 0) {
+					if($update) {
+						$var = $table->string($field->colname)->change();
+					} else {
+						$var = $table->string($field->colname);
+					}
+				} else {
+					if($update) {
+						$var = $table->string($field->colname, $field->maxlength)->change();
+					} else {
+						$var = $table->string($field->colname, $field->maxlength);
+					}
+				}
+				if($field->defaultvalue != "") {
+					$var->default($field->defaultvalue);
+				} else if($field->required) {
+					$var->default("");
+				}
+				break;
 		}
 		
 		// set column unique

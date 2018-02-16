@@ -45,6 +45,7 @@ class CreateModuleFieldTypesTable extends Migration
         ModuleFieldTypes::create(["name" => "URL"]);
         ModuleFieldTypes::create(["name" => "Files"]);
         ModuleFieldTypes::create(["name" => "Time"]);
+        ModuleFieldTypes::create(["name" => "Color"]);
     }
 
     /**

@@ -24,8 +24,10 @@ class AgendasController extends Controller
 	public $show_action = true;
 	public $view_col = 'nome';
 	public $view_col_agendamentos = 'data';
+	public $view_col_usuarios = 'nome';
 	public $listing_cols = ['id', 'nome', 'aplicador', 'agendamentos'];
 	public $listing_cols_agendamentos = ['id', 'data', 'inicio', 'fim', 'aplicador', 'paciente'];
+	public $listing_cols_usuarios = ['id', 'nome', 'context_id', 'email', 'password', 'tipo', 'color'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
@@ -269,13 +271,27 @@ class AgendasController extends Controller
 				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
-				/*if($col == $this->view_col_agendamentos) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/agendamentos/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
-				}*/
-				// else if($col == "author") {
-				//    $data->data[$i][$j];
-				// }
 			}
+		}
+		$out->setData($data);
+		return $out;
+	}
+
+	public function agenda_usuarios()
+	{
+		$values = DB::table('users')->select($this->listing_cols_usuarios)->whereNull('deleted_at');
+		$out = Datatables::of($values)->make();
+		$data = $out->getData();
+
+		$fields_popup = ModuleFields::getModuleFields('Users');
+		
+		for($i=0; $i < count($data->data); $i++) {
+			for ($j=0; $j < count($this->listing_cols_usuarios); $j++) { 
+				$col = $this->listing_cols_usuarios[$j];
+				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
+					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
+				}				
+			}			
 		}
 		$out->setData($data);
 		return $out;

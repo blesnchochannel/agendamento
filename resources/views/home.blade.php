@@ -24,6 +24,8 @@
     <link href="{{ asset('/la-assets/css/bootstrap.css') }}" rel="stylesheet">
 
 	<link href="{{ asset('la-assets/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('la-assets/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
     
     <!-- Custom styles for this template -->
     <link href="{{ asset('/la-assets/css/main.css') }}" rel="stylesheet">
@@ -33,6 +35,8 @@
 
     <script src="{{ asset('/la-assets/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('/la-assets/js/smoothscroll.js') }}"></script>
+
+    <script src="{{ asset('/la-assets/js/bootstrap-colorpicker.min.js') }}"></script>
 
 
 </head>

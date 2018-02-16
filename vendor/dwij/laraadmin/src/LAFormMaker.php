@@ -569,6 +569,21 @@ class LAFormMaker
 					$out .= "<div class='input-group time'>";
 					$out .= Form::text($field_name, $dval, $params);
 					$out .= "<span class='input-group-addon'><span class='fa fa-clock-o'></span></span></div>";
+					break;
+				case 'Color':
+					$out .= '<label for="'.$field_name.'">'.$label.$required_ast.' :</label>';
+					
+					if($default_val == null) {
+						$default_val = $defaultvalue;
+					}
+					// Override the edit value
+					if(isset($row) && isset($row->$field_name)) {
+						$default_val = $row->$field_name;
+					}
+					
+					$out .= "<div id='color' class='input-group color colorpicker-component'>";
+					$out .= Form::text($field_name, $default_val, $params);
+					$out .= "<span class='input-group-addon'><i></i></span></div>";
 					break;	
 			}
 			$out .= '</div>';
@@ -856,6 +871,9 @@ class LAFormMaker
 				case 'Time':
 					$dt = strtotime($value);
 					$value = date("H:i:s", $dt);
+					break;
+				case 'Color':
+					
 					break;
 			}
 			
