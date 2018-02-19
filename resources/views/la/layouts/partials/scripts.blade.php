@@ -19,15 +19,11 @@
 
 <script src="{{ asset('/la-assets/js/bootstrap-colorpicker.min.js') }}"></script>
 
-<script src="{{ asset('/la-assets/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('/la-assets/js/buttons.flash.min.js') }}"></script>
-<script src="{{ asset('/la-assets/js/jszip.min.js') }}"></script>
-<script src="{{ asset('/la-assets/js/pdfmake.min.js') }}"></script>
-<script src="{{ asset('/la-assets/js/vfs_fonts.js') }}"></script>
-<script src="{{ asset('/la-assets/js/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('/la-assets/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('/la-assets/js/moment.min.js') }}"></script>
 
+<script src="{{ asset('/la-assets/js/fullcalendar.min.js') }}"></script>
 
+<script src="{{ asset('/la-assets/js/fullcalendar-locale-all.js') }}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

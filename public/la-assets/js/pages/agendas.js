@@ -1,4 +1,6 @@
-"use strict";
+
+
+/*"use strict";
 
 function Calendar(id, size, labelSettings, colors, options) {
   this.id = id;
@@ -546,4 +548,4 @@ Organizer.prototype.setOnClickListener = function (theCase, backCallback, nextCa
     };
     break;
   }
-};
+};*/

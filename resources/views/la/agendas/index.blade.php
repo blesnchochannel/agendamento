@@ -23,10 +23,13 @@
 	<!-- Main row -->
 	<div class="row">
 		<section class="col-lg-12 connectedSortable">
-			<div class="agenda-calendario">
+
+			<div id='calendar'></div>
+
+			<!--<div class="agenda-calendario">
 				<div id="calendarContainer"></div>
 				<div id="organizerContainer"></div>
-			</div>
+			</div>-->
 		</section>
 	</div>
 	<div class="row">
@@ -66,7 +69,7 @@
 			</div>
 		</section>
 	</div>
-	-->
+-->
 </section>
 
 @la_access("Agendas", "create")
@@ -98,24 +101,122 @@
 			</div>
 		</div>
 	</div>
-	-->
-	@endla_access
+-->
+@endla_access
 
-	@endsection
+@endsection
 
-	@push('styles')
+@push('styles')
 	<!--
 	<link rel="stylesheet" type="text/css" href="{{ asset('la-assets/plugins/datatables/datatables.min.css') }}"/>
-	-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('la-assets/css/pages/agendas.css') }}"/>
-	@endpush
+-->
+<link rel="stylesheet" type="text/css" href="{{ asset('la-assets/css/pages/agendas.css') }}"/>
+@endpush
 
-	@push('scripts')
+@push('scripts')
 	<!--
 	<script src="{{ asset('la-assets/plugins/datatables/datatables.min.js') }}"></script>
-	-->
-	<!-- agendamentos -->
-	<script src="{{ asset('la-assets/js/pages/agendas.js') }}"></script>
+-->
+<!-- agendamentos -->
+<script src="{{ asset('la-assets/js/pages/agendas.js') }}"></script>
+<script>
+
+	$(document).ready(function() {
+		var initialLocaleCode = 'pt-br';
+
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay,listMonth'
+			},
+			defaultDate: '2018-02-12',
+			locale: initialLocaleCode,
+      buttonIcons: false, // show the prev/next text
+      weekNumbers: true,
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: "{{ url(config('laraadmin.adminRoute') . '/agenda_dados') }}",
+      /*events: [
+      {
+      	title: 'All Day Event',
+      	start: '2018-02-01'
+      },
+      {
+      	title: 'Long Event',
+      	start: '2018-02-07',
+      	end: '2018-02-10'
+      },
+      {
+      	id: 999,
+      	title: 'Repeating Event',
+      	start: '2018-02-09T16:00:00'
+      },
+      {
+      	id: 999,
+      	title: 'Repeating Event',
+      	start: '2018-02-16T16:00:00'
+      },
+      {
+      	title: 'Conference',
+      	start: '2018-02-11',
+      	end: '2018-02-13'
+      },
+      {
+      	title: 'Meeting',
+      	start: '2018-02-12T10:30:00',
+      	end: '2018-02-12T12:30:00'
+      },
+      {
+      	title: 'Lunch',
+      	start: '2018-02-12T12:00:00'
+      },
+      {
+      	title: 'Meeting',
+      	start: '2018-02-12T14:30:00'
+      },
+      {
+      	title: 'Happy Hour',
+      	start: '2018-02-12T17:30:00'
+      },
+      {
+      	title: 'Dinner',
+      	start: '2018-02-12T20:00:00'
+      },
+      {
+      	title: 'Birthday Party',
+      	start: '2018-02-13T07:00:00'
+      },
+      {
+      	title: 'Click for Google',
+      	url: 'http://google.com/',
+      	start: '2018-02-28'
+      }
+      ]*/
+  });
+
+    // build the locale selector's options
+    $.each($.fullCalendar.locales, function(localeCode) {
+    	$('#locale-selector').append(
+    		$('<option/>')
+    		.attr('value', localeCode)
+    		.prop('selected', localeCode == initialLocaleCode)
+    		.text(localeCode)
+    		);
+    });
+
+    // when the selected option changes, dynamically change the calendar option
+    $('#locale-selector').on('change', function() {
+    	if (this.value) {
+    		$('#calendar').fullCalendar('option', 'locale', this.value);
+    	}
+    });
+});
+
+</script>
+
+	<!--
 	<script>
 		"use strict";
 
@@ -263,7 +364,7 @@
 		}
 
 	</script>
-	<!--
+
 	<script>
 		$(function () {
 			$("#example1").DataTable({
@@ -302,5 +403,5 @@
 			});
 		});
 	</script>
-	-->			
-	@endpush
+-->			
+@endpush
