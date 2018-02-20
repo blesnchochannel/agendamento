@@ -60,15 +60,13 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::resource(config('laraadmin.adminRoute') . '/pacientes', 'LA\PacientesController');
 	Route::get(config('laraadmin.adminRoute') . '/paciente_dt_ajax', 'LA\PacientesController@dtajax');
 
-	/* ================== Agendamentos ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/agendamentos', 'LA\AgendamentosController');
-	Route::get(config('laraadmin.adminRoute') . '/agendamento_dt_ajax', 'LA\AgendamentosController@dtajax');
 
 
 
-	/* ================== Agendas ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/agendas', 'LA\AgendasController');
-	Route::get(config('laraadmin.adminRoute') . '/agenda_dt_ajax', 'LA\AgendasController@dtajax');
-	Route::get(config('laraadmin.adminRoute') . '/agenda_dados', 'LA\AgendasController@agenda_dados');
 
+
+
+	/* ================== Events ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/events', 'LA\EventsController');
+	Route::get(config('laraadmin.adminRoute') . '/event_dt_ajax', 'LA\EventsController@dtajax');
 });

@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Agendamentos")
-@section("contentheader_description", "Listagem de Agendamentos")
-@section("section", "Agendamentos")
+@section("contentheader_title", "Events")
+@section("contentheader_description", "Listagem de Events")
+@section("section", "Events")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Agendamentos")
+@section("htmlheader_title", "Listadem de Events")
 
 @section("headerElems")
-@la_access("Agendamentos", "create")
-<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Agendamento</button>
+@la_access("Events", "create")
+<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Event</button>
 @endla_access
 @endsection
 
@@ -24,6 +24,11 @@
 </div>
 @endif
 
+<div>
+	{!! $calendar->calendar() !!}
+	{!! $calendar->script() !!}
+</div>
+<br>
 <div class="box box-success">
 	<!--<div class="box-header"></div>-->
 	<div class="box-body">
@@ -39,31 +44,30 @@
 				</tr>
 			</thead>
 			<tbody>
-				
+
 			</tbody>
 		</table>
 	</div>
 </div>
 
-@la_access("Agendamentos", "create")
+@la_access("Events", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Adicionar Agendamento</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Event</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\AgendamentosController@store', 'id' => 'agendamento-add-form']) !!}
+			{!! Form::open(['action' => 'LA\EventsController@store', 'id' => 'event-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
 					@la_form($module)
 					
 					{{--
-						@la_input($module, 'data')
-						@la_input($module, 'inicio')
-						@la_input($module, 'fim')
-						@la_input($module, 'aplicador')
-						@la_input($module, 'paciente')
+						@la_input($module, 'title')
+						@la_input($module, 'all_day')
+						@la_input($module, 'start_date')
+						@la_input($module, 'end_date')
 						--}}
 					</div>
 				</div>
@@ -90,36 +94,18 @@
 			$("#example1").DataTable({
 				processing: true,
 				serverSide: true,
-				ajax: "{{ url(config('laraadmin.adminRoute') . '/agendamento_dt_ajax') }}",
+				ajax: "{{ url(config('laraadmin.adminRoute') . '/event_dt_ajax') }}",
 				language: {
-					"sEmptyTable": "Nenhum registro encontrado",
-					"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-					"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-					"sInfoFiltered": "(Filtrados de _MAX_ registros)",
-					"sInfoPostFix": "",
-					"sInfoThousands": ".",
-					"sLengthMenu": "_MENU_ resultados por página",
-					"sLoadingRecords": "Carregando...",
-					"sProcessing": "Processando...",
-					"sZeroRecords": "Nenhum registro encontrado",
-					"sSearch": "Pesquisar",
-					"oPaginate": {
-						"sNext": "Próximo",
-						"sPrevious": "Anterior",
-						"sFirst": "Primeiro",
-						"sLast": "Último"
-					},
-					"oAria": {
-						"sSortAscending": ": Ordenar colunas de forma ascendente",
-						"sSortDescending": ": Ordenar colunas de forma descendente"
-					}
+					lengthMenu: "_MENU_",
+					search: "_INPUT_",
+					searchPlaceholder: "Procurar"
 				},
 				@if($show_actions)
 				columnDefs: [ { orderable: false, targets: [-1] }],
 				@endif
 			});
-			$("#agendamento-add-form").validate({
-				
+			$("#event-add-form").validate({
+
 			});
 		});
 	</script>

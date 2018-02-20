@@ -1,7 +1,7 @@
 @extends('la.layouts.app')
 
 @section('htmlheader_title')
-	Agenda View
+	Event View
 @endsection
 
 
@@ -15,7 +15,7 @@
 					<div class="profile-icon text-primary"><i class="fa {{ $module->fa_icon }}"></i></div>
 				</div>
 				<div class="col-md-9">
-					<h4 class="name">{{ $agenda->$view_col }}</h4>
+					<h4 class="name">{{ $event->$view_col }}</h4>
 					<div class="row stats">
 						<div class="col-md-4"><i class="fa fa-facebook"></i> 234</div>
 						<div class="col-md-4"><i class="fa fa-twitter"></i> 12</div>
@@ -81,12 +81,12 @@
 			</div>
 		</div>
 		<div class="col-md-1 actions">
-			@la_access("Agendas", "edit")
-				<a href="{{ url(config('laraadmin.adminRoute') . '/agendas/'.$agenda->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+			@la_access("Events", "edit")
+				<a href="{{ url(config('laraadmin.adminRoute') . '/events/'.$event->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
 			
-			@la_access("Agendas", "delete")
-				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.agendas.destroy', $agenda->id], 'method' => 'delete', 'style'=>'display:inline']) }}
+			@la_access("Events", "delete")
+				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.events.destroy', $event->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
 				{{ Form::close() }}
 			@endla_access
@@ -94,7 +94,7 @@
 	</div>
 
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
-		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/agendas') }}" data-toggle="tooltip" data-placement="right" title="Back to Agendas"><i class="fa fa-chevron-left"></i></a></li>
+		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/events') }}" data-toggle="tooltip" data-placement="right" title="Back to Events"><i class="fa fa-chevron-left"></i></a></li>
 		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-general-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
 		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li>
 	</ul>
@@ -107,9 +107,10 @@
 						<h4>General Info</h4>
 					</div>
 					<div class="panel-body">
-						@la_display($module, 'nome')
-						@la_display($module, 'aplicador')
-						@la_display($module, 'agendamentos')
+						@la_display($module, 'title')
+						@la_display($module, 'all_day')
+						@la_display($module, 'start_date')
+						@la_display($module, 'end_date')
 					</div>
 				</div>
 			</div>

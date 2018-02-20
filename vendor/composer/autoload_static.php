@@ -321,6 +321,10 @@ class ComposerStaticInit607a1667d3d5f9c45245a55ec4c40b4a
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
+            'MaddHatter\\LaravelFullcalendar' => 
+            array (
+                0 => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src',
+            ),
             'Maatwebsite\\Excel\\' => 
             array (
                 0 => __DIR__ . '/..' . '/maatwebsite/excel/src',
@@ -355,20 +359,28 @@ class ComposerStaticInit607a1667d3d5f9c45245a55ec4c40b4a
     );
 
     public static $classMap = array (
+        'CreateAgendamentosTable' => __DIR__ . '/../..' . '/database/migrations/2018_02_07_220840_create_agendamentos_table.php',
+        'CreateAgendasTable' => __DIR__ . '/../..' . '/database/migrations/2018_02_09_225916_create_agendas_table.php',
         'CreateBackupsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_07_134058_create_backups_table.php',
+        'CreateCalendáriosTable' => __DIR__ . '/../..' . '/database/migrations/2018_02_08_221330_create_calendários_table.php',
+        'CreateDatasTable' => __DIR__ . '/../..' . '/database/migrations/2018_02_10_153417_create_datas_table.php',
         'CreateDepartmentsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_26_064006_create_departments_table.php',
         'CreateEmployeesTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_26_064007_create_employees_table.php',
+        'CreateEventsTable' => __DIR__ . '/../..' . '/database/migrations/2018_02_20_143247_create_events_table.php',
         'CreateLaConfigsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_06_115413_create_la_configs_table.php',
         'CreateMenusTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_07_134058_create_menus_table.php',
         'CreateModuleFieldTypesTable' => __DIR__ . '/../..' . '/database/migrations/2014_05_26_055000_create_module_field_types_table.php',
         'CreateModuleFieldsTable' => __DIR__ . '/../..' . '/database/migrations/2014_05_26_060000_create_module_fields_table.php',
         'CreateModulesTable' => __DIR__ . '/../..' . '/database/migrations/2014_05_26_050000_create_modules_table.php',
         'CreateOrganizationsTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_06_140637_create_organizations_table.php',
+        'CreatePacientesTable' => __DIR__ . '/../..' . '/database/migrations/2018_02_07_215642_create_pacientes_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreatePermissionRoleTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_10_163520_create_permission_role_table.php',
         'CreatePermissionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_10_163337_create_permissions_table.php',
+        'CreatePlanosTable' => __DIR__ . '/../..' . '/database/migrations/2018_02_07_012129_create_planos_table.php',
         'CreateRoleUserTable' => __DIR__ . '/../..' . '/database/migrations/2016_07_05_115343_create_role_user_table.php',
         'CreateRolesTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_26_064446_create_roles_table.php',
+        'CreateTiposTable' => __DIR__ . '/../..' . '/database/migrations/2018_02_07_020145_create_tipos_table.php',
         'CreateUploadsTable' => __DIR__ . '/../..' . '/database/migrations/2014_12_01_000000_create_uploads_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',

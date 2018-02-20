@@ -24,6 +24,8 @@
 
     <link href="{{ asset('la-assets/css/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <script src="{{ asset('la-assets/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -13,52 +13,70 @@ use Auth;
 use DB;
 use Validator;
 use Datatables;
+use Calendar;
 use Collective\Html\FormFacade as Form;
 use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
-use App\Models\Agendamento;
+use App\Models\Event;
 
-class AgendamentosController extends Controller
+class EventsController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'data';
-	public $listing_cols = ['id', 'data', 'inicio', 'fim', 'aplicador', 'paciente'];
+	public $view_col = 'title';
+	public $listing_cols = ['id', 'title', 'all_day', 'start_date', 'end_date'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
 			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('Agendamentos', $this->listing_cols);
+				$this->listing_cols = ModuleFields::listingColumnAccessScan('Events', $this->listing_cols);
 				return $next($request);
 			});
 		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('Agendamentos', $this->listing_cols);
+			$this->listing_cols = ModuleFields::listingColumnAccessScan('Events', $this->listing_cols);
 		}
 	}
 	
 	/**
-	 * Display a listing of the Agendamentos.
+	 * Display a listing of the Events.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-		$module = Module::get('Agendamentos');
+		
+		$events = [];
+		$data = Event::all();
+		if($data->count()){
+			foreach ($data as $key => $value) {
+				$events[] = Calendar::event(
+					$value->title,
+					$value->all_day,
+					new \DateTime($value->start_date),
+					new \DateTime($value->end_date)
+				);
+			}
+		}
+
+		$calendar = Calendar::addEvents($events);
+
+		$module = Module::get('Events');
 		
 		if(Module::hasAccess($module->id)) {
-			return View('la.agendamentos.index', [
+			return View('la.events.index', [
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
+				'calendar' => $calendar,
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('laraadmin.adminRoute')."/");
-        }
+			return redirect(config('laraadmin.adminRoute')."/");
+		}
 	}
 
 	/**
-	 * Show the form for creating a new agendamento.
+	 * Show the form for creating a new event.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -68,16 +86,16 @@ class AgendamentosController extends Controller
 	}
 
 	/**
-	 * Store a newly created agendamento in database.
+	 * Store a newly created event in database.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request)
 	{
-		if(Module::hasAccess("Agendamentos", "create")) {
-		
-			$rules = Module::validateRules("Agendamentos", $request);
+		if(Module::hasAccess("Events", "create")) {
+
+			$rules = Module::validateRules("Events", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -85,9 +103,9 @@ class AgendamentosController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
 			
-			$insert_id = Module::insert("Agendamentos", $request);
+			$insert_id = Module::insert("Events", $request);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.agendamentos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.events.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -95,30 +113,30 @@ class AgendamentosController extends Controller
 	}
 
 	/**
-	 * Display the specified agendamento.
+	 * Display the specified event.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id)
 	{
-		if(Module::hasAccess("Agendamentos", "view")) {
+		if(Module::hasAccess("Events", "view")) {
 			
-			$agendamento = Agendamento::find($id);
-			if(isset($agendamento->id)) {
-				$module = Module::get('Agendamentos');
-				$module->row = $agendamento;
+			$event = Event::find($id);
+			if(isset($event->id)) {
+				$module = Module::get('Events');
+				$module->row = $event;
 				
-				return view('la.agendamentos.show', [
+				return view('la.events.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('agendamento', $agendamento);
+				])->with('event', $event);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("agendamento"),
+					'record_name' => ucfirst("event"),
 				]);
 			}
 		} else {
@@ -127,28 +145,28 @@ class AgendamentosController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified agendamento.
+	 * Show the form for editing the specified event.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id)
 	{
-		if(Module::hasAccess("Agendamentos", "edit")) {			
-			$agendamento = Agendamento::find($id);
-			if(isset($agendamento->id)) {	
-				$module = Module::get('Agendamentos');
+		if(Module::hasAccess("Events", "edit")) {			
+			$event = Event::find($id);
+			if(isset($event->id)) {	
+				$module = Module::get('Events');
 				
-				$module->row = $agendamento;
+				$module->row = $event;
 				
-				return view('la.agendamentos.edit', [
+				return view('la.events.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('agendamento', $agendamento);
+				])->with('event', $event);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("agendamento"),
+					'record_name' => ucfirst("event"),
 				]);
 			}
 		} else {
@@ -157,7 +175,7 @@ class AgendamentosController extends Controller
 	}
 
 	/**
-	 * Update the specified agendamento in storage.
+	 * Update the specified event in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -165,9 +183,9 @@ class AgendamentosController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if(Module::hasAccess("Agendamentos", "edit")) {
+		if(Module::hasAccess("Events", "edit")) {
 			
-			$rules = Module::validateRules("Agendamentos", $request, true);
+			$rules = Module::validateRules("Events", $request, true);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -175,9 +193,9 @@ class AgendamentosController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			$insert_id = Module::updateRow("Agendamentos", $request, $id);
+			$insert_id = Module::updateRow("Events", $request, $id);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.agendamentos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.events.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -185,18 +203,18 @@ class AgendamentosController extends Controller
 	}
 
 	/**
-	 * Remove the specified agendamento from storage.
+	 * Remove the specified event from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id)
 	{
-		if(Module::hasAccess("Agendamentos", "delete")) {
-			Agendamento::find($id)->delete();
+		if(Module::hasAccess("Events", "delete")) {
+			Event::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.agendamentos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.events.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -209,11 +227,11 @@ class AgendamentosController extends Controller
 	 */
 	public function dtajax()
 	{
-		$values = DB::table('agendamentos')->select($this->listing_cols)->whereNull('deleted_at');
+		$values = DB::table('events')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('Agendamentos');
+		$fields_popup = ModuleFields::getModuleFields('Events');
 		
 		for($i=0; $i < count($data->data); $i++) {
 			for ($j=0; $j < count($this->listing_cols); $j++) { 
@@ -222,7 +240,7 @@ class AgendamentosController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/agendamentos/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/events/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -231,12 +249,12 @@ class AgendamentosController extends Controller
 			
 			if($this->show_action) {
 				$output = '';
-				if(Module::hasAccess("Agendamentos", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/agendamentos/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+				if(Module::hasAccess("Events", "edit")) {
+					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/events/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
-				if(Module::hasAccess("Agendamentos", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.agendamentos.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+				if(Module::hasAccess("Events", "delete")) {
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.events.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
