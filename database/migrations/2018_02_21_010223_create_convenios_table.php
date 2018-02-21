@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dwij\Laraadmin\Models\Module;
 
-class CreatePacientesTable extends Migration
+class CreateConveniosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,20 +17,8 @@ class CreatePacientesTable extends Migration
      */
     public function up()
     {
-        Module::generate("Pacientes", 'pacientes', 'nome', 'fa-user', [
-            ["nome", "Nome", "Name", false, "", 0, 256, true],
-            ["cpf", "CPF", "String", true, "", 11, 14, false],
-            ["email", "E-mail", "Email", false, "", 0, 256, false],
-            ["data_nascimento", "Data de Nascimento", "Date", false, "", 0, 0, false],
-            ["telefone", "Telefone", "Mobile", false, "", 0, 20, false],
-            ["celular", "Celular", "Mobile", false, "", 0, 20, false],
-            ["responsavel", "Responsável", "Name", false, "", 0, 256, false],
-            ["endereco", "Endereço", "Address", false, "", 0, 256, false],
-            ["cidade", "Cidade", "Address", false, "", 0, 256, false],
-            ["convenio", "Convênio", "Dropdown", false, "", 0, 0, false, "@convenios"],
-            ["plano", "Plano", "Dropdown", false, "", 0, 0, false, "@planos"],
-            ["indicacao", "Indicação", "Name", false, "", 0, 256, false],
-            ["observacoes", "Observações", "Textarea", false, "", 0, 0, false],
+        Module::generate("Convenios", 'convenios', 'nome', 'fa-medkit', [
+            ["nome", "Nome", "Name", true, "", 0, 256, true],
         ]);
 		
 		/*
@@ -76,8 +64,8 @@ class CreatePacientesTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('pacientes')) {
-            Schema::drop('pacientes');
+        if (Schema::hasTable('convenios')) {
+            Schema::drop('convenios');
         }
     }
 }

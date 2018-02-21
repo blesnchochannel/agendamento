@@ -113,7 +113,13 @@
 						@la_display($module, 'data_nascimento')
 						@la_display($module, 'telefone')
 						@la_display($module, 'celular')
+						@la_display($module, 'responsavel')
+						@la_display($module, 'endereco')
+						@la_display($module, 'cidade')
+						@la_display($module, 'convenio')
 						@la_display($module, 'plano')
+						@la_display($module, 'indicacao')
+						@la_display($module, 'observacoes')
 					</div>
 				</div>
 			</div>

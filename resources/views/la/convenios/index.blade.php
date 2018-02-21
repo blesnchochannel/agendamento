@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Pacientes")
-@section("contentheader_description", "Listagem de Pacientes")
-@section("section", "Pacientes")
+@section("contentheader_title", "Convenios")
+@section("contentheader_description", "Listagem de Convenios")
+@section("section", "Convenios")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Pacientes")
+@section("htmlheader_title", "Listadem de Convenios")
 
 @section("headerElems")
-@la_access("Pacientes", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Paciente</button>
+@la_access("Convenios", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Convenio</button>
 @endla_access
 @endsection
 
@@ -45,33 +45,21 @@
 	</div>
 </div>
 
-@la_access("Pacientes", "create")
+@la_access("Convenios", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Adicionar Paciente</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Convenio</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\PacientesController@store', 'id' => 'paciente-add-form']) !!}
+			{!! Form::open(['action' => 'LA\ConveniosController@store', 'id' => 'convenio-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
 					
 					{{--
 					@la_input($module, 'nome')
-					@la_input($module, 'cpf')
-					@la_input($module, 'email')
-					@la_input($module, 'data_nascimento')
-					@la_input($module, 'telefone')
-					@la_input($module, 'celular')
-					@la_input($module, 'responsavel')
-					@la_input($module, 'endereco')
-					@la_input($module, 'cidade')
-					@la_input($module, 'convenio')
-					@la_input($module, 'plano')
-					@la_input($module, 'indicacao')
-					@la_input($module, 'observacoes')
 					--}}
 				</div>
 			</div>
@@ -98,7 +86,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/paciente_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/convenio_dt_ajax') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
@@ -108,7 +96,7 @@ $(function () {
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#paciente-add-form").validate({
+	$("#convenio-add-form").validate({
 		
 	});
 });

@@ -69,4 +69,8 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== Events ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/events', 'LA\EventsController');
 	Route::get(config('laraadmin.adminRoute') . '/event_dt_ajax', 'LA\EventsController@dtajax');
+
+	/* ================== Convenios ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/convenios', 'LA\ConveniosController');
+	Route::get(config('laraadmin.adminRoute') . '/convenio_dt_ajax', 'LA\ConveniosController@dtajax');
 });

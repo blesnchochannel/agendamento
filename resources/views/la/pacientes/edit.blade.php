@@ -39,7 +39,13 @@
 					@la_input($module, 'data_nascimento')
 					@la_input($module, 'telefone')
 					@la_input($module, 'celular')
+					@la_input($module, 'responsavel')
+					@la_input($module, 'endereco')
+					@la_input($module, 'cidade')
+					@la_input($module, 'convenio')
 					@la_input($module, 'plano')
+					@la_input($module, 'indicacao')
+					@la_input($module, 'observacoes')
 					--}}
                     <br>
 					<div class="form-group">

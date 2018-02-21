@@ -13,18 +13,18 @@ use Auth;
 use DB;
 use Validator;
 use Datatables;
-use Calendar;
 use Collective\Html\FormFacade as Form;
 use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
 use App\Models\Event;
+use Calendar;
 
 class EventsController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'title';
-	public $listing_cols = ['id', 'title', 'all_day', 'start_date', 'end_date'];
+	public $listing_cols = ['id', 'title', 'aplicador', 'paciente', 'all_day', 'start_date', 'end_date'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

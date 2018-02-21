@@ -17,37 +17,37 @@ use Collective\Html\FormFacade as Form;
 use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
-use App\Models\Paciente;
+use App\Models\Convenio;
 
-class PacientesController extends Controller
+class ConveniosController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'nome';
-	public $listing_cols = ['id', 'nome', 'cpf', 'email', 'data_nascimento', 'telefone', 'celular', 'responsavel', 'endereco', 'cidade', 'convenio', 'plano', 'indicacao', 'observacoes'];
+	public $listing_cols = ['id', 'nome'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
 			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('Pacientes', $this->listing_cols);
+				$this->listing_cols = ModuleFields::listingColumnAccessScan('Convenios', $this->listing_cols);
 				return $next($request);
 			});
 		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('Pacientes', $this->listing_cols);
+			$this->listing_cols = ModuleFields::listingColumnAccessScan('Convenios', $this->listing_cols);
 		}
 	}
 	
 	/**
-	 * Display a listing of the Pacientes.
+	 * Display a listing of the Convenios.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-		$module = Module::get('Pacientes');
+		$module = Module::get('Convenios');
 		
 		if(Module::hasAccess($module->id)) {
-			return View('la.pacientes.index', [
+			return View('la.convenios.index', [
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
 				'module' => $module
@@ -58,7 +58,7 @@ class PacientesController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new paciente.
+	 * Show the form for creating a new convenio.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -68,16 +68,16 @@ class PacientesController extends Controller
 	}
 
 	/**
-	 * Store a newly created paciente in database.
+	 * Store a newly created convenio in database.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request)
 	{
-		if(Module::hasAccess("Pacientes", "create")) {
+		if(Module::hasAccess("Convenios", "create")) {
 		
-			$rules = Module::validateRules("Pacientes", $request);
+			$rules = Module::validateRules("Convenios", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -85,9 +85,9 @@ class PacientesController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
 			
-			$insert_id = Module::insert("Pacientes", $request);
+			$insert_id = Module::insert("Convenios", $request);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.pacientes.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.convenios.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -95,30 +95,30 @@ class PacientesController extends Controller
 	}
 
 	/**
-	 * Display the specified paciente.
+	 * Display the specified convenio.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id)
 	{
-		if(Module::hasAccess("Pacientes", "view")) {
+		if(Module::hasAccess("Convenios", "view")) {
 			
-			$paciente = Paciente::find($id);
-			if(isset($paciente->id)) {
-				$module = Module::get('Pacientes');
-				$module->row = $paciente;
+			$convenio = Convenio::find($id);
+			if(isset($convenio->id)) {
+				$module = Module::get('Convenios');
+				$module->row = $convenio;
 				
-				return view('la.pacientes.show', [
+				return view('la.convenios.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('paciente', $paciente);
+				])->with('convenio', $convenio);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("paciente"),
+					'record_name' => ucfirst("convenio"),
 				]);
 			}
 		} else {
@@ -127,28 +127,28 @@ class PacientesController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified paciente.
+	 * Show the form for editing the specified convenio.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id)
 	{
-		if(Module::hasAccess("Pacientes", "edit")) {			
-			$paciente = Paciente::find($id);
-			if(isset($paciente->id)) {	
-				$module = Module::get('Pacientes');
+		if(Module::hasAccess("Convenios", "edit")) {			
+			$convenio = Convenio::find($id);
+			if(isset($convenio->id)) {	
+				$module = Module::get('Convenios');
 				
-				$module->row = $paciente;
+				$module->row = $convenio;
 				
-				return view('la.pacientes.edit', [
+				return view('la.convenios.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('paciente', $paciente);
+				])->with('convenio', $convenio);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("paciente"),
+					'record_name' => ucfirst("convenio"),
 				]);
 			}
 		} else {
@@ -157,7 +157,7 @@ class PacientesController extends Controller
 	}
 
 	/**
-	 * Update the specified paciente in storage.
+	 * Update the specified convenio in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -165,9 +165,9 @@ class PacientesController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if(Module::hasAccess("Pacientes", "edit")) {
+		if(Module::hasAccess("Convenios", "edit")) {
 			
-			$rules = Module::validateRules("Pacientes", $request, true);
+			$rules = Module::validateRules("Convenios", $request, true);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -175,9 +175,9 @@ class PacientesController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			$insert_id = Module::updateRow("Pacientes", $request, $id);
+			$insert_id = Module::updateRow("Convenios", $request, $id);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.pacientes.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.convenios.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -185,18 +185,18 @@ class PacientesController extends Controller
 	}
 
 	/**
-	 * Remove the specified paciente from storage.
+	 * Remove the specified convenio from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id)
 	{
-		if(Module::hasAccess("Pacientes", "delete")) {
-			Paciente::find($id)->delete();
+		if(Module::hasAccess("Convenios", "delete")) {
+			Convenio::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.pacientes.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.convenios.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -209,11 +209,11 @@ class PacientesController extends Controller
 	 */
 	public function dtajax()
 	{
-		$values = DB::table('pacientes')->select($this->listing_cols)->whereNull('deleted_at');
+		$values = DB::table('convenios')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('Pacientes');
+		$fields_popup = ModuleFields::getModuleFields('Convenios');
 		
 		for($i=0; $i < count($data->data); $i++) {
 			for ($j=0; $j < count($this->listing_cols); $j++) { 
@@ -222,7 +222,7 @@ class PacientesController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/pacientes/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/convenios/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -231,12 +231,12 @@ class PacientesController extends Controller
 			
 			if($this->show_action) {
 				$output = '';
-				if(Module::hasAccess("Pacientes", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/pacientes/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+				if(Module::hasAccess("Convenios", "edit")) {
+					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/convenios/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
-				if(Module::hasAccess("Pacientes", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.pacientes.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+				if(Module::hasAccess("Convenios", "delete")) {
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.convenios.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}

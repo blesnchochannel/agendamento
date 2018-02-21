@@ -19,6 +19,8 @@ class CreateEventsTable extends Migration
     {
         Module::generate("Events", 'events', 'title', 'fa-calendar-plus-o', [
             ["title", "Título", "Name", false, "", 0, 256, true],
+            ["aplicador", "Aplicador", "Dropdown", false, "", 0, 0, true, "@users"],
+            ["paciente", "Paciente", "Dropdown", false, "", 0, 0, true, "@pacientes"],
             ["all_day", "Dia Todo", "Checkbox", false, "0", 0, 0, false],
             ["start_date", "Data Inicial", "Datetime", false, "", 0, 0, true],
             ["end_date", "Data Final", "Datetime", false, "", 0, 0, true],
