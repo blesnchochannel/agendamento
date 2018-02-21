@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dwij\Laraadmin\Models\Module;
 
-class CreateUsersTable extends Migration
+class CreateRoleUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,13 +17,9 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Module::generate("Users", 'users', 'nome', 'fa-group', [
-            ["nome", "Nome", "Name", false, "", 5, 250, true],
-            ["context_id", "Context", "Integer", false, "", 0, 11, false],
-            ["email", "Email", "Email", true, "", 0, 250, false],
-            ["password", "Password", "Password", false, "123456", 6, 250, true],
-            ["tipo", "Tipo", "Dropdown", false, "", 0, 0, true, "@tipos"],
-            ["cor", "Cor", "Color", true, "", 0, 0, false],
+        Module::generate("Role_users", 'role_user', 'role_id', 'fa-user-secret', [
+            ["role_id", "Role_Id", "Dropdown", false, "", 0, 0, true, "@roles"],
+            ["user_id", "User_Id", "Dropdown", false, "", 0, 0, true, "@users"],
         ]);
 		
 		/*
@@ -69,8 +65,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('users')) {
-            Schema::drop('users');
+        if (Schema::hasTable('role_user')) {
+            Schema::drop('role_user');
         }
     }
 }

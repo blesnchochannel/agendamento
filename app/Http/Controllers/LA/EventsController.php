@@ -18,6 +18,7 @@ use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
 use App\Models\Event;
+use App\Models\User;
 use Calendar;
 
 class EventsController extends Controller
@@ -47,17 +48,29 @@ class EventsController extends Controller
 	{
 		
 		$events = [];
-		$data = Event::all();
-		if($data->count()){
+		$aplicadores = DB::table('users')->select('id', 'nome', 'cor')->where('tipo', 2)->get();
+		$data = DB::table('events')
+		->join('users', 'users.id', '=', 'events.aplicador')
+		->join('pacientes', 'pacientes.id', '=', 'events.paciente')
+		->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
+		->get();
+
+		//if($data->count()){
 			foreach ($data as $key => $value) {
 				$events[] = Calendar::event(
-					$value->title,
-					$value->all_day,
-					new \DateTime($value->start_date),
-					new \DateTime($value->end_date)
-				);
+					$value->paciente, //Event title
+                	$value->all_day, //Full day event
+                	new \DateTime($value->start_date), //Start time
+                	new \DateTime($value->end_date), //End time
+                	$value->id, //Event ID
+                	[
+                		'backgroundColor' => $value->back_cor,
+                		'borderColor' => $value->back_cor,
+                		//'description' => $value->status
+                	]                
+                );
 			}
-		}
+		//}
 
 		$calendar = Calendar::addEvents($events);
 
@@ -68,6 +81,7 @@ class EventsController extends Controller
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
 				'calendar' => $calendar,
+				'aplicadores' => $aplicadores,
 				'module' => $module
 			]);
 		} else {

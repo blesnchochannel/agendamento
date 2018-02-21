@@ -38,7 +38,7 @@
 					@la_input($module, 'email')
 					@la_input($module, 'password')
 					@la_input($module, 'tipo')
-					@la_input($module, 'color')
+					@la_input($module, 'cor')
 					--}}
                     <br>
 					<div class="form-group">

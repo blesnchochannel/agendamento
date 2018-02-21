@@ -1,7 +1,7 @@
 @extends('la.layouts.app')
 
 @section('htmlheader_title')
-	User View
+	Role User View
 @endsection
 
 
@@ -15,7 +15,7 @@
 					<div class="profile-icon text-primary"><i class="fa {{ $module->fa_icon }}"></i></div>
 				</div>
 				<div class="col-md-9">
-					<h4 class="name">{{ $user->$view_col }}</h4>
+					<h4 class="name">{{ $role_user->$view_col }}</h4>
 					<div class="row stats">
 						<div class="col-md-4"><i class="fa fa-facebook"></i> 234</div>
 						<div class="col-md-4"><i class="fa fa-twitter"></i> 12</div>
@@ -81,12 +81,12 @@
 			</div>
 		</div>
 		<div class="col-md-1 actions">
-			@la_access("Users", "edit")
-				<a href="{{ url(config('laraadmin.adminRoute') . '/users/'.$user->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+			@la_access("Role_User", "edit")
+				<a href="{{ url(config('laraadmin.adminRoute') . '/role_user/'.$role_user->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
 			
-			@la_access("Users", "delete")
-				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.users.destroy', $user->id], 'method' => 'delete', 'style'=>'display:inline']) }}
+			@la_access("Role_User", "delete")
+				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.role_user.destroy', $role_user->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
 				{{ Form::close() }}
 			@endla_access
@@ -94,7 +94,7 @@
 	</div>
 
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
-		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/users') }}" data-toggle="tooltip" data-placement="right" title="Back to Users"><i class="fa fa-chevron-left"></i></a></li>
+		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/role_user') }}" data-toggle="tooltip" data-placement="right" title="Back to Role Users"><i class="fa fa-chevron-left"></i></a></li>
 		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-general-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
 		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li>
 	</ul>
@@ -107,12 +107,8 @@
 						<h4>General Info</h4>
 					</div>
 					<div class="panel-body">
-						@la_display($module, 'nome')
-						@la_display($module, 'context_id')
-						@la_display($module, 'email')
-						@la_display($module, 'password')
-						@la_display($module, 'tipo')
-						@la_display($module, 'cor')
+						@la_display($module, 'role_id')
+						@la_display($module, 'user_id')
 					</div>
 				</div>
 			</div>

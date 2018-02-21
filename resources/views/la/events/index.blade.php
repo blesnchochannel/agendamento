@@ -8,44 +8,52 @@
 
 @section("headerElems")
 @la_access("Events", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Event</button>
+<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Event</button>
 @endla_access
 @endsection
 
 @section("main-content")
 
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+	<ul>
+		@foreach ($errors->all() as $error)
+		<li>{{ $error }}</li>
+		@endforeach
+	</ul>
+</div>
 @endif
 
-<div>
+<div class="aplicadores col-lg-3">
+	@foreach( $aplicadores as $aplicador )
+	<div class="aplicador" style="background-color: {{ $aplicador->cor }}">
+		{{ $aplicador->nome }}
+	</div>
+	@endforeach
+</div>
+
+<div class="col-lg-12">
 	{!! $calendar->calendar() !!}
 	{!! $calendar->script() !!}
 </div>
 <br>
-<div class="box box-success">
+<div class="box box-success col-lg-12">
 	<!--<div class="box-header"></div>-->
 	<div class="box-body">
 		<table id="example1" class="table table-bordered">
-		<thead>
-		<tr class="success">
-			@foreach( $listing_cols as $col )
-			<th>{{ $module->fields[$col]['label'] or ucfirst($col) }}</th>
-			@endforeach
-			@if($show_actions)
-			<th>Ações</th>
-			@endif
-		</tr>
-		</thead>
-		<tbody>
-			
-		</tbody>
+			<thead>
+				<tr class="success">
+					@foreach( $listing_cols as $col )
+					<th>{{ $module->fields[$col]['label'] or ucfirst($col) }}</th>
+					@endforeach
+					@if($show_actions)
+					<th>Ações</th>
+					@endif
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
 		</table>
 	</div>
 </div>
@@ -61,54 +69,54 @@
 			{!! Form::open(['action' => 'LA\EventsController@store', 'id' => 'event-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
-                    @la_form($module)
+					@la_form($module)
 					
 					{{--
-					@la_input($module, 'title')
-					@la_input($module, 'aplicador')
-					@la_input($module, 'paciente')
-					@la_input($module, 'all_day')
-					@la_input($module, 'start_date')
-					@la_input($module, 'end_date')
-					--}}
+						@la_input($module, 'title')
+						@la_input($module, 'aplicador')
+						@la_input($module, 'paciente')
+						@la_input($module, 'all_day')
+						@la_input($module, 'start_date')
+						@la_input($module, 'end_date')
+						--}}
+					</div>
 				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					{!! Form::submit( 'Enviar', ['class'=>'btn btn-success']) !!}
+				</div>
+				{!! Form::close() !!}
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-				{!! Form::submit( 'Enviar', ['class'=>'btn btn-success']) !!}
-			</div>
-			{!! Form::close() !!}
 		</div>
 	</div>
-</div>
-@endla_access
+	@endla_access
 
-@endsection
+	@endsection
 
-@push('styles')
-<link rel="stylesheet" type="text/css" href="{{ asset('la-assets/plugins/datatables/datatables.min.css') }}"/>
-@endpush
+	@push('styles')
+	<link rel="stylesheet" type="text/css" href="{{ asset('la-assets/plugins/datatables/datatables.min.css') }}"/>
+	@endpush
 
-@push('scripts')
-<script src="{{ asset('la-assets/plugins/datatables/datatables.min.js') }}"></script>
-<script>
-$(function () {
-	$("#example1").DataTable({
-		processing: true,
-        serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/event_dt_ajax') }}",
-		language: {
-			lengthMenu: "_MENU_",
-			search: "_INPUT_",
-			searchPlaceholder: "Procurar"
-		},
-		@if($show_actions)
-		columnDefs: [ { orderable: false, targets: [-1] }],
-		@endif
-	});
-	$("#event-add-form").validate({
-		
-	});
-});
-</script>
-@endpush
+	@push('scripts')
+	<script src="{{ asset('la-assets/plugins/datatables/datatables.min.js') }}"></script>
+	<script>
+		$(function () {
+			$("#example1").DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: "{{ url(config('laraadmin.adminRoute') . '/event_dt_ajax') }}",
+				language: {
+					lengthMenu: "_MENU_",
+					search: "_INPUT_",
+					searchPlaceholder: "Procurar"
+				},
+				@if($show_actions)
+				columnDefs: [ { orderable: false, targets: [-1] }],
+				@endif
+			});
+			$("#event-add-form").validate({
+
+			});
+		});
+	</script>
+	@endpush
