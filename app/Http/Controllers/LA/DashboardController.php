@@ -9,6 +9,9 @@ namespace App\Http\Controllers\LA;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use DB;
+use App\Models\Event;
+use App\Models\User;
 
 /**
  * Class DashboardController
@@ -33,6 +36,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('la.dashboard');
+        $data = DB::table('events')
+        ->join('users', 'users.id', '=', 'events.aplicador')
+        ->join('pacientes', 'pacientes.id', '=', 'events.paciente')
+        ->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
+        ->get();
+        return view('la.dashboard', ['data' => $data]);
     }
 }

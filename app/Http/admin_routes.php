@@ -1,8 +1,16 @@
 <?php
 
 /* ================== Homepage ================== */
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index');
+Route::get('/', function () {
+	return redirect('admin');
+});
+
+
+Route::get('/home', function () {
+	return redirect('admin');
+});
+
+
 Route::auth();
 
 /* ================== Access Uploaded Files ================== */
@@ -77,4 +85,5 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== Role_User ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/role_user', 'LA\Role_UserController');
 	Route::get(config('laraadmin.adminRoute') . '/role_user_dt_ajax', 'LA\Role_UserController@dtajax');
+
 });
