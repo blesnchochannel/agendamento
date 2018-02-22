@@ -42,12 +42,14 @@ class DashboardController extends Controller
         ->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
         ->get();
 
-        /*foreach ($data as $key => $value) {
+        $resultado = [];
+
+        foreach ($data as $key => $value) {
             $timestamp1 = strtotime($value->start_date);
             $timestamp2 = strtotime($value->end_date);
-            echo "Difference between two dates is " . $hour = abs($timestamp2 - $timestamp1)/(60*60) . " hour(s)"."<br>";
-        }*/
+            $resultado[] = "Horas trabalhadas: " . $hour = abs($timestamp2 - $timestamp1)/(60*60) . " hora(s)";
+        }
 
-        return view('la.dashboard', ['data' => $data]);
+        return view('la.dashboard', ['data' => $data, 'resultado' => $resultado]);
     }
 }

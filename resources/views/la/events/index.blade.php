@@ -115,7 +115,7 @@
 				@endif
 			});
 			$("#event-add-form").validate({
-
+				
 			});
 		});
 	</script>

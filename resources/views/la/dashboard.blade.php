@@ -9,9 +9,15 @@
 <div class="agendamentos col-lg-3">
   @foreach( $data as $dados )
   <div>
-    <span>{{ $dados->id }}</span>
-    <span>{{ $dados->start_date }}</span>
-    <span>{{ $dados->end_date }}</span>
+    <span>{{ $dados->aplicador }}</span>
+  </div>
+  @endforeach
+</div>
+
+<div class="agendamentos col-lg-3">
+  @foreach( $resultado as $result )
+  <div>
+    <span>{{ $result }}</span>
   </div>
   @endforeach
 </div>

@@ -18,7 +18,7 @@ use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
 use App\Models\Event;
-use App\Models\User;
+
 use Calendar;
 
 class EventsController extends Controller
@@ -56,8 +56,8 @@ class EventsController extends Controller
 		->get();
 
 		//if($data->count()){
-			foreach ($data as $key => $value) {
-				$events[] = Calendar::event(
+		foreach ($data as $key => $value) {
+			$events[] = Calendar::event(
 					$value->paciente, //Event title
                 	$value->all_day, //Full day event
                 	new \DateTime($value->start_date), //Start time
@@ -69,7 +69,7 @@ class EventsController extends Controller
                 		//'description' => $value->status
                 	]                
                 );
-			}
+		}
 		//}
 
 		$calendar = Calendar::addEvents($events);
