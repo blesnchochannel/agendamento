@@ -72,12 +72,12 @@
 					@la_form($module)
 					
 					{{--
-						@la_input($module, 'title')
 						@la_input($module, 'aplicador')
 						@la_input($module, 'paciente')
 						@la_input($module, 'all_day')
 						@la_input($module, 'start_date')
 						@la_input($module, 'end_date')
+						@la_input($module, 'tempo')
 						--}}
 					</div>
 				</div>

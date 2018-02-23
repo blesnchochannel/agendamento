@@ -7,14 +7,6 @@
 @section('main-content')
 
 <div class="agendamentos col-lg-3">
-  @foreach( $data as $dados )
-  <div>
-    <span>{{ $dados->aplicador }}</span>
-  </div>
-  @endforeach
-</div>
-
-<div class="agendamentos col-lg-3">
   @foreach( $resultado as $result )
   <div>
     <span>{{ $result }}</span>

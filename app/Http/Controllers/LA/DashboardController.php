@@ -39,17 +39,22 @@ class DashboardController extends Controller
         $data = DB::table('events')
         ->join('users', 'users.id', '=', 'events.aplicador')
         ->join('pacientes', 'pacientes.id', '=', 'events.paciente')
-        ->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
+        ->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente', 'users.id as aplicador_id')
+        ->whereNull('events.deleted_at')
         ->get();
 
         $resultado = [];
 
         foreach ($data as $key => $value) {
-            $timestamp1 = strtotime($value->start_date);
-            $timestamp2 = strtotime($value->end_date);
-            $resultado[] = "Horas trabalhadas: " . $hour = abs($timestamp2 - $timestamp1)/(60*60) . " hora(s)";
+            $tempo = $value->tempo;
+            $id = $value->aplicador_id;
+            $aplicador = $value->aplicador;
+            $resultado[] = ['nome' => $aplicador, 'tempo' => $tempo];// = $aplicador = $tempo;
+            //$resultado = array_add(['nome' => $aplicador, 'tempo' => $tempo]);
         }
 
-        return view('la.dashboard', ['data' => $data, 'resultado' => $resultado]);
+        var_dump($resultado);
+
+        //return view('la.dashboard', ['resultado' => $resultado]);
     }
 }

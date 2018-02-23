@@ -38,6 +38,7 @@
 					@la_input($module, 'email')
 					@la_input($module, 'password')
 					@la_input($module, 'tipo')
+					@la_input($module, 'valor')
 					@la_input($module, 'cor')
 					--}}
                     <br>

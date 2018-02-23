@@ -18,14 +18,13 @@ use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
 use App\Models\Event;
-
 use Calendar;
 
 class EventsController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'title';
-	public $listing_cols = ['id', 'title', 'aplicador', 'paciente', 'all_day', 'start_date', 'end_date'];
+	public $view_col = 'aplicador';
+	public $listing_cols = ['id', 'aplicador', 'paciente', 'all_day', 'start_date', 'end_date', 'tempo'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
@@ -53,6 +52,7 @@ class EventsController extends Controller
 		->join('users', 'users.id', '=', 'events.aplicador')
 		->join('pacientes', 'pacientes.id', '=', 'events.paciente')
 		->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
+		->whereNull('events.deleted_at')
 		->get();
 
 		//if($data->count()){
@@ -108,7 +108,7 @@ class EventsController extends Controller
 	public function store(Request $request)
 	{
 		if(Module::hasAccess("Events", "create")) {
-
+		
 			$rules = Module::validateRules("Events", $request);
 			
 			$validator = Validator::make($request->all(), $rules);

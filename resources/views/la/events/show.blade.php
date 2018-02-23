@@ -107,12 +107,12 @@
 						<h4>General Info</h4>
 					</div>
 					<div class="panel-body">
-						@la_display($module, 'title')
 						@la_display($module, 'aplicador')
 						@la_display($module, 'paciente')
 						@la_display($module, 'all_day')
 						@la_display($module, 'start_date')
 						@la_display($module, 'end_date')
+						@la_display($module, 'tempo')
 					</div>
 				</div>
 			</div>

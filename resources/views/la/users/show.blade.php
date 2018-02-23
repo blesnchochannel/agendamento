@@ -112,6 +112,7 @@
 						@la_display($module, 'email')
 						@la_display($module, 'password')
 						@la_display($module, 'tipo')
+						@la_display($module, 'valor')
 						@la_display($module, 'cor')
 					</div>
 				</div>
