@@ -44,6 +44,9 @@
 					@la_input($module, 'cidade')
 					@la_input($module, 'convenio')
 					@la_input($module, 'plano')
+					@la_input($module, 'inicio')
+					@la_input($module, 'local')
+					@la_input($module, 'codigo')
 					@la_input($module, 'indicacao')
 					@la_input($module, 'observacoes')
 					--}}

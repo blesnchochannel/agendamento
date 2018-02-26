@@ -29,6 +29,9 @@ class CreatePacientesTable extends Migration
             ["cidade", "Cidade", "Address", false, "", 0, 256, false],
             ["convenio", "Convênio", "Dropdown", false, "", 0, 0, false, "@convenios"],
             ["plano", "Plano", "Dropdown", false, "", 0, 0, false, "@planos"],
+            ["inicio", "Início", "Date", false, "", 0, 0, false],
+            ["local", "Local", "Name", false, "", 0, 256, false],
+            ["codigo", "Código", "Integer", false, "", 0, 11, false],
             ["indicacao", "Indicação", "Name", false, "", 0, 256, false],
             ["observacoes", "Observações", "Textarea", false, "", 0, 0, false],
         ]);

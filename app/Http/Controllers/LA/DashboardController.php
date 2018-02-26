@@ -85,17 +85,17 @@ class DashboardController extends Controller
         ->size(['width' => 400, 'height' => 200])
         ->labels(['Label x', 'Label y'])
         ->datasets([
-         [
-             "label" => "My First dataset",
-             'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-             'data' => [69, 59]
-         ],
-         [
-             "label" => "My First dataset",
-             'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
-             'data' => [65, 12]
-         ]
-     ])
+           [
+               "label" => "My First dataset",
+               'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+               'data' => [69, 59]
+           ],
+           [
+               "label" => "My First dataset",
+               'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
+               'data' => [65, 12]
+           ]
+       ])
         ->options([]);
         
         return view('la.dashboard', ['resultado' => $resultado, 'aplicadores' => $aplicadores], compact('chartjs'));
@@ -103,6 +103,9 @@ class DashboardController extends Controller
 
     public function aplicadores()
     {
+        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('America/Sao_Paulo');
+
         $q = intval($_GET['q']);
 
         $data = DB::table('events')
@@ -125,7 +128,7 @@ class DashboardController extends Controller
             $aplicador = $value->aplicador;
             $valor = $value->valor;
             $time = strtotime($value->start_date);
-            $mes = date("F", $time);
+            $mes = strftime('%B', $time);
             $ano = date("Y", $time);
             $year[$id] = $ano;
             $month[$id] = $mes;
@@ -142,20 +145,42 @@ class DashboardController extends Controller
             $resultado[$ano][$mes][$id] = ['ano' => $year[$id], 'mes' => $month[$id],'nome' => $aplicador, 'tempo' => $tempo[$ano][$mes][$id], 'valor' => $valor];
         }
 
-        foreach ($resultado as $value) {
-            $resultado2 = [$value];
+        foreach ($resultado as $key => $value) {
+            echo "<div class='agendamentos col-lg-12'>".$key."<br>";
+            foreach ($resultado[$key] as $key2 => $value2) {
+                echo "<div class='agendamentos col-lg-6'>".$key2."<br>";
+                foreach ($resultado[$key][$key2] as $key3 => $value3) {
+                    echo "Tempo: ".$value3["tempo"]." horas.<br>";
+                    echo "Valor: R$ ".$value3["valor"]." reais.<br>";
+                    echo "Total: R$ ".$value3["tempo"]*$value3["valor"]." reais. <br>";
+                    
+                }
+                echo "</div>";
+            }
+            echo "</div>";
         }
 
-        foreach ($resultado2 as $value2) {
-            $resultado3 = [$value2];
-        }
+        $chartjs = app()->chartjs
+        ->name('barChartTest')
+        ->type('bar')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels(['Label x', 'Label y'])
+        ->datasets([
+           [
+               "label" => "My First dataset",
+               'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+               'data' => [69, 59]
+           ],
+           [
+               "label" => "My First dataset",
+               'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
+               'data' => [65, 12]
+           ]
+       ])
+        ->options([]);
 
-        foreach ($resultado3 as $value3) {
-            $resultado4 = $value3;
-        }
+        //var_dump($resultado);
 
-        $resultado5 = $resultado4;
-
-        return $resultado2;
+        //return $resultado;
     }
 }

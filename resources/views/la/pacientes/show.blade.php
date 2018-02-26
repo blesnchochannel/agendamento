@@ -118,6 +118,9 @@
 						@la_display($module, 'cidade')
 						@la_display($module, 'convenio')
 						@la_display($module, 'plano')
+						@la_display($module, 'inicio')
+						@la_display($module, 'local')
+						@la_display($module, 'codigo')
 						@la_display($module, 'indicacao')
 						@la_display($module, 'observacoes')
 					</div>
