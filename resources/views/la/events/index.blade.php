@@ -24,12 +24,25 @@
 </div>
 @endif
 
-<div class="aplicadores col-lg-3">
+<div class="aplicadores col-lg-12">
+	<label>Aplicadores: </label><br>
 	@foreach( $aplicadores as $aplicador )
-	<div class="aplicador" style="background-color: {{ $aplicador->cor }}">
+	<div class="aplicador col-lg-2" style="background-color: {{ $aplicador->cor }}">
 		{{ $aplicador->nome }}
 	</div>
 	@endforeach
+</div>
+<br>
+<div class="aplicadores col-lg-12">
+	<form>
+		<select name="aplicadores" onchange="showAplicadores(this.value)">
+			<option value="">Selecione uma opção</option>
+			<option value="all">Todas as agendas</option>
+			@foreach( $aplicadores as $aplicador )      
+			<option value="{{ $aplicador->id }}">{{ $aplicador->nome }}</option>
+			@endforeach
+		</select>
+	</form>
 </div>
 
 <div class="col-lg-12">
@@ -125,4 +138,11 @@
 			window.print();
 		});
 	</script>
+
+	<script>
+		function showAplicadores(str) {
+			window.location.href = "?q="+str;
+		}
+	</script>
+
 	@endpush

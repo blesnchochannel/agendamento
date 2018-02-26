@@ -45,20 +45,36 @@ class EventsController extends Controller
 	 */
 	public function index()
 	{
-		
-		$events = [];
 		$aplicadores = DB::table('users')->select('id', 'nome', 'cor')->where('tipo', 2)->get();
-		$data = DB::table('events')
-		->join('users', 'users.id', '=', 'events.aplicador')
-		->join('pacientes', 'pacientes.id', '=', 'events.paciente')
-		->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
-		->whereNull('events.deleted_at')
-		->get();
+
+		$q = "all";
+
+		if (isset($_GET['q'])) {
+			$q = intval($_GET['q']);
+		}
+		if ($q == "all"){
+			$data = DB::table('events')
+			->join('users', 'users.id', '=', 'events.aplicador')
+			->join('pacientes', 'pacientes.id', '=', 'events.paciente')
+			->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
+			->where('events.deleted_at', '=', null)
+			->get();
+		}else{
+			$data = DB::table('events')
+			->join('users', 'users.id', '=', 'events.aplicador')
+			->join('pacientes', 'pacientes.id', '=', 'events.paciente')
+			->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
+			->where('events.deleted_at', '=', null)
+			->where('events.aplicador', '=', $q)
+			->get();
+		}
+
+		$events = [];
 
 		//if($data->count()){
 		foreach ($data as $key => $value) {
 			$events[] = Calendar::event(
-					$value->paciente, //Event title
+					"Paciente: ".$value->paciente, //Event title
                 	$value->all_day, //Full day event
                 	new \DateTime($value->start_date), //Start time
                 	new \DateTime($value->end_date), //End time
@@ -75,7 +91,7 @@ class EventsController extends Controller
 		$calendar = Calendar::addEvents($events);
 
 		$module = Module::get('Events');
-		
+
 		if(Module::hasAccess($module->id)) {
 			return View('la.events.index', [
 				'show_actions' => $this->show_action,
@@ -108,7 +124,7 @@ class EventsController extends Controller
 	public function store(Request $request)
 	{
 		if(Module::hasAccess("Events", "create")) {
-		
+
 			$rules = Module::validateRules("Events", $request);
 			
 			$validator = Validator::make($request->all(), $rules);

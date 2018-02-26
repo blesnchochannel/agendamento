@@ -40,6 +40,11 @@ class Calendar
         'navLinks' => true, // can click day/week names to navigate views
         'editable' => true,
         'defaultView' => 'agendaWeek',
+        'businessHours' => [
+            'dow' => [ 1, 2, 3, 4, 5 ],
+            'start' => '08:00',
+            'end' => '20:00',
+        ],
     ];
 
     /**
