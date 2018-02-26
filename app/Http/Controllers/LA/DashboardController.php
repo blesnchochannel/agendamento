@@ -41,67 +41,15 @@ class DashboardController extends Controller
         ->where('tipo', '=', '2', 'and', 'deleted_at', '=', null)
         ->get();
 
-        $data = DB::table('events')
-        ->join('users', 'users.id', '=', 'events.aplicador')
-        ->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'users.id as aplicador_id', 'users.valor as valor')
-        ->whereNull('events.deleted_at')
+        $pacientes = DB::table('pacientes')
+        ->select('id', 'nome')
+        ->where('deleted_at', '=', null)
         ->get();
 
-        $resultado = [];
-        foreach ($data as $key => $value)
-        {
-
-            $id = $value->aplicador_id;
-            $aplicador = $value->aplicador;
-            $valor = $value->valor;
-            $time = strtotime($value->start_date);
-            $mes = date("F", $time);
-            $ano = date("Y", $time);
-            $year[$id] = $ano;
-            $month[$id] = $mes;
-
-            if (isset($tempo[$ano][$mes][$id]))
-            {
-                $tempo[$ano][$mes][$id] += $value->tempo;
-            }
-            else
-            {
-                $tempo[$ano][$mes][$id] = $value->tempo;
-            }
-
-            //$resultado[$ano][$mes][$id] = $year[$id] = $month[$id] = ['nome' => $aplicador, 'tempo' => $tempo[$ano][$mes][$id]];
-            $resultado[$ano][$mes][$id] = ['ano' => $year[$id], 'mes' => $month[$id],'nome' => $aplicador, 'tempo' => $tempo[$ano][$mes][$id], 'valor' => $valor];
-        }
-
-        foreach ($resultado as $key => $value) {
-            //echo $value."<br>";
-        }
-
-        //var_dump($resultado[2018]);
-
-        $chartjs = app()->chartjs
-        ->name('barChartTest')
-        ->type('bar')
-        ->size(['width' => 400, 'height' => 200])
-        ->labels(['Label x', 'Label y'])
-        ->datasets([
-           [
-               "label" => "My First dataset",
-               'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-               'data' => [69, 59]
-           ],
-           [
-               "label" => "My First dataset",
-               'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
-               'data' => [65, 12]
-           ]
-       ])
-        ->options([]);
-        
-        return view('la.dashboard', ['resultado' => $resultado, 'aplicadores' => $aplicadores], compact('chartjs'));
+        return view('la.dashboard', ['aplicadores' => $aplicadores, 'pacientes' => $pacientes]);
     }
 
-    public function aplicadores()
+    public function ajaxaplicadores()
     {
         setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
         date_default_timezone_set('America/Sao_Paulo');
@@ -117,10 +65,6 @@ class DashboardController extends Controller
         ->get();
 
         $resultado = [];
-        $resultado2 = [];
-        $resultado3 = [];
-        $resultado4 = [];
-        $resultado5 = [];
         foreach ($data as $key => $value)
         {
 
@@ -145,42 +89,105 @@ class DashboardController extends Controller
             $resultado[$ano][$mes][$id] = ['ano' => $year[$id], 'mes' => $month[$id],'nome' => $aplicador, 'tempo' => $tempo[$ano][$mes][$id], 'valor' => $valor];
         }
 
+        echo "
+        <table class='table' id='aplicadores'>
+        <tr>
+        <th>Ano</th>
+        <th>Mês</th>
+        <th>Horas Trabalhadas</th>
+        <th>Valor/Hora</th>
+        <th>Valor Total</th>
+        </tr>
+        ";
+
         foreach ($resultado as $key => $value) {
-            echo "<div class='agendamentos col-lg-12'>".$key."<br>";
             foreach ($resultado[$key] as $key2 => $value2) {
-                echo "<div class='agendamentos col-lg-6'>".$key2."<br>";
                 foreach ($resultado[$key][$key2] as $key3 => $value3) {
-                    echo "Tempo: ".$value3["tempo"]." horas.<br>";
-                    echo "Valor: R$ ".$value3["valor"]." reais.<br>";
-                    echo "Total: R$ ".$value3["tempo"]*$value3["valor"]." reais. <br>";
-                    
+                    echo "
+                    <tr>
+                    <td>".$value3["ano"]."</td>
+                    <td>".$value3["mes"]."</td>
+                    <td>".$value3["tempo"]." horas</td>
+                    <td>R$ ".$value3["valor"]."</td>
+                    <td>R$ ".$value3["tempo"]*$value3["valor"]."</td>
+                    </tr>
+                    ";                    
                 }
-                echo "</div>";
             }
-            echo "</div>";
         }
 
-        $chartjs = app()->chartjs
-        ->name('barChartTest')
-        ->type('bar')
-        ->size(['width' => 400, 'height' => 200])
-        ->labels(['Label x', 'Label y'])
-        ->datasets([
-           [
-               "label" => "My First dataset",
-               'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-               'data' => [69, 59]
-           ],
-           [
-               "label" => "My First dataset",
-               'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
-               'data' => [65, 12]
-           ]
-       ])
-        ->options([]);
-
-        //var_dump($resultado);
-
-        //return $resultado;
+        echo "</table>";        
     }
+
+    public function ajaxpacientes()
+    {
+        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $q = intval($_GET['q']);
+
+        $data = DB::table('events')
+        ->join('pacientes', 'pacientes.id', '=', 'events.paciente')
+        ->join('planos', 'planos.id', '=', 'pacientes.plano')
+        ->select('events.*', 'pacientes.nome as paciente', 'planos.nome as plano', 'pacientes.id as paciente_id', 'planos.descricao as descricao')
+        ->where('events.deleted_at', '=', null)
+        ->where('events.paciente', '=', $q)
+        ->get();
+
+        $resultado = [];
+        foreach ($data as $key => $value)
+        {
+
+            $id = $value->paciente_id;
+            $paciente = $value->paciente;
+            $plano = $value->plano;
+            $descricao = $value->descricao;
+            $time = strtotime($value->start_date);
+            $mes = strftime('%B', $time);
+            $ano = date("Y", $time);
+            $year[$id] = $ano;
+            $month[$id] = $mes;
+
+            if (isset($tempo[$ano][$mes][$id]))
+            {
+                $tempo[$ano][$mes][$id] += $value->tempo;
+            }
+            else
+            {
+                $tempo[$ano][$mes][$id] = $value->tempo;
+            }
+
+            $resultado[$ano][$mes][$id] = ['ano' => $year[$id], 'mes' => $month[$id],'nome' => $paciente, 'tempo' => $tempo[$ano][$mes][$id], 'plano' => $plano, 'descricao' => $descricao];
+        }
+
+        echo "
+        <table class='table' id='aplicadores'>
+        <tr>
+        <th>Ano</th>
+        <th>Mês</th>
+        <th>Horas em Atendimento</th>
+        <th>Plano</th>
+        <th>Descrição</th>
+        </tr>
+        ";
+
+        foreach ($resultado as $key => $value) {
+            foreach ($resultado[$key] as $key2 => $value2) {
+                foreach ($resultado[$key][$key2] as $key3 => $value3) {
+                    echo "
+                    <tr>
+                    <td>".$value3["ano"]."</td>
+                    <td>".$value3["mes"]."</td>
+                    <td>".$value3["tempo"]." horas</td>
+                    <td>".$value3["plano"]."</td>
+                    <td>".$value3["descricao"]."</td>
+                    </tr>
+                    ";                    
+                }
+            }
+        }
+
+        echo "</table>";        
+    }
+
 }

@@ -33,6 +33,7 @@
 </div>
 
 <div class="col-lg-12">
+	<button class="printBtn hidden-print">Imprimir</button>
 	{!! $calendar->calendar() !!}
 	{!! $calendar->script() !!}
 </div>
@@ -117,6 +118,11 @@
 			$("#event-add-form").validate({
 				
 			});
+		});
+	</script>
+	<script type="text/javascript">
+		$('.printBtn').on('click', function (){
+			window.print();
 		});
 	</script>
 	@endpush

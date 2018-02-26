@@ -6,21 +6,35 @@
 
 @section('main-content')
 
-<div class="agendamentos col-lg-10">
+<div class="aplicadores col-lg-12">
+  <h2>Relatórios</h2>
+</div>
+<br>
+
+<div class="aplicadores col-lg-6">
+  <label>Cálculo de Horas trabalhadas por aplicador:</label>
   <form>
-    <select name="aplicadores" onchange="showUser(this.value)">
-      <option value="">Selecione um aplicador:</option>
+    <select name="aplicadores" onchange="showAplicadores(this.value)">
+      <option value="">Selecione um aplicador</option>
       @foreach( $aplicadores as $aplicador )      
       <option value="{{ $aplicador->id }}">{{ $aplicador->nome }}</option>
       @endforeach
     </select>
   </form>
-  <br>
-  <div id="txtHint"><b>Os dados do aplicador serão apresentados aqui.</b></div>
+  <div id="txtHint_aplicadores" style="background-color: white;"><b>O cálculo será exibido abaixo.</b></div>
 </div>
 
-<div class="agendamentos col-lg-6">
-  {!! $chartjs->render() !!}
+<div class="pacientes col-lg-6">
+  <label>Cálculo de Horas utilizadas por paciente:</label>
+  <form>
+    <select name="pacientes" onchange="showPacientes(this.value)">
+      <option value="">Selecione um paciente</option>
+      @foreach( $pacientes as $paciente )      
+      <option value="{{ $paciente->id }}">{{ $paciente->nome }}</option>
+      @endforeach
+    </select>
+  </form>
+  <div id="txtHint_pacientes" style="background-color: white;"><b>O cálculo será exibido abaixo.</b></div>
 </div>
 
 <!--<div>
@@ -50,26 +64,7 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
-<!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="{{ asset('la-assets/plugins/morris/morris.min.js') }}"></script>
-<!-- Sparkline -->
-<script src="{{ asset('la-assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
-<!-- jvectormap -->
-<script src="{{ asset('la-assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-<script src="{{ asset('la-assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{ asset('la-assets/plugins/knob/jquery.knob.js') }}"></script>
-<!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="{{ asset('la-assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
-<!-- datepicker -->
-<script src="{{ asset('la-assets/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('la-assets/plugins/datepicker/locales/bootstrap-datepicker.pt-BR.js') }}"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="{{ asset('la-assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
-<!-- FastClick -->
-<script src="{{ asset('la-assets/plugins/fastclick/fastclick.js') }}"></script>
+
 <!-- dashboard -->
 <script src="{{ asset('la-assets/js/pages/dashboard.js') }}"></script>
 @endpush
@@ -88,13 +83,14 @@
   }).show();
  })(window.jQuery);
 </script>
+
 <script>
-function showUser(str) {
-  if (str=="") {
-    document.getElementById("txtHint").innerHTML="";
-    return;
-  }
-  if (window.XMLHttpRequest) {
+  function showAplicadores(str) {
+    if (str=="") {
+      document.getElementById("txtHint_aplicadores").innerHTML="";
+      return;
+    }
+    if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp=new XMLHttpRequest();
   } else { // code for IE6, IE5
@@ -102,11 +98,43 @@ function showUser(str) {
   }
   xmlhttp.onreadystatechange=function() {
     if (this.readyState==4 && this.status==200) {
-      document.getElementById("txtHint").innerHTML=this.responseText;
+      document.getElementById("txtHint_aplicadores").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/aplicadores?q=') }}"+str,true);
+  xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/ajaxaplicadores?q=') }}"+str,true);
   xmlhttp.send();
 }
+</script>
+
+<script>
+  function showPacientes(str) {
+    if (str=="") {
+      document.getElementById("txtHint_pacientes").innerHTML="";
+      return;
+    }
+    if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else { // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("txtHint_pacientes").innerHTML=this.responseText;
+    }
+  }
+  xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/ajaxpacientes?q=') }}"+str,true);
+  xmlhttp.send();
+}
+</script>
+
+<script src="{{ asset('la-assets/plugins/datatables/datatables.min.js') }}"></script>
+<script>
+  $(document).ready( function () {
+    $('#aplicadores').DataTable();
+  } );
+  $(document).ready( function () {
+    $('#pacientes').DataTable();
+  } );
 </script>
 @endpush

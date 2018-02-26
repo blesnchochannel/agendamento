@@ -33,7 +33,8 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	
 	Route::get(config('laraadmin.adminRoute'), 'LA\DashboardController@index');
 	Route::get(config('laraadmin.adminRoute'). '/dashboard', 'LA\DashboardController@index');
-	Route::get(config('laraadmin.adminRoute') . '/aplicadores', 'LA\DashboardController@aplicadores');
+	Route::get(config('laraadmin.adminRoute') . '/ajaxaplicadores', 'LA\DashboardController@ajaxaplicadores');
+	Route::get(config('laraadmin.adminRoute') . '/ajaxpacientes', 'LA\DashboardController@ajaxpacientes');
 	
 	/* ================== Users ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/users', 'LA\UsersController');
@@ -88,4 +89,8 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== Fechamentos ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/fechamentos', 'LA\FechamentosController');
 	Route::get(config('laraadmin.adminRoute') . '/fechamento_dt_ajax', 'LA\FechamentosController@dtajax');
+
+	/* ================== Atendimentos ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/atendimentos', 'LA\AtendimentosController');
+	Route::get(config('laraadmin.adminRoute') . '/atendimento_dt_ajax', 'LA\AtendimentosController@dtajax');
 });
