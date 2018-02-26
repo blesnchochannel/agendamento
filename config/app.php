@@ -157,6 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Dwij\Laraadmin\LAProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
 
     ],
 

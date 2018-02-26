@@ -5,11 +5,9 @@ Route::get('/', function () {
 	return redirect('admin');
 });
 
-
 Route::get('/home', function () {
 	return redirect('admin');
 });
-
 
 Route::auth();
 
@@ -35,6 +33,7 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	
 	Route::get(config('laraadmin.adminRoute'), 'LA\DashboardController@index');
 	Route::get(config('laraadmin.adminRoute'). '/dashboard', 'LA\DashboardController@index');
+	Route::get(config('laraadmin.adminRoute') . '/aplicadores', 'LA\DashboardController@aplicadores');
 	
 	/* ================== Users ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/users', 'LA\UsersController');
@@ -86,4 +85,7 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::resource(config('laraadmin.adminRoute') . '/role_user', 'LA\Role_UserController');
 	Route::get(config('laraadmin.adminRoute') . '/role_user_dt_ajax', 'LA\Role_UserController@dtajax');
 
+	/* ================== Fechamentos ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/fechamentos', 'LA\FechamentosController');
+	Route::get(config('laraadmin.adminRoute') . '/fechamento_dt_ajax', 'LA\FechamentosController@dtajax');
 });

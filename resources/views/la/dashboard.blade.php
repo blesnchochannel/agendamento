@@ -6,17 +6,26 @@
 
 @section('main-content')
 
-<div class="agendamentos col-lg-3">
-  @foreach( $resultado as $result )
-  <div>
-    <span>{{ $result }}</span>
-  </div>
-  @endforeach
+<div class="agendamentos col-lg-10">
+  <form>
+    <select name="aplicadores" onchange="showUser(this.value)">
+      <option value="">Selecione um aplicador:</option>
+      @foreach( $aplicadores as $aplicador )      
+      <option value="{{ $aplicador->id }}">{{ $aplicador->nome }}</option>
+      @endforeach
+    </select>
+  </form>
+  <br>
+  <div id="txtHint"><b>Os dados do aplicador serão apresentados aqui.</b></div>
 </div>
 
-<div>
-  <div id="myfirstchart" style="height: 250px;"></div>
+<div class="agendamentos col-lg-6">
+  {!! $chartjs->render() !!}
 </div>
+
+<!--<div>
+  <div id="myfirstchart" style="height: 250px;"></div>
+</div>-->
 
 @endsection
 
@@ -80,27 +89,24 @@
  })(window.jQuery);
 </script>
 <script>
-  new Morris.Bar({
-  // ID of the element in which to draw the chart.
-  element: 'myfirstchart',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [
-  { y: '2006', a: 100, b: 90 },
-  { y: '2007', a: 75,  b: 65 },
-  { y: '2008', a: 50,  b: 40 },
-  { y: '2009', a: 75,  b: 65 },
-  { y: '2010', a: 50,  b: 40 },
-  { y: '2011', a: 75,  b: 65 },
-  { y: '2012', a: 100, b: 90 }
-  ],
-  // The name of the data record attribute that contains x-values.
-  xkey: 'y',
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['a', 'b'],
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-  labels: ['Series A', 'Series B']
-});
+function showUser(str) {
+  if (str=="") {
+    document.getElementById("txtHint").innerHTML="";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else { // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("txtHint").innerHTML=this.responseText;
+    }
+  }
+  xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/aplicadores?q=') }}"+str,true);
+  xmlhttp.send();
+}
 </script>
 @endpush

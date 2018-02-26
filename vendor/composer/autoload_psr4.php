@@ -38,6 +38,7 @@ return array(
     'League\\Fractal\\' => array($vendorDir . '/league/fractal/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
+    'Fx3costa\\LaravelChartJs\\' => array($vendorDir . '/fx3costa/laravelchartjs/src'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
     'Dwij\\Laraadmin\\' => array($vendorDir . '/dwij/laraadmin/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
