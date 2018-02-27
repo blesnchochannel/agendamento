@@ -34,6 +34,7 @@
 					
 					{{--
 					@la_input($module, 'nome')
+					@la_input($module, 'tempo')
 					@la_input($module, 'descricao')
 					--}}
                     <br>

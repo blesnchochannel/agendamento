@@ -108,6 +108,7 @@
 					</div>
 					<div class="panel-body">
 						@la_display($module, 'nome')
+						@la_display($module, 'tempo')
 						@la_display($module, 'descricao')
 					</div>
 				</div>

@@ -23,7 +23,7 @@ class PlanosController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'nome';
-	public $listing_cols = ['id', 'nome', 'descricao'];
+	public $listing_cols = ['id', 'nome', 'tempo', 'descricao'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

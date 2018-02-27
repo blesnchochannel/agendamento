@@ -82,7 +82,7 @@ class EventsController extends Controller
                 	[
                 		'backgroundColor' => $value->back_cor,
                 		'borderColor' => $value->back_cor,
-                		//'description' => $value->status
+                		//'description' => $value->status,
                 	]                
                 );
 		}

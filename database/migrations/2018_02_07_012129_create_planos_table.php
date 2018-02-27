@@ -19,6 +19,7 @@ class CreatePlanosTable extends Migration
     {
         Module::generate("Planos", 'planos', 'nome', 'fa-paper-plane', [
             ["nome", "Nome", "Name", false, "", 0, 256, true],
+            ["tempo", "Tempo", "Integer", false, "", 0, 11, true],
             ["descricao", "Descrição", "Name", false, "", 0, 256, false],
         ]);
 		

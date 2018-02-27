@@ -24,29 +24,24 @@
 </div>
 @endif
 
-<div class="aplicadores col-lg-12">
+<div class="aplicadores col-lg-4">
 	<label>Aplicadores: </label><br>
-	@foreach( $aplicadores as $aplicador )
-	<div class="aplicador col-lg-2" style="background-color: {{ $aplicador->cor }}">
-		{{ $aplicador->nome }}
-	</div>
-	@endforeach
-</div>
-<br>
-<div class="aplicadores col-lg-12">
 	<form>
-		<select name="aplicadores" onchange="showAplicadores(this.value)">
+		<select class="form-control" name="aplicadores" onchange="showAplicadores(this.value)">
 			<option value="">Selecione uma opção</option>
 			<option value="all">Todas as agendas</option>
 			@foreach( $aplicadores as $aplicador )      
-			<option value="{{ $aplicador->id }}">{{ $aplicador->nome }}</option>
+			<option value="{{ $aplicador->id }}" style="background-color: {{ $aplicador->cor }}">{{ $aplicador->nome }}</option>
 			@endforeach
 		</select>
 	</form>
 </div>
-
+<br>
 <div class="col-lg-12">
-	<button class="printBtn hidden-print">Imprimir</button>
+	<button type="button" class="btn btn-default printBtn hidden-print">
+		<i class="fa fa-print"></i>
+		Imprimir
+	</button>
 	{!! $calendar->calendar() !!}
 	{!! $calendar->script() !!}
 </div>
@@ -120,9 +115,27 @@
 				serverSide: true,
 				ajax: "{{ url(config('laraadmin.adminRoute') . '/event_dt_ajax') }}",
 				language: {
-					lengthMenu: "_MENU_",
-					search: "_INPUT_",
-					searchPlaceholder: "Procurar"
+					"sEmptyTable": "Nenhum registro encontrado",
+					"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+					"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+					"sInfoFiltered": "(Filtrados de _MAX_ registros)",
+					"sInfoPostFix": "",
+					"sInfoThousands": ".",
+					"sLengthMenu": "_MENU_ resultados por página",
+					"sLoadingRecords": "Carregando...",
+					"sProcessing": "Processando...",
+					"sZeroRecords": "Nenhum registro encontrado",
+					"sSearch": "Pesquisar",
+					"oPaginate": {
+						"sNext": "Próximo",
+						"sPrevious": "Anterior",
+						"sFirst": "Primeiro",
+						"sLast": "Último"
+					},
+					"oAria": {
+						"sSortAscending": ": Ordenar colunas de forma ascendente",
+						"sSortDescending": ": Ordenar colunas de forma descendente"
+					}
 				},
 				@if($show_actions)
 				columnDefs: [ { orderable: false, targets: [-1] }],

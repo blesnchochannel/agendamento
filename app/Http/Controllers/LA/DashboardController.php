@@ -37,7 +37,7 @@ class DashboardController extends Controller
     public function index()
     {
         $aplicadores = DB::table('users')
-        ->select('id', 'nome')
+        ->select('id', 'nome', 'cor')
         ->where('tipo', '=', '2', 'and', 'deleted_at', '=', null)
         ->get();
 

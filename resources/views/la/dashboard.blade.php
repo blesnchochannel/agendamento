@@ -14,10 +14,10 @@
 <div class="aplicadores col-lg-6">
   <label>Cálculo de Horas trabalhadas por aplicador:</label>
   <form>
-    <select name="aplicadores" onchange="showAplicadores(this.value)">
+    <select class="form-control" name="aplicadores" onchange="showAplicadores(this.value)">
       <option value="">Selecione um aplicador</option>
       @foreach( $aplicadores as $aplicador )      
-      <option value="{{ $aplicador->id }}">{{ $aplicador->nome }}</option>
+      <option value="{{ $aplicador->id }}" style="background-color: {{ $aplicador->cor }}">{{ $aplicador->nome }}</option>
       @endforeach
     </select>
   </form>
@@ -27,7 +27,7 @@
 <div class="pacientes col-lg-6">
   <label>Cálculo de Horas utilizadas por paciente:</label>
   <form>
-    <select name="pacientes" onchange="showPacientes(this.value)">
+    <select class="form-control" name="pacientes" onchange="showPacientes(this.value)">
       <option value="">Selecione um paciente</option>
       @foreach( $pacientes as $paciente )      
       <option value="{{ $paciente->id }}">{{ $paciente->nome }}</option>
