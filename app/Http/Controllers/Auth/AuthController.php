@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Usuario;
 use App\Models\Employee;
 use App\Role;
 use Validator;
@@ -47,7 +47,7 @@ class AuthController extends Controller
     {
         $roleCount = Role::count();
 		if($roleCount != 0) {
-			$userCount = User::count();
+			$userCount = Usuario::count();
 			if($userCount == 0) {
 				return view('auth.register');
 			} else {
@@ -65,7 +65,7 @@ class AuthController extends Controller
     {
 		$roleCount = Role::count();
 		if($roleCount != 0) {
-			$userCount = User::count();
+			$userCount = Usuario::count();
 			if($userCount == 0) {
 				return redirect('register');
 			} else {
@@ -89,7 +89,7 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:usuarios',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -98,7 +98,7 @@ class AuthController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return Usuario
      */
     protected function create(array $data)
     {
@@ -122,7 +122,7 @@ class AuthController extends Controller
             'salary_cur' => 0,
         ]);
         
-        $user = User::create([
+        $user = Usuario::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

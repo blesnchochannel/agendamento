@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Fechamentos")
-@section("contentheader_description", "Listagem de Fechamentos")
-@section("section", "Fechamentos")
+@section("contentheader_title", "Role Users")
+@section("contentheader_description", "Listagem de Role Users")
+@section("section", "Role Users")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Fechamentos")
+@section("htmlheader_title", "Listadem de Role Users")
 
 @section("headerElems")
-@la_access("Fechamentos", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Fechamento</button>
+@la_access("Role_Users", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Role User</button>
 @endla_access
 @endsection
 
@@ -45,22 +45,22 @@
 	</div>
 </div>
 
-@la_access("Fechamentos", "create")
+@la_access("Role_Users", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Adicionar Fechamento</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Role User</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\FechamentosController@store', 'id' => 'fechamento-add-form']) !!}
+			{!! Form::open(['action' => 'LA\Role_UsersController@store', 'id' => 'role_user-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
 					
 					{{--
-					@la_input($module, 'aplicador')
-					@la_input($module, 'ano')
+					@la_input($module, 'role_id')
+					@la_input($module, 'user_id')
 					--}}
 				</div>
 			</div>
@@ -87,7 +87,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/fechamento_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/role_user_dt_ajax') }}",
 		language: {
 					"sEmptyTable": "Nenhum registro encontrado",
 					"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -115,7 +115,7 @@ $(function () {
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#fechamento-add-form").validate({
+	$("#role_user-add-form").validate({
 		
 	});
 });

@@ -93,7 +93,7 @@ class LAInstall extends Command
 			
 			if ($this->confirm("This process may change/append to the following of your existing project files:"
 					."\n\n\t app/Http/routes.php"
-					."\n\t app/User.php"
+					."\n\t app/Usuario.php"
 					."\n\t database/migrations/2014_10_12_000000_create_users_table.php"
 					."\n\t gulpfile.js"
 					."\n\n Please take backup or use git. Do you wish to continue ?", true)) {
@@ -275,7 +275,7 @@ class LAInstall extends Command
 				}
 				// Creating Super Admin User
 				
-				$user = \App\User::where('context_id', "1")->first();
+				$user = \App\Usuario::where('context_id', "1")->first();
 				if(!isset($user['id'])) {
 
 					$this->line('Creating Super Admin User...');
@@ -286,7 +286,7 @@ class LAInstall extends Command
 					$data['password'] = bcrypt($this->secret('Super Admin password'));
 					$data['context_id']  = "1";
 					$data['type']  = "Employee";
-					$user = \App\User::create($data);
+					$user = \App\Usuario::create($data);
 					
 					// TODO: This is Not Standard. Need to find alternative
 					Eloquent::unguard();

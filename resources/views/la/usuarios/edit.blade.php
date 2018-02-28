@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title")
-	<a href="{{ url(config('laraadmin.adminRoute') . '/users') }}">User</a> :
+	<a href="{{ url(config('laraadmin.adminRoute') . '/usuarios') }}">Usuario</a> :
 @endsection
 @section("contentheader_description", $user->$view_col)
-@section("section", "Users")
-@section("section_url", url(config('laraadmin.adminRoute') . '/users'))
+@section("section", "Usuarios")
+@section("section_url", url(config('laraadmin.adminRoute') . '/usuarios'))
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listadem de Users Edit : ".$user->$view_col)
+@section("htmlheader_title", "Listadem de Usuarios Edit : ".$user->$view_col)
 
 @section("main-content")
 
@@ -29,7 +29,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($user, ['route' => [config('laraadmin.adminRoute') . '.users.update', $user->id ], 'method'=>'PUT', 'id' => 'user-edit-form']) !!}
+				{!! Form::model($user, ['route' => [config('laraadmin.adminRoute') . '.usuarios.update', $user->id ], 'method'=>'PUT', 'id' => 'user-edit-form']) !!}
 					@la_form($module)
 					
 					{{--

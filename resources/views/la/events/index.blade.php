@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Events")
-@section("contentheader_description", "Listagem de Events")
-@section("section", "Events")
+@section("contentheader_title", "Agendamentos")
+@section("contentheader_description", "Listagem de Agendamentos")
+@section("section", "Agendamentos")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Events")
+@section("htmlheader_title", "Listadem de Agendamentos")
 
 @section("headerElems")
 @la_access("Events", "create")
-<button class="btn btn-success btn-sm pull-right hidden-print nao-imprimir" data-toggle="modal" data-target="#AddModal">Adicionar  Event</button>
+<button class="btn btn-success btn-sm pull-right hidden-print nao-imprimir" data-toggle="modal" data-target="#AddModal">Adicionar Agendamento</button>
 @endla_access
 @endsection
 
@@ -73,7 +73,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Adicionar Event</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Agendamento</h4>
 			</div>
 			{!! Form::open(['action' => 'LA\EventsController@store', 'id' => 'event-add-form']) !!}
 			<div class="modal-body">
@@ -159,7 +159,7 @@
 	</script>
 	<script>
 		$( document ).ready(function() {
-			document.getElementsByTagName("SELECT")[3].setAttribute("onchange", "buscaPacientes(this.value)");
+			document.getElementsByTagName("SELECT")[3].setAttribute("onchange", "buscaPacientes(this.value);");
 		});
 	</script>
 
@@ -180,7 +180,7 @@
   					alertify.alert('ATENÇÃO!', this.responseText);
   				}
   			}
-  			xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/ajaxpacientes?q=') }}"+str,true);
+  			xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/ajaxpacientes2?q=') }}"+str,true);
   			xmlhttp.send();
   		}
   	</script>

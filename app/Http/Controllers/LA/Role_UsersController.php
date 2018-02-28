@@ -17,37 +17,37 @@ use Collective\Html\FormFacade as Form;
 use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
-use App\Models\Fechamento;
+use App\Models\Role_User;
 
-class FechamentosController extends Controller
+class Role_UsersController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'aplicador';
-	public $listing_cols = ['id', 'aplicador', 'ano'];
+	public $view_col = 'role_id';
+	public $listing_cols = ['id', 'role_id', 'user_id'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
 			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('Fechamentos', $this->listing_cols);
+				$this->listing_cols = ModuleFields::listingColumnAccessScan('Role_Users', $this->listing_cols);
 				return $next($request);
 			});
 		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('Fechamentos', $this->listing_cols);
+			$this->listing_cols = ModuleFields::listingColumnAccessScan('Role_Users', $this->listing_cols);
 		}
 	}
 	
 	/**
-	 * Display a listing of the Fechamentos.
+	 * Display a listing of the Role_Users.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-		$module = Module::get('Fechamentos');
+		$module = Module::get('Role_Users');
 		
 		if(Module::hasAccess($module->id)) {
-			return View('la.fechamentos.index', [
+			return View('la.role_users.index', [
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
 				'module' => $module
@@ -58,7 +58,7 @@ class FechamentosController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new fechamento.
+	 * Show the form for creating a new role_user.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -68,16 +68,16 @@ class FechamentosController extends Controller
 	}
 
 	/**
-	 * Store a newly created fechamento in database.
+	 * Store a newly created role_user in database.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request)
 	{
-		if(Module::hasAccess("Fechamentos", "create")) {
+		if(Module::hasAccess("Role_Users", "create")) {
 		
-			$rules = Module::validateRules("Fechamentos", $request);
+			$rules = Module::validateRules("Role_Users", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -85,9 +85,9 @@ class FechamentosController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
 			
-			$insert_id = Module::insert("Fechamentos", $request);
+			$insert_id = Module::insert("Role_Users", $request);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.fechamentos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.role_users.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -95,30 +95,30 @@ class FechamentosController extends Controller
 	}
 
 	/**
-	 * Display the specified fechamento.
+	 * Display the specified role_user.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id)
 	{
-		if(Module::hasAccess("Fechamentos", "view")) {
+		if(Module::hasAccess("Role_Users", "view")) {
 			
-			$fechamento = Fechamento::find($id);
-			if(isset($fechamento->id)) {
-				$module = Module::get('Fechamentos');
-				$module->row = $fechamento;
+			$role_user = Role_User::find($id);
+			if(isset($role_user->id)) {
+				$module = Module::get('Role_Users');
+				$module->row = $role_user;
 				
-				return view('la.fechamentos.show', [
+				return view('la.role_users.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('fechamento', $fechamento);
+				])->with('role_user', $role_user);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("fechamento"),
+					'record_name' => ucfirst("role_user"),
 				]);
 			}
 		} else {
@@ -127,28 +127,28 @@ class FechamentosController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified fechamento.
+	 * Show the form for editing the specified role_user.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id)
 	{
-		if(Module::hasAccess("Fechamentos", "edit")) {			
-			$fechamento = Fechamento::find($id);
-			if(isset($fechamento->id)) {	
-				$module = Module::get('Fechamentos');
+		if(Module::hasAccess("Role_Users", "edit")) {			
+			$role_user = Role_User::find($id);
+			if(isset($role_user->id)) {	
+				$module = Module::get('Role_Users');
 				
-				$module->row = $fechamento;
+				$module->row = $role_user;
 				
-				return view('la.fechamentos.edit', [
+				return view('la.role_users.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('fechamento', $fechamento);
+				])->with('role_user', $role_user);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("fechamento"),
+					'record_name' => ucfirst("role_user"),
 				]);
 			}
 		} else {
@@ -157,7 +157,7 @@ class FechamentosController extends Controller
 	}
 
 	/**
-	 * Update the specified fechamento in storage.
+	 * Update the specified role_user in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -165,9 +165,9 @@ class FechamentosController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if(Module::hasAccess("Fechamentos", "edit")) {
+		if(Module::hasAccess("Role_Users", "edit")) {
 			
-			$rules = Module::validateRules("Fechamentos", $request, true);
+			$rules = Module::validateRules("Role_Users", $request, true);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -175,9 +175,9 @@ class FechamentosController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			$insert_id = Module::updateRow("Fechamentos", $request, $id);
+			$insert_id = Module::updateRow("Role_Users", $request, $id);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.fechamentos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.role_users.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -185,18 +185,18 @@ class FechamentosController extends Controller
 	}
 
 	/**
-	 * Remove the specified fechamento from storage.
+	 * Remove the specified role_user from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id)
 	{
-		if(Module::hasAccess("Fechamentos", "delete")) {
-			Fechamento::find($id)->delete();
+		if(Module::hasAccess("Role_Users", "delete")) {
+			Role_User::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.fechamentos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.role_users.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -209,11 +209,11 @@ class FechamentosController extends Controller
 	 */
 	public function dtajax()
 	{
-		$values = DB::table('fechamentos')->select($this->listing_cols)->whereNull('deleted_at');
+		$values = DB::table('role_user')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('Fechamentos');
+		$fields_popup = ModuleFields::getModuleFields('Role_Users');
 		
 		for($i=0; $i < count($data->data); $i++) {
 			for ($j=0; $j < count($this->listing_cols); $j++) { 
@@ -222,7 +222,7 @@ class FechamentosController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/fechamentos/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/role_users/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -231,12 +231,12 @@ class FechamentosController extends Controller
 			
 			if($this->show_action) {
 				$output = '';
-				if(Module::hasAccess("Fechamentos", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/fechamentos/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+				if(Module::hasAccess("Role_Users", "edit")) {
+					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/role_users/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
-				if(Module::hasAccess("Fechamentos", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.fechamentos.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+				if(Module::hasAccess("Role_Users", "delete")) {
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.role_users.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}

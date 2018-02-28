@@ -1,11 +1,11 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title")
-	<a href="{{ url(config('laraadmin.adminRoute') . '/role_user') }}">Role User</a> :
+	<a href="{{ url(config('laraadmin.adminRoute') . '/role_users') }}">Role User</a> :
 @endsection
 @section("contentheader_description", $role_user->$view_col)
 @section("section", "Role Users")
-@section("section_url", url(config('laraadmin.adminRoute') . '/role_user'))
+@section("section_url", url(config('laraadmin.adminRoute') . '/role_users'))
 @section("sub_section", "Editar")
 
 @section("htmlheader_title", "Listadem de Role Users Edit : ".$role_user->$view_col)
@@ -29,7 +29,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($role_user, ['route' => [config('laraadmin.adminRoute') . '.role_user.update', $role_user->id ], 'method'=>'PUT', 'id' => 'role_user-edit-form']) !!}
+				{!! Form::model($role_user, ['route' => [config('laraadmin.adminRoute') . '.role_users.update', $role_user->id ], 'method'=>'PUT', 'id' => 'role_user-edit-form']) !!}
 					@la_form($module)
 					
 					{{--
@@ -38,7 +38,7 @@
 					--}}
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Atualizar', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/role_user') }}">Cancelar</a></button>
+						{!! Form::submit( 'Atualizar', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/role_users') }}">Cancelar</a></button>
 					</div>
 				{!! Form::close() !!}
 			</div>

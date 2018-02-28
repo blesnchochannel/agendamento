@@ -16,13 +16,13 @@ use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Database\Eloquent\SoftDeletes;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class Usuario extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
     // use SoftDeletes;
     use EntrustUserTrait;
 
-    protected $table = 'users';
+    protected $table = 'usuarios';
 	
 	/**
      * The attributes that are mass assignable.

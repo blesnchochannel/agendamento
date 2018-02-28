@@ -18,6 +18,7 @@ use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
 use App\Models\Event;
+use App\Models\Usuario;
 use Calendar;
 
 class EventsController extends Controller
@@ -45,7 +46,7 @@ class EventsController extends Controller
 	 */
 	public function index()
 	{
-		$aplicadores = DB::table('users')->select('id', 'nome', 'cor')->where('tipo', 2)->get();
+		$aplicadores = DB::table('usuarios')->select('id', 'nome', 'cor')->where('tipo', 2)->get();
 
 		$q = "all";
 
@@ -54,16 +55,16 @@ class EventsController extends Controller
 		}
 		if ($q == "all"){
 			$data = DB::table('events')
-			->join('users', 'users.id', '=', 'events.aplicador')
+			->join('usuarios', 'usuarios.id', '=', 'events.aplicador')
 			->join('pacientes', 'pacientes.id', '=', 'events.paciente')
-			->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
+			->select('events.*', 'usuarios.nome as aplicador', 'usuarios.cor as back_cor', 'pacientes.nome as paciente')
 			->where('events.deleted_at', '=', null)
 			->get();
 		}else{
 			$data = DB::table('events')
-			->join('users', 'users.id', '=', 'events.aplicador')
+			->join('usuarios', 'usuarios.id', '=', 'events.aplicador')
 			->join('pacientes', 'pacientes.id', '=', 'events.paciente')
-			->select('events.*', 'users.nome as aplicador', 'users.cor as back_cor', 'pacientes.nome as paciente')
+			->select('events.*', 'usuarios.nome as aplicador', 'usuarios.cor as back_cor', 'pacientes.nome as paciente')
 			->where('events.deleted_at', '=', null)
 			->where('events.aplicador', '=', $q)
 			->get();
@@ -295,7 +296,7 @@ class EventsController extends Controller
 		return $out;
 	}
 
-	public function ajaxpacientes()
+	public function ajaxpacientes2()
 	{
 		setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 		date_default_timezone_set('America/Sao_Paulo');

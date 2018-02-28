@@ -23,7 +23,7 @@ class ConveniosController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'nome';
-	public $listing_cols = ['id', 'nome'];
+	public $listing_cols = ['id', 'nome', 'cnpj', 'endereco', 'telefone', 'contato', 'email'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

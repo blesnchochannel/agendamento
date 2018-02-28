@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Users")
-@section("contentheader_description", "Listagem de Users")
-@section("section", "Users")
+@section("contentheader_title", "Usuários")
+@section("contentheader_description", "Listagem de Usuários")
+@section("section", "Usuários")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Users")
+@section("htmlheader_title", "Listadem de Usuários")
 
 @section("headerElems")
-@la_access("Users", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  User</button>
+@la_access("Usuarios", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar Usuário</button>
 @endla_access
 @endsection
 
@@ -45,15 +45,15 @@
 	</div>
 </div>
 
-@la_access("Users", "create")
+@la_access("Usuarios", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Adicionar User</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Usuário</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\UsersController@store', 'id' => 'user-add-form']) !!}
+			{!! Form::open(['action' => 'LA\UsuariosController@store', 'id' => 'user-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
@@ -92,7 +92,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/user_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/usuarios_dt_ajax') }}",
 		language: {
 					"sEmptyTable": "Nenhum registro encontrado",
 					"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",

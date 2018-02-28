@@ -29,7 +29,7 @@ class Module extends Model
 		// Check is Generated
 		$is_gen = false;
 		if(file_exists(base_path('app/Http/Controllers/'.($names->controller).".php"))) {
-			if(($names->model == "User" || $model == "Role" || $model == "Permission") && file_exists(base_path('app/'.($names->model).".php"))) {
+			if(($names->model == "Usuario" || $model == "Role" || $model == "Permission") && file_exists(base_path('app/'.($names->model).".php"))) {
 				$is_gen = true;
 			} else if(file_exists(base_path('app/Models/'.($names->model).".php"))) {
 				$is_gen = true;
@@ -1127,7 +1127,7 @@ class Module extends Model
 		}
 		
 		if($user_id) {
-			$user = \App\User::find($user_id);
+			$user = \App\Usuario::find($user_id);
 			if(isset($user->id)) {
 				$roles = $user->roles();
 			}
@@ -1177,7 +1177,7 @@ class Module extends Model
 		}
 		
 		if($user_id) {
-			$user = \App\User::find($user_id);
+			$user = \App\Usuario::find($user_id);
 			if(isset($user->id)) {
 				$roles = $user->roles();
 			}

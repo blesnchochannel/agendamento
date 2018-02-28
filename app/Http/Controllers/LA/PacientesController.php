@@ -23,7 +23,7 @@ class PacientesController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'nome';
-	public $listing_cols = ['id', 'nome', 'cpf', 'email', 'data_nascimento', 'telefone', 'celular', 'responsavel', 'endereco', 'cidade', 'convenio', 'plano', 'inicio', 'local', 'codigo', 'indicacao', 'observacoes'];
+	public $listing_cols = ['id', 'nome', 'cpf', 'email', 'data_nascimento', 'telefone', 'celular', 'responsavel', 'rua', 'bairro', 'numero', 'cep', 'cidade', 'estado', 'convenio', 'plano', 'inicio', 'local', 'codigo', 'indicacao', 'observacoes'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

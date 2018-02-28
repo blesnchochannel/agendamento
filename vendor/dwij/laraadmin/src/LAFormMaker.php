@@ -12,7 +12,7 @@ class LAFormMaker
 	/**
 	* Print input field enclosed within form-group
 	**/
-	public static function input($module, $field_name, $default_val = null, $required2 = null, $class = 'form-control', $params = [])
+	public static function input($module, $field_name, $default_val = null, $required2 = null, $class = 'form-control', $id = null, $params = [])
 	{
 		// Check Field Write Aceess
 		if(Module::hasFieldAccess($module->id, $module->fields[$field_name]['id'], $access_type = "write")) {
@@ -42,7 +42,10 @@ class LAFormMaker
 			$required_ast = "";
 			
 			if(!isset($params['class'])) {
-				$params['class'] = $class;
+				$params['class'] = $class.' '.$field_name;
+			}
+			if(!isset($params['id'])) {
+				$params['id'] = $field_name;
 			}
 			if(!isset($params['placeholder'])) {
 				$params['placeholder'] = 'Enter '.$label;

@@ -123,7 +123,7 @@
       document.getElementById("txtHint_pacientes").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/ajaxpacientes?q=') }}"+str,true);
+  xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/ajaxpacientes1?q=') }}"+str,true);
   xmlhttp.send();
 }
 </script>

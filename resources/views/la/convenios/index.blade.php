@@ -60,6 +60,11 @@
 					
 					{{--
 					@la_input($module, 'nome')
+					@la_input($module, 'cnpj')
+					@la_input($module, 'endereco')
+					@la_input($module, 'telefone')
+					@la_input($module, 'contato')
+					@la_input($module, 'email')
 					--}}
 				</div>
 			</div>

@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dwij\Laraadmin\Models\Module;
 
-class CreateConveniosTable extends Migration
+class CreateRoleUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,13 +17,9 @@ class CreateConveniosTable extends Migration
      */
     public function up()
     {
-        Module::generate("Convenios", 'convenios', 'nome', 'fa-medkit', [
-            ["nome", "Nome", "Name", true, "", 0, 256, true],
-            ["cnpj", "CNPJ", "Name", false, "", 14, 18, false],
-            ["endereco", "Endereço", "Name", false, "", 0, 256, false],
-            ["telefone", "Telefone", "Mobile", false, "", 0, 20, false],
-            ["contato", "Contato", "Name", false, "", 0, 256, false],
-            ["email", "E-mail", "Email", false, "", 0, 256, false],
+        Module::generate("Role_users", 'role_users', 'role_id', 'fa-user', [
+            ["role_id", "Role_Id", "Dropdown", false, "", 0, 0, true, "@roles"],
+            ["user_id", "User_Id", "Dropdown", false, "", 0, 0, true, "@usuarios"],
         ]);
 		
 		/*
@@ -69,8 +65,8 @@ class CreateConveniosTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('convenios')) {
-            Schema::drop('convenios');
+        if (Schema::hasTable('role_users')) {
+            Schema::drop('role_users');
         }
     }
 }

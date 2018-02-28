@@ -11,7 +11,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Event;
-use App\Models\User;
+use App\Models\Usuario;
 
 /**
  * Class DashboardController
@@ -36,7 +36,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $aplicadores = DB::table('users')
+        $aplicadores = DB::table('usuarios')
         ->select('id', 'nome', 'cor')
         ->where('tipo', '=', '2', 'and', 'deleted_at', '=', null)
         ->get();
@@ -57,8 +57,8 @@ class DashboardController extends Controller
         $q = intval($_GET['q']);
 
         $data = DB::table('events')
-        ->join('users', 'users.id', '=', 'events.aplicador')
-        ->select('events.*', 'users.tipo as tipo' ,'users.nome as aplicador', 'users.cor as back_cor', 'users.id as aplicador_id', 'users.valor as valor')
+        ->join('usuarios', 'usuarios.id', '=', 'events.aplicador')
+        ->select('events.*', 'usuarios.tipo as tipo' ,'usuarios.nome as aplicador', 'usuarios.cor as back_cor', 'usuarios.id as aplicador_id', 'usuarios.valor as valor')
         ->where('events.deleted_at', '=', null)
         ->where('tipo', '=', '2')
         ->where('events.aplicador', '=', $q)
@@ -119,7 +119,7 @@ class DashboardController extends Controller
         echo "</table>";        
     }
 
-    public function ajaxpacientes()
+    public function ajaxpacientes1()
     {
         setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
         date_default_timezone_set('America/Sao_Paulo');

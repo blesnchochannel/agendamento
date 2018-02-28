@@ -66,8 +66,12 @@
 					@la_input($module, 'telefone')
 					@la_input($module, 'celular')
 					@la_input($module, 'responsavel')
-					@la_input($module, 'endereco')
+					@la_input($module, 'rua')
+					@la_input($module, 'bairro')
+					@la_input($module, 'numero')
+					@la_input($module, 'cep')
 					@la_input($module, 'cidade')
+					@la_input($module, 'estado')
 					@la_input($module, 'convenio')
 					@la_input($module, 'plano')
 					@la_input($module, 'inicio')
@@ -133,5 +137,11 @@ $(function () {
 		
 	});
 });
+</script>
+
+<script>
+	$( document ).ready(function() {
+		document.getElementById("cep").setAttribute("onblur", "pesquisacep(this.value);");
+	});
 </script>
 @endpush

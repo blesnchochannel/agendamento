@@ -5,9 +5,11 @@ Route::get('/', function () {
 	return redirect('admin');
 });
 
+
 Route::get('/home', function () {
 	return redirect('admin');
 });
+
 
 Route::auth();
 
@@ -36,9 +38,9 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::get(config('laraadmin.adminRoute') . '/ajaxaplicadores', 'LA\DashboardController@ajaxaplicadores');
 	Route::get(config('laraadmin.adminRoute') . '/ajaxpacientes', 'LA\DashboardController@ajaxpacientes');
 	
-	/* ================== Users ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/users', 'LA\UsersController');
-	Route::get(config('laraadmin.adminRoute') . '/user_dt_ajax', 'LA\UsersController@dtajax');
+	/* ================== Usuarios ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/usuarios', 'LA\UsuariosController');
+	Route::get(config('laraadmin.adminRoute') . '/usuarios_dt_ajax', 'LA\UsuariosController@dtajax');
 	
 	
 	/* ================== Roles ================== */
@@ -83,15 +85,13 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::resource(config('laraadmin.adminRoute') . '/convenios', 'LA\ConveniosController');
 	Route::get(config('laraadmin.adminRoute') . '/convenio_dt_ajax', 'LA\ConveniosController@dtajax');
 
-	/* ================== Role_User ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/role_user', 'LA\Role_UserController');
-	Route::get(config('laraadmin.adminRoute') . '/role_user_dt_ajax', 'LA\Role_UserController@dtajax');
 
-	/* ================== Fechamentos ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/fechamentos', 'LA\FechamentosController');
-	Route::get(config('laraadmin.adminRoute') . '/fechamento_dt_ajax', 'LA\FechamentosController@dtajax');
 
 	/* ================== Atendimentos ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/atendimentos', 'LA\AtendimentosController');
 	Route::get(config('laraadmin.adminRoute') . '/atendimento_dt_ajax', 'LA\AtendimentosController@dtajax');
+
+	/* ================== Role_Users ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/role_users', 'LA\Role_UsersController');
+	Route::get(config('laraadmin.adminRoute') . '/role_user_dt_ajax', 'LA\Role_UsersController@dtajax');
 });
