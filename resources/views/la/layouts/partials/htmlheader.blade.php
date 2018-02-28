@@ -15,27 +15,33 @@
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
-    -->
-    <link href="{{ asset('la-assets/css/skins/'.LAConfigs::getByKey('skin').'.css') }}" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="{{ asset('la-assets/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
+      -->
+      <link href="{{ asset('la-assets/css/skins/'.LAConfigs::getByKey('skin').'.css') }}" rel="stylesheet" type="text/css" />
+      <!-- iCheck -->
+      <link href="{{ asset('la-assets/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('la-assets/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ asset('la-assets/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('la-assets/css/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ asset('la-assets/css/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('la-assets/css/fullcalendar.print.css') }}" rel="stylesheet" type="text/css" media="print"/>
-
-    <script src="{{ asset('la-assets/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+      <link href="{{ asset('la-assets/css/fullcalendar.print.css') }}" rel="stylesheet" type="text/css" media="print"/>
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!-- CSS -->
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css"/>
+      <!-- Bootstrap theme -->
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/themes/bootstrap.min.css"/>
+
+      <script src="{{ asset('la-assets/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+
+
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    @stack('styles')
-    
+<![endif]-->
+
+@stack('styles')
+
 </head>

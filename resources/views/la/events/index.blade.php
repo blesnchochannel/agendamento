@@ -8,14 +8,14 @@
 
 @section("headerElems")
 @la_access("Events", "create")
-<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Event</button>
+<button class="btn btn-success btn-sm pull-right hidden-print nao-imprimir" data-toggle="modal" data-target="#AddModal">Adicionar  Event</button>
 @endla_access
 @endsection
 
 @section("main-content")
 
 @if (count($errors) > 0)
-<div class="alert alert-danger">
+<div class="alert alert-danger hidden-print nao-imprimir">
 	<ul>
 		@foreach ($errors->all() as $error)
 		<li>{{ $error }}</li>
@@ -24,10 +24,10 @@
 </div>
 @endif
 
-<div class="aplicadores col-lg-4">
-	<label>Aplicadores: </label><br>
-	<form>
-		<select class="form-control" name="aplicadores" onchange="showAplicadores(this.value)">
+<div class="aplicadores col-lg-4 hidden-print nao-imprimir">
+	<label class="hidden-print nao-imprimir">Aplicadores: </label><br>
+	<form class="hidden-print nao-imprimir">
+		<select class="form-control hidden-print nao-imprimir" name="aplicadores" onchange="showAplicadores(this.value)">
 			<option value="">Selecione uma opção</option>
 			<option value="all">Todas as agendas</option>
 			@foreach( $aplicadores as $aplicador )      
@@ -46,10 +46,10 @@
 	{!! $calendar->script() !!}
 </div>
 <br>
-<div class="box box-success col-lg-12">
+<div class="box box-success col-lg-12 hidden-print nao-imprimir">
 	<!--<div class="box-header"></div>-->
-	<div class="box-body">
-		<table id="example1" class="table table-bordered">
+	<div class="box-body hidden-print nao-imprimir">
+		<table id="example1" class="table table-bordered hidden-print nao-imprimir">
 			<thead>
 				<tr class="success">
 					@foreach( $listing_cols as $col )
@@ -157,5 +157,32 @@
 			window.location.href = "?q="+str;
 		}
 	</script>
+	<script>
+		$( document ).ready(function() {
+			document.getElementsByTagName("SELECT")[3].setAttribute("onchange", "buscaPacientes(this.value)");
+		});
+	</script>
 
-	@endpush
+	<script>
+		function buscaPacientes(str) {
+			if (str=="") {
+
+			}
+			if (window.XMLHttpRequest) {
+    			// code for IE7+, Firefox, Chrome, Opera, Safari
+    			xmlhttp=new XMLHttpRequest();
+    		} else { 
+  				// code for IE6, IE5
+  				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  			}
+  			xmlhttp.onreadystatechange=function() {
+  				if (this.readyState==4 && this.status==200) {
+  					alertify.alert('ATENÇÃO!', this.responseText);
+  				}
+  			}
+  			xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/ajaxpacientes?q=') }}"+str,true);
+  			xmlhttp.send();
+  		}
+  	</script>
+
+  	@endpush

@@ -294,4 +294,56 @@ class EventsController extends Controller
 		$out->setData($data);
 		return $out;
 	}
+
+	public function ajaxpacientes()
+	{
+		setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+		date_default_timezone_set('America/Sao_Paulo');
+
+		$q = intval($_GET['q']);
+
+		$data = DB::table('events')
+		->join('pacientes', 'pacientes.id', '=', 'events.paciente')
+		->join('planos', 'planos.id', '=', 'pacientes.plano')
+		->select('events.*', 'pacientes.nome as paciente', 'planos.nome as plano', 'pacientes.id as paciente_id', 'planos.tempo as limite')
+		->where('events.deleted_at', '=', null)
+		->where('events.paciente', '=', $q)
+		->get();
+
+		$resultado = [];
+		foreach ($data as $key => $value)
+		{
+
+			$id = $value->paciente_id;
+			$paciente = $value->paciente;
+			$plano = $value->plano;
+			$limite = $value->limite;
+			$time = strtotime($value->start_date);
+			$ano = date("Y", $time);
+			$year[$id] = $ano;
+
+			if (isset($tempo[$ano][$id]))
+			{
+				$tempo[$ano][$id] += $value->tempo;
+			}
+			else
+			{
+				$tempo[$ano][$id] = $value->tempo;
+			}
+
+			$resultado[$ano][$id] = ['ano' => $year[$id], 'nome' => $paciente, 'tempo' => $tempo[$ano][$id], 'plano' => $plano, 'limite' => $limite];
+		}
+
+		foreach ($resultado as $key => $value) {
+			foreach ($resultado[$key] as $key2 => $value2) {
+				if (date('Y') == $value2["ano"]){ 
+					if($value2["tempo"] >= $value2["limite"]){				
+						echo "<span>O paciente já atingiu ".$value2["tempo"]."/".$value2["limite"]." horas do plano ".$value2["plano"].".</span>";
+					}else{
+						echo "<span>O paciente já atingiu ".$value2["tempo"]."/".$value2["limite"]." horas do plano ".$value2["plano"].".</span>";
+					}
+				}
+			}
+		}        
+	}
 }

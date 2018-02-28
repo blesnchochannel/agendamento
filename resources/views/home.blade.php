@@ -199,10 +199,10 @@
         </div>
     </div>
 </div>
-<div id="c">
-    <div class="container">
+<div id="c" class="hidden-print nao-imprimir">
+    <div class="container hidden-print nao-imprimir">
         <p>
-            <strong>Copyright &copy; 2016. Powered by <a href="https://dwijitsolutions.com"><b>Dwij IT Solutions</b></a>
+            <strong class="hidden-print nao-imprimir">Copyright &copy; 2016. Powered by <a href="https://dwijitsolutions.com"><b>Dwij IT Solutions</b></a>
         </p>
     </div>
 </div>
