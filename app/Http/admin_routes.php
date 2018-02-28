@@ -36,7 +36,7 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::get(config('laraadmin.adminRoute'), 'LA\DashboardController@index');
 	Route::get(config('laraadmin.adminRoute'). '/dashboard', 'LA\DashboardController@index');
 	Route::get(config('laraadmin.adminRoute') . '/ajaxaplicadores', 'LA\DashboardController@ajaxaplicadores');
-	Route::get(config('laraadmin.adminRoute') . '/ajaxpacientes', 'LA\DashboardController@ajaxpacientes');
+	Route::get(config('laraadmin.adminRoute') . '/ajaxpacientes1', 'LA\DashboardController@ajaxpacientes1');
 	
 	/* ================== Usuarios ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/usuarios', 'LA\UsuariosController');
@@ -79,7 +79,7 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== Events ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/events', 'LA\EventsController');
 	Route::get(config('laraadmin.adminRoute') . '/event_dt_ajax', 'LA\EventsController@dtajax');
-	Route::get(config('laraadmin.adminRoute') . '/ajaxpacientes', 'LA\EventsController@ajaxpacientes');
+	Route::get(config('laraadmin.adminRoute') . '/ajaxpacientes2', 'LA\EventsController@ajaxpacientes2');
 
 	/* ================== Convenios ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/convenios', 'LA\ConveniosController');
