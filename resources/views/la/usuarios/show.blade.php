@@ -1,7 +1,7 @@
 @extends('la.layouts.app')
 
 @section('htmlheader_title')
-	User View
+	Visualização de Usuário
 @endsection
 
 
@@ -37,12 +37,12 @@
 			</div>
 		</div>
 		<div class="col-md-1 actions">
-			@la_access("Users", "edit")
-				<a href="{{ url(config('laraadmin.adminRoute') . '/users/'.$user->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+			@la_access("Usuarios", "edit")
+				<a href="{{ url(config('laraadmin.adminRoute') . '/usuarios/'.$user->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
 			
-			@la_access("Users", "delete")
-				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.users.destroy', $user->id], 'method' => 'delete', 'style'=>'display:inline']) }}
+			@la_access("Usuarios", "delete")
+				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.usuarios.destroy', $user->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
 				{{ Form::close() }}
 			@endla_access
@@ -50,8 +50,8 @@
 	</div>
 
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
-		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/users') }}" data-toggle="tooltip" data-placement="right" title="Back to Users"><i class="fa fa-chevron-left"></i></a></li>
-		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-general-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
+		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/usuarios') }}" data-toggle="tooltip" data-placement="right" title="Voltar para Usuários"><i class="fa fa-chevron-left"></i></a></li>
+		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-general-info" data-target="#tab-info"><i class="fa fa-bars"></i> Informações Gerais</a></li>
 	</ul>
 
 	<div class="tab-content">
@@ -59,7 +59,7 @@
 			<div class="tab-content">
 				<div class="panel infolist">
 					<div class="panel-default panel-heading">
-						<h4>General Info</h4>
+						<h4>Informações Gerais</h4>
 					</div>
 					<div class="panel-body">
 						@la_display($module, 'nome')

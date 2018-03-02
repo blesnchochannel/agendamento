@@ -5,7 +5,7 @@
 @section("section", "Courses")
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listadem de Course Edit : ".$course->$view_col)
+@section("htmlheader_title", "Listagem de Course Edição : ".$course->$view_col)
 
 @section("main-content")
 <div class="box">

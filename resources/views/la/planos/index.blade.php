@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Planos")
 @section("section", "Planos")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Planos")
+@section("htmlheader_title", "Listagem de Planos")
 
 @section("headerElems")
 @la_access("Planos", "create")

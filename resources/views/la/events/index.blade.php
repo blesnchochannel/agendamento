@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Agendamentos")
 @section("section", "Agendamentos")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Agendamentos")
+@section("htmlheader_title", "Listagem de Agendamentos")
 
 @section("headerElems")
 @la_access("Events", "create")

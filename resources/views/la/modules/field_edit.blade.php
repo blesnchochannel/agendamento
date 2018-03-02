@@ -6,7 +6,7 @@
 @section("section_url", url(config('laraadmin.adminRoute') . '/modules/'.$module->id))
 @section("sub_section", "Edit Field")
 
-@section("htmlheader_title", "Listadem de Field Edit : ".$field->label)
+@section("htmlheader_title", "Listagem de Field Edição : ".$field->label)
 
 @section("main-content")
 <div class="box">

@@ -8,7 +8,7 @@
 @section("section_url", url(config('laraadmin.adminRoute') . '/convenios'))
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listadem de Convenios Edit : ".$convenio->$view_col)
+@section("htmlheader_title", "Listagem de Convenios Edição : ".$convenio->$view_col)
 
 @section("main-content")
 

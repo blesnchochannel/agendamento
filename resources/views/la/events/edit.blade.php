@@ -8,7 +8,7 @@
 @section("section_url", url(config('laraadmin.adminRoute') . '/events'))
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listadem de Events Edit : ".$event->$view_col)
+@section("htmlheader_title", "Listagem de Events Edição : ".$event->$view_col)
 
 @section("main-content")
 

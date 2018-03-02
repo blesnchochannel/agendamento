@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Atendimentos")
 @section("section", "Atendimentos")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Atendimentos")
+@section("htmlheader_title", "Listagem de Atendimentos")
 
 @section("headerElems")
 @la_access("Atendimentos", "create")

@@ -5,11 +5,9 @@ Route::get('/', function () {
 	return redirect('admin');
 });
 
-
 Route::get('/home', function () {
 	return redirect('admin');
 });
-
 
 Route::auth();
 
@@ -94,4 +92,8 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== Role_Users ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/role_users', 'LA\Role_UsersController');
 	Route::get(config('laraadmin.adminRoute') . '/role_user_dt_ajax', 'LA\Role_UsersController@dtajax');
+
+	/* ================== Profissoes ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/profissoes', 'LA\ProfissoesController');
+	Route::get(config('laraadmin.adminRoute') . '/profisso_dt_ajax', 'LA\ProfissoesController@dtajax');
 });

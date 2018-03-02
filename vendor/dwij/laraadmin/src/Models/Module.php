@@ -1036,14 +1036,14 @@ class Module extends Model
 					$model = "App\\".$model_name;
 					return $model::count();
 				} else {
-					return "Model doesn't exists";
+					return "O modelo não existe";
 				}
 			} else {
 				if(file_exists(base_path('app/Models/'.$model_name.".php"))) {
 					$model = "App\\Models\\".$model_name;
 					return $model::count();
 				} else {
-					return "Model doesn't exists";
+					return "O modelo não existe";
 				}
 			}
 			

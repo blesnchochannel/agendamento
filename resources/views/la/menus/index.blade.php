@@ -8,7 +8,7 @@ use Dwij\Laraadmin\Models\Module;
 @section("contentheader_description", "Listagem de Menus")
 @section("section", "Menus")
 @section("sub_section", "Menus")
-@section("htmlheader_title", "Listadem de Menus")
+@section("htmlheader_title", "Listagem de Menus")
 
 @section("headerElems")
 

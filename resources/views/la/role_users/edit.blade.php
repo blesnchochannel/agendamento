@@ -8,7 +8,7 @@
 @section("section_url", url(config('laraadmin.adminRoute') . '/role_users'))
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listadem de Role Users Edit : ".$role_user->$view_col)
+@section("htmlheader_title", "Listagem de Role Users Edição : ".$role_user->$view_col)
 
 @section("main-content")
 

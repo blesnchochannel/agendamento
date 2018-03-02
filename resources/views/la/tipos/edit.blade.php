@@ -8,7 +8,7 @@
 @section("section_url", url(config('laraadmin.adminRoute') . '/tipos'))
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listadem de Tipos Edit : ".$tipo->$view_col)
+@section("htmlheader_title", "Listagem de Tipos Edição : ".$tipo->$view_col)
 
 @section("main-content")
 

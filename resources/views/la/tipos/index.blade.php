@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Tipos")
 @section("section", "Tipos")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Tipos")
+@section("htmlheader_title", "Listagem de Tipos")
 
 @section("headerElems")
 @la_access("Tipos", "create")

@@ -8,7 +8,7 @@
 @section("section_url", url(config('laraadmin.adminRoute') . '/permissions'))
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listadem de Permission Edit : ".$permission->$view_col)
+@section("htmlheader_title", "Listagem de Permission Edição : ".$permission->$view_col)
 
 @section("main-content")
 

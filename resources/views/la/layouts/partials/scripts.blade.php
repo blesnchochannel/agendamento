@@ -33,37 +33,47 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
 
-<script type="text/javascript">
-	function confirmacao(){
-		alertify.confirm('Excluindo...', 'Tem certeza que deseja excluir?', function(){ alertify.success('Sim') }
-			, function(){ alertify.error('Não')});
-	};
+<script>
+
+    function confirmacao(){
+        alertify.confirm("Tem certeza que deseja excluir?", function(e){
+            if (e) {
+                $("#target").submit();
+                alertify.success("Category was saved.");
+                form.submit();
+                return true;
+            } else {
+                alertify.error("Category not saved.");
+                return false;
+            }
+        });
+    };
 </script>
 
 <script>
-	$(function () {
-		$('.consultoria').mask('00000/0000');
-		$('.data').mask('00/00/0000');
-		$('.start_date').mask('00/00/0000 00:00');
-		$('.end_date').mask('00/00/0000 00:00');
-		$('.tempo').mask('00:00:00');
-		$('.data_tempo').mask('00/00/0000 00:00:00');
-		$('.cep').mask('00000-000');
-		$('.telefone').mask('(00) 0000-0000');
-		var CelularMaskBehavior = function (val) {
-			return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00000';
-		},
-		celularOptions = {
-			onKeyPress: function (val, e, field, options) {
-				field.mask(CelularMaskBehavior.apply({}, arguments), options);
-			}
-		};
+ $(function () {
+  $('.consultoria').mask('00000/0000');
+  $('.data').mask('00/00/0000');
+  $('.start_date').mask('00/00/0000 00:00');
+  $('.end_date').mask('00/00/0000 00:00');
+  $('.tempo').mask('00:00:00');
+  $('.data_tempo').mask('00/00/0000 00:00:00');
+  $('.cep').mask('00000-000');
+  $('.telefone').mask('(00) 0000-0000');
+  var CelularMaskBehavior = function (val) {
+   return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00000';
+},
+celularOptions = {
+   onKeyPress: function (val, e, field, options) {
+    field.mask(CelularMaskBehavior.apply({}, arguments), options);
+}
+};
 
-		$('.celular').mask(CelularMaskBehavior, celularOptions);
-		$('.cnpj').mask('00.000.000/0000-00', {reverse: true});
-		$('.cpf').mask('000.000.000-00', {reverse: true});
-		$('.dinheiro').mask('#.##0,00', {reverse: true});
-	});
+$('.celular').mask(CelularMaskBehavior, celularOptions);
+$('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+$('.cpf').mask('000.000.000-00', {reverse: true});
+$('.dinheiro').mask('#.##0,00', {reverse: true});
+});
 </script>
 
 <script type="text/javascript" >

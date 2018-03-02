@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Installation instructions")
 @section("section", "LA Code Editor")
 @section("sub_section", "Not installed")
-@section("htmlheader_title", "Listadem de Install LA Code Editor")
+@section("htmlheader_title", "Listagem de Install LA Code Editor")
 
 @section('main-content')
 

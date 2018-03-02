@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Regras")
-@section("contentheader_description", "Listagem de Regras")
-@section("section", "Regras")
+@section("contentheader_title", "Profissoes")
+@section("contentheader_description", "Listagem de Profissoes")
+@section("section", "Profissoes")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listagem de Regras")
+@section("htmlheader_title", "Listadem de Profissoes")
 
 @section("headerElems")
-@la_access("Roles", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar Regra</button>
+@la_access("Profissoes", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Profisso</button>
 @endla_access
 @endsection
 
@@ -45,25 +45,22 @@
 	</div>
 </div>
 
-@la_access("Roles", "create")
+@la_access("Profissoes", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Adicionar Role</h4>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Profisso</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\RolesController@store', 'id' => 'role-add-form']) !!}
+			{!! Form::open(['action' => 'LA\ProfissoesController@store', 'id' => 'profisso-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
 					
 					{{--
-					@la_input($module, 'name')
-					@la_input($module, 'display_name')
-					@la_input($module, 'description')
-					@la_input($module, 'parent')
-					@la_input($module, 'tipo')
+					@la_input($module, 'nome')
+					@la_input($module, 'descricao')
 					--}}
 				</div>
 			</div>
@@ -90,35 +87,17 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/role_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/profisso_dt_ajax') }}",
 		language: {
-					"sEmptyTable": "Nenhum registro encontrado",
-					"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-					"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-					"sInfoFiltered": "(Filtrados de _MAX_ registros)",
-					"sInfoPostFix": "",
-					"sInfoThousands": ".",
-					"sLengthMenu": "_MENU_ resultados por página",
-					"sLoadingRecords": "Carregando...",
-					"sProcessing": "Processando...",
-					"sZeroRecords": "Nenhum registro encontrado",
-					"sSearch": "Pesquisar",
-					"oPaginate": {
-						"sNext": "Próximo",
-						"sPrevious": "Anterior",
-						"sFirst": "Primeiro",
-						"sLast": "Último"
-					},
-					"oAria": {
-						"sSortAscending": ": Ordenar colunas de forma ascendente",
-						"sSortDescending": ": Ordenar colunas de forma descendente"
-					}
-				},
+			lengthMenu: "_MENU_",
+			search: "_INPUT_",
+			searchPlaceholder: "Procurar"
+		},
 		@if($show_actions)
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#role-add-form").validate({
+	$("#profisso-add-form").validate({
 		
 	});
 });

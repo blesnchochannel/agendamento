@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de permissões")
 @section("section", "Permissões")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Permissões")
+@section("htmlheader_title", "Listagem de Permissões")
 
 @section("headerElems")
 @la_access("Permissions", "create")

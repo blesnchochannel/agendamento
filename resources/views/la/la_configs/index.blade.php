@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Configurações")
 @section("section", "Configurações")
 @section("sub_section", "")
-@section("htmlheader_title", "Listadem de Configurações")
+@section("htmlheader_title", "Listagem de Configurações")
 
 @section("headerElems")
 @endsection

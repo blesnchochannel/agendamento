@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Pacientes")
 @section("section", "Pacientes")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Pacientes")
+@section("htmlheader_title", "Listagem de Pacientes")
 
 @section("headerElems")
 @la_access("Pacientes", "create")
@@ -130,7 +130,10 @@ $(function () {
 					}
 				},
 		@if($show_actions)
-		columnDefs: [ { orderable: false, targets: [-1] }],
+		columnDefs: [ 
+		{ visible: false, targets: [2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20] },
+		{ orderable: false, targets: [-1] }
+		],
 		@endif
 	});
 	$("#paciente-add-form").validate({

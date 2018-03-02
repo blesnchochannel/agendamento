@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Convenios")
 @section("section", "Convenios")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Convenios")
+@section("htmlheader_title", "Listagem de Convenios")
 
 @section("headerElems")
 @la_access("Convenios", "create")

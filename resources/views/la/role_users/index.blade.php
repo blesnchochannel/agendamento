@@ -4,7 +4,7 @@
 @section("contentheader_description", "Listagem de Role Users")
 @section("section", "Role Users")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Role Users")
+@section("htmlheader_title", "Listagem de Role Users")
 
 @section("headerElems")
 @la_access("Role_Users", "create")

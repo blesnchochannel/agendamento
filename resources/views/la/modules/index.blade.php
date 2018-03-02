@@ -8,7 +8,7 @@ use Dwij\Laraadmin\Models\Module;
 @section("contentheader_description", "Listagem de módulos")
 @section("section", "Módulos")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listadem de Módulos")
+@section("htmlheader_title", "Listagem de Módulos")
 
 @section("headerElems")
 <button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar Módulo</button>
