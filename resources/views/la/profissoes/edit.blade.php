@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title")
-	<a href="{{ url(config('laraadmin.adminRoute') . '/profissoes') }}">Profisso</a> :
+	<a href="{{ url(config('laraadmin.adminRoute') . '/profissoes') }}">Profissão</a> :
 @endsection
 @section("contentheader_description", $profisso->$view_col)
-@section("section", "Profissoes")
+@section("section", "Profissões")
 @section("section_url", url(config('laraadmin.adminRoute') . '/profissoes'))
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listadem de Profissoes Edit : ".$profisso->$view_col)
+@section("htmlheader_title", "Listadem de Profissoes Edição : ".$profisso->$view_col)
 
 @section("main-content")
 

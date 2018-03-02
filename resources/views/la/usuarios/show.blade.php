@@ -69,6 +69,7 @@
 						@la_display($module, 'tipo')
 						@la_display($module, 'valor')
 						@la_display($module, 'cor')
+						@la_display($module, 'profissao')
 					</div>
 				</div>
 			</div>

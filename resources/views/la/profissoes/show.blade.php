@@ -1,7 +1,7 @@
 @extends('la.layouts.app')
 
 @section('htmlheader_title')
-	Profisso View
+	Visualização de Profissão
 @endsection
 
 

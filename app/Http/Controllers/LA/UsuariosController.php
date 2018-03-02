@@ -23,7 +23,7 @@ class UsuariosController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'nome';
-	public $listing_cols = ['id', 'nome', 'context_id', 'email', 'password', 'tipo', 'valor', 'cor'];
+	public $listing_cols = ['id', 'nome', 'context_id', 'email', 'password', 'tipo', 'valor', 'cor', 'profissao'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
@@ -58,7 +58,7 @@ class UsuariosController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new user.
+	 * Show the form for creating a new usuario.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -68,7 +68,7 @@ class UsuariosController extends Controller
 	}
 
 	/**
-	 * Store a newly created user in database.
+	 * Store a newly created usuario in database.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -95,7 +95,7 @@ class UsuariosController extends Controller
 	}
 
 	/**
-	 * Display the specified user.
+	 * Display the specified usuario.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -104,21 +104,21 @@ class UsuariosController extends Controller
 	{
 		if(Module::hasAccess("Usuarios", "view")) {
 			
-			$user = Usuario::find($id);
-			if(isset($user->id)) {
+			$usuario = Usuario::find($id);
+			if(isset($usuario->id)) {
 				$module = Module::get('Usuarios');
-				$module->row = $user;
+				$module->row = $usuario;
 				
 				return view('la.usuarios.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('user', $user);
+				])->with('usuario', $usuario);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("user"),
+					'record_name' => ucfirst("usuario"),
 				]);
 			}
 		} else {
@@ -127,7 +127,7 @@ class UsuariosController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified user.
+	 * Show the form for editing the specified usuario.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -135,20 +135,20 @@ class UsuariosController extends Controller
 	public function edit($id)
 	{
 		if(Module::hasAccess("Usuarios", "edit")) {			
-			$user = Usuario::find($id);
-			if(isset($user->id)) {	
+			$usuario = Usuario::find($id);
+			if(isset($usuario->id)) {	
 				$module = Module::get('Usuarios');
 				
-				$module->row = $user;
+				$module->row = $usuario;
 				
 				return view('la.usuarios.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('user', $user);
+				])->with('usuario', $usuario);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("user"),
+					'record_name' => ucfirst("usuario"),
 				]);
 			}
 		} else {
@@ -157,7 +157,7 @@ class UsuariosController extends Controller
 	}
 
 	/**
-	 * Update the specified user in storage.
+	 * Update the specified usuario in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -185,7 +185,7 @@ class UsuariosController extends Controller
 	}
 
 	/**
-	 * Remove the specified user from storage.
+	 * Remove the specified usuario from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -236,8 +236,8 @@ class UsuariosController extends Controller
 				}
 				
 				if(Module::hasAccess("Usuarios", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.usuarios.destroy', $data->data[$i][0]], 'method' => 'delete', 'id' => "target", 'style'=>'display:inline']);
-					$output .= ' <button class="btn btn-danger btn-xs" id="btn-submit" onclick="confirmacao();" type="button"><i class="fa fa-times"></i></button>';
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.usuarios.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
 				$data->data[$i][] = (string)$output;

@@ -3,12 +3,12 @@
 @section("contentheader_title")
 	<a href="{{ url(config('laraadmin.adminRoute') . '/usuarios') }}">Usuario</a> :
 @endsection
-@section("contentheader_description", $user->$view_col)
+@section("contentheader_description", $usuario->$view_col)
 @section("section", "Usuarios")
 @section("section_url", url(config('laraadmin.adminRoute') . '/usuarios'))
 @section("sub_section", "Editar")
 
-@section("htmlheader_title", "Listagem de Usuarios Edição: ".$user->$view_col)
+@section("htmlheader_title", "Listadem de Usuarios Edit : ".$usuario->$view_col)
 
 @section("main-content")
 
@@ -29,7 +29,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($user, ['route' => [config('laraadmin.adminRoute') . '.usuarios.update', $user->id ], 'method'=>'PUT', 'id' => 'user-edit-form']) !!}
+				{!! Form::model($usuario, ['route' => [config('laraadmin.adminRoute') . '.usuarios.update', $usuario->id ], 'method'=>'PUT', 'id' => 'usuario-edit-form']) !!}
 					@la_form($module)
 					
 					{{--
@@ -40,6 +40,7 @@
 					@la_input($module, 'tipo')
 					@la_input($module, 'valor')
 					@la_input($module, 'cor')
+					@la_input($module, 'profissao')
 					--}}
                     <br>
 					<div class="form-group">
@@ -56,7 +57,7 @@
 @push('scripts')
 <script>
 $(function () {
-	$("#user-edit-form").validate({
+	$("#usuario-edit-form").validate({
 		
 	});
 });

@@ -66,6 +66,7 @@
 						@la_input($module, 'tipo')
 						@la_input($module, 'valor')
 						@la_input($module, 'cor')
+						@la_input($module, 'profissao')
 						--}}
 					</div>
 				</div>
