@@ -236,8 +236,8 @@ class PlanosController extends Controller
 				}
 				
 				if(Module::hasAccess("Planos", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.planos.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
-					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.planos.destroy', $data->data[$i][0]], 'method' => 'delete', 'id' => 'target'.$data->data[$i][0], 'style'=>'display:inline']);
+					$output .= ' <button class="btn btn-danger btn-xs" type="button" onclick="confirmacao('.$data->data[$i][0].');"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
 				$data->data[$i][] = (string)$output;
