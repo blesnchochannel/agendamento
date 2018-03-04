@@ -48,7 +48,7 @@ class LAFormMaker
 				$params['id'] = $field_name;
 			}
 			if(!isset($params['placeholder'])) {
-				$params['placeholder'] = 'Enter '.$label;
+				$params['placeholder'] = 'Digite o(a) '.$label;
 			}
 			if($minlength) {
 				$params['data-rule-minlength'] = $minlength;
