@@ -4,11 +4,11 @@
 @section("contentheader_description", "Listagem de Atendimentos")
 @section("section", "Atendimentos")
 @section("sub_section", "Listagem")
-@section("htmlheader_title", "Listagem de Atendimentos")
+@section("htmlheader_title", "Listadem de Atendimentos")
 
 @section("headerElems")
 @la_access("Atendimentos", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar  Atendimento</button>
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Adicionar Atendimento</button>
 @endla_access
 @endsection
 

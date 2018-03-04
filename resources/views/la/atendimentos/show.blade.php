@@ -20,10 +20,12 @@
 			</div>
 		</div>
 		<div class="col-md-3">
-			
 		</div>
 		<div class="col-md-4">
-			
+			<!--
+			<div class="teamview">
+			</div>
+			-->
 			<div class="dats1 pb">
 				
 			</div>

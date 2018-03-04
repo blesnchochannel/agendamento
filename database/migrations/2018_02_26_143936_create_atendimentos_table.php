@@ -18,7 +18,7 @@ class CreateAtendimentosTable extends Migration
     public function up()
     {
         Module::generate("Atendimentos", 'atendimentos', 'aplicador', 'fa-user-md', [
-            ["aplicador", "Aplicador", "Dropdown", false, "", 0, 0, true, "@users"],
+            ["aplicador", "Aplicador", "Dropdown", false, "", 0, 0, true, "@usuarios"],
             ["paciente", "Paciente", "Dropdown", false, "", 0, 0, true, "@pacientes"],
             ["data", "Data do Atendimento", "Datetime", false, "", 0, 0, true],
             ["observacoes", "Observações", "Textarea", false, "", 0, 0, true],
