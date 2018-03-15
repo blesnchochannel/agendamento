@@ -86,7 +86,7 @@
 						@la_input($module, 'all_day')
 						@la_input($module, 'start_date')
 						@la_input($module, 'end_date')
-						@la_input($module, 'tempo')
+						@la_input($module, 'tempo_de_atendimento')
 						--}}
 					</div>
 				</div>

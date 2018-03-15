@@ -67,7 +67,7 @@
 						@la_display($module, 'all_day')
 						@la_display($module, 'start_date')
 						@la_display($module, 'end_date')
-						@la_display($module, 'tempo')
+						@la_display($module, 'tempo_de_atendimento')
 					</div>
 				</div>
 			</div>

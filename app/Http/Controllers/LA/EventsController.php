@@ -25,7 +25,7 @@ class EventsController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'aplicador';
-	public $listing_cols = ['id', 'aplicador', 'paciente', 'all_day', 'start_date', 'end_date', 'tempo'];
+	public $listing_cols = ['id', 'aplicador', 'paciente', 'all_day', 'start_date', 'end_date', 'tempo_de_atendimento'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
