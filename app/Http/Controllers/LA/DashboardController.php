@@ -79,11 +79,11 @@ class DashboardController extends Controller
 
             if (isset($tempo[$ano][$mes][$id]))
             {
-                $tempo[$ano][$mes][$id] += $value->tempo;
+                $tempo[$ano][$mes][$id] += $value->tempo_de_atendimento;
             }
             else
             {
-                $tempo[$ano][$mes][$id] = $value->tempo;
+                $tempo[$ano][$mes][$id] = $value->tempo_de_atendimento;
             }
 
             $resultado[$ano][$mes][$id] = ['ano' => $year[$id], 'mes' => $month[$id],'nome' => $aplicador, 'tempo' => $tempo[$ano][$mes][$id], 'valor' => $valor];
@@ -150,11 +150,11 @@ class DashboardController extends Controller
 
             if (isset($tempo[$ano][$mes][$id]))
             {
-                $tempo[$ano][$mes][$id] += $value->tempo;
+                $tempo[$ano][$mes][$id] += $value->tempo_de_atendimento;
             }
             else
             {
-                $tempo[$ano][$mes][$id] = $value->tempo;
+                $tempo[$ano][$mes][$id] = $value->tempo_de_atendimento;
             }
 
             $resultado[$ano][$mes][$id] = ['ano' => $year[$id], 'mes' => $month[$id],'nome' => $paciente, 'tempo' => $tempo[$ano][$mes][$id], 'plano' => $plano, 'descricao' => $descricao];
