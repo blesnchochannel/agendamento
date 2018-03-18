@@ -33,13 +33,15 @@ class Calendar
             'center' => 'title',
             'right' => 'month,agendaWeek,agendaDay,listWeek',
         ],
-        'eventLimit' => true,
+        'eventLimit' => true, // allow "more" link when too many events
         'locale' => 'pt-br',
         'buttonIcons' => false, // show the prev/next text
         'weekNumbers' => true,
         'navLinks' => true, // can click day/week names to navigate views
-        'editable' => true,
+        'editable' => false,
         'defaultView' => 'agendaWeek',
+        'timeFormat' => 'hh:mm',
+        'timezone' => 'America/Sao_Paulo',
         'businessHours' => [
             'dow' => [ 1, 2, 3, 4, 5 ],
             'start' => '08:00',
@@ -79,12 +81,14 @@ class Calendar
      * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param string          $id    event Id
+     * @param array           $dow
+     * @param string          $url
      * @param array           $options
      * @return SimpleEvent
      */
-    public static function event($title, $isAllDay, $start, $end, $id = null, $options = [])
+    public static function event($title, $isAllDay, $start, $end, $id = null, $dow = [], $url, $options = [])
     {
-        return new SimpleEvent($title, $isAllDay, $start, $end, $id, $options);
+        return new SimpleEvent($title, $isAllDay, $start, $end, $id, $dow, $url, $options);
     }
 
     /**

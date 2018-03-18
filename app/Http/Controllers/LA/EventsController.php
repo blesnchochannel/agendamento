@@ -25,7 +25,7 @@ class EventsController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'aplicador';
-	public $listing_cols = ['id', 'aplicador', 'paciente', 'all_day', 'start_date', 'end_date', 'tempo_de_atendimento'];
+	public $listing_cols = ['id', 'aplicador', 'paciente', 'all_day', 'start_date', 'end_date', 'dow', 'tempo_de_atendimento'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
@@ -80,10 +80,11 @@ class EventsController extends Controller
                 	new \DateTime($value->start_date), //Start time
                 	new \DateTime($value->end_date), //End time
                 	$value->id, //Event ID
+                	str_replace('"', '', $value->dow),
+                	url(config('laraadmin.adminRoute')."/events/".$value->id."/edit"),
                 	[
                 		'backgroundColor' => $value->back_cor,
                 		'borderColor' => $value->back_cor,
-                		//'description' => $value->status,
                 	]                
                 );
 		}
@@ -325,11 +326,11 @@ class EventsController extends Controller
 
 			if (isset($tempo[$ano][$id]))
 			{
-				$tempo[$ano][$id] += $value->tempo;
+				$tempo[$ano][$id] += $value->tempo_de_atendimento;
 			}
 			else
 			{
-				$tempo[$ano][$id] = $value->tempo;
+				$tempo[$ano][$id] = $value->tempo_de_atendimento;
 			}
 
 			$resultado[$ano][$id] = ['ano' => $year[$id], 'nome' => $paciente, 'tempo' => $tempo[$ano][$id], 'plano' => $plano, 'limite' => $limite];

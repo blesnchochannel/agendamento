@@ -62,12 +62,13 @@
 						<h4>Informações Gerais</h4>
 					</div>
 					<div class="panel-body">
-						@la_display($module, 'aplicador')
-						@la_display($module, 'paciente')
-						@la_display($module, 'all_day')
-						@la_display($module, 'start_date')
-						@la_display($module, 'end_date')
-						@la_display($module, 'tempo_de_atendimento')
+						@la_input($module, 'aplicador')
+						@la_input($module, 'paciente')
+						@la_input($module, 'all_day')
+						@la_input($module, 'start_date')
+						@la_input($module, 'end_date')
+						@la_input($module, 'dow')
+						@la_input($module, 'tempo_de_atendimento')
 					</div>
 				</div>
 			</div>

@@ -32,4 +32,18 @@ interface Event
      */
     public function getEnd();
 
+    /**
+     * Get the dow
+     *
+     * @return Dow
+     */
+    public function getDow();
+
+    /**
+     * Get the event's url
+     *
+     * @return string
+     */
+    public function getUrl();
+
 }

@@ -40,6 +40,16 @@ class SimpleEvent implements IdentifiableEvent
     /**
      * @var array
      */
+    private $dow;
+
+    /**
+     * @var string
+     */
+    public $url;
+
+    /**
+     * @var array
+     */
     private $options;
 
     /**
@@ -48,15 +58,19 @@ class SimpleEvent implements IdentifiableEvent
      * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param int|string|null $id
+     * @param array           $dow
+     * @param string          $url
      * @param array           $options
      */
-    public function __construct($title, $isAllDay, $start, $end, $id = null, $options = [])
+    public function __construct($title, $isAllDay, $start, $end, $id = null, $dow = [], $url, $options = [])
     {
         $this->title    = $title;
         $this->isAllDay = $isAllDay;
         $this->start    = $start instanceof DateTime ? $start : new DateTime($start);
         $this->end      = $start instanceof DateTime ? $end : new DateTime($end);
         $this->id       = $id;
+        $this->dow      = $dow;
+        $this->url      = $url;
         $this->options  = $options;
     }
 
@@ -108,6 +122,26 @@ class SimpleEvent implements IdentifiableEvent
     public function getEnd()
     {
         return $this->end;
+    }
+
+    /**
+     * Get the dow event dow
+     *
+     * @return array
+     */
+    public function getDow()
+    {
+        return $this->dow;
+    }
+
+    /**
+     * Get the event's url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 
     /**

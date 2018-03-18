@@ -24,7 +24,7 @@
 
       <link href="{{ asset('la-assets/css/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
 
-      <link href="{{ asset('la-assets/css/fullcalendar.print.css') }}" rel="stylesheet" type="text/css" media="print"/>
+      <link href="{{ asset('la-assets/css/fullcalendar.print.min.css') }}" rel="stylesheet" type="text/css" media="print"/>
 
 
       <!-- CSS -->

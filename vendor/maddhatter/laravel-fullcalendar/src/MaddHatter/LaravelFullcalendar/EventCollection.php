@@ -38,6 +38,8 @@ class EventCollection
             'allDay' => $event->isAllDay(),
             'start' => $event->getStart()->format('c'),
             'end' => $event->getEnd()->format('c'),
+            'dow' => $event->getDow(),
+            'url' => $event->getUrl(),
         ];
 
         $eventOptions = method_exists($event, 'getEventOptions') ? $event->getEventOptions() : [];

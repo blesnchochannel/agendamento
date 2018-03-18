@@ -23,6 +23,7 @@ class CreateEventsTable extends Migration
             ["all_day", "Dia Todo", "Checkbox", false, "0", 0, 0, false],
             ["start_date", "Data Inicial", "Datetime", false, "", 0, 0, true],
             ["end_date", "Data Final", "Datetime", false, "", 0, 0, true],
+            ["dow", "Recurrência", "Multiselect", false, "", 0, 0, false, ["1","2","3","4","5","6"]],
             ["tempo_de_atendimento", "Tempo de Atendimento", "Float", false, "", 0, 11, false],
         ]);
 		
