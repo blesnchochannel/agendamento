@@ -76,16 +76,24 @@ class EventsController extends Controller
 		foreach ($data as $key => $value) {
 			$events[] = Calendar::event(
 					"Paciente: ".$value->paciente, //Event title
-                	$value->all_day, //Full day event
-                	new \DateTime($value->start_date), //Start time
-                	new \DateTime($value->end_date), //End time
+                	$allday = ($value->all_day == 0) ? false : true, //Full day event
+                	date('H:i:s', strtotime($value->start_date)),
+                	date('H:i:s', strtotime($value->end_date)),
+                	//new \DateTime($value->start_date), //Start time
+                	//new \DateTime($value->end_date), //End time
                 	$value->id, //Event ID
                 	str_replace('"', '', $value->dow),
                 	url(config('laraadmin.adminRoute')."/events/".$value->id."/edit"),
                 	[
+                		[
+                			'start' => date('Y-m-d', strtotime($value->start_date)),
+                			'end' => date('Y-m-d', strtotime($value->end_date)),
+                		]
+                	],  
+                	[
                 		'backgroundColor' => $value->back_cor,
                 		'borderColor' => $value->back_cor,
-                	]                
+                	]                	              
                 );
 		}
 		//}

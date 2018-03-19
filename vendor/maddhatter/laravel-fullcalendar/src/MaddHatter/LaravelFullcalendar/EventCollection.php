@@ -36,10 +36,11 @@ class EventCollection
             'id' => $this->getEventId($event),
             'title' => $event->getTitle(),
             'allDay' => $event->isAllDay(),
-            'start' => $event->getStart()->format('c'),
-            'end' => $event->getEnd()->format('c'),
+            'start' => $event->getStart(),//->format('c'),
+            'end' => $event->getEnd(),//->format('c'),
             'dow' => $event->getDow(),
             'url' => $event->getUrl(),
+            'ranges' => $event->getRanges(),
         ];
 
         $eventOptions = method_exists($event, 'getEventOptions') ? $event->getEventOptions() : [];

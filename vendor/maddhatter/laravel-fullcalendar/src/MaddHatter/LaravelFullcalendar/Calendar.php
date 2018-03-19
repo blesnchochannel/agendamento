@@ -39,6 +39,7 @@ class Calendar
         'weekNumbers' => true,
         'navLinks' => true, // can click day/week names to navigate views
         'editable' => false,
+        'height' => "auto",
         'defaultView' => 'agendaWeek',
         'timeFormat' => 'hh:mm',
         'timezone' => 'America/Sao_Paulo',
@@ -83,12 +84,13 @@ class Calendar
      * @param string          $id    event Id
      * @param array           $dow
      * @param string          $url
+     * @param array           $ranges
      * @param array           $options
      * @return SimpleEvent
      */
-    public static function event($title, $isAllDay, $start, $end, $id = null, $dow = [], $url, $options = [])
+    public static function event($title, $isAllDay, $start, $end, $id = null, $dow = [], $url, $ranges = [], $options = [])
     {
-        return new SimpleEvent($title, $isAllDay, $start, $end, $id, $dow, $url, $options);
+        return new SimpleEvent($title, $isAllDay, $start, $end, $id, $dow, $url, $ranges, $options);
     }
 
     /**
@@ -112,7 +114,7 @@ class Calendar
 
         return $this->view->make('fullcalendar::script', [
             'id' => $this->getId(),
-            'options' => $options,
+            'options' => $options,            
         ]);
     }
 

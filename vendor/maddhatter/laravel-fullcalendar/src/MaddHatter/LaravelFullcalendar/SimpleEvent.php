@@ -50,6 +50,11 @@ class SimpleEvent implements IdentifiableEvent
     /**
      * @var array
      */
+    private $ranges;
+
+    /**
+     * @var array
+     */
     private $options;
 
     /**
@@ -60,17 +65,19 @@ class SimpleEvent implements IdentifiableEvent
      * @param int|string|null $id
      * @param array           $dow
      * @param string          $url
+     * @param array           $ranges
      * @param array           $options
      */
-    public function __construct($title, $isAllDay, $start, $end, $id = null, $dow = [], $url, $options = [])
+    public function __construct($title, $isAllDay, $start, $end, $id = null, $dow = [], $url, $ranges = [], $options = [])
     {
         $this->title    = $title;
         $this->isAllDay = $isAllDay;
-        $this->start    = $start instanceof DateTime ? $start : new DateTime($start);
-        $this->end      = $start instanceof DateTime ? $end : new DateTime($end);
+        $this->start    = $start;// instanceof DateTime ? $start : new DateTime($start);
+        $this->end      = $end; //$start instanceof DateTime ? $end : new DateTime($end);
         $this->id       = $id;
         $this->dow      = $dow;
         $this->url      = $url;
+        $this->ranges   = $ranges;
         $this->options  = $options;
     }
 
@@ -125,7 +132,7 @@ class SimpleEvent implements IdentifiableEvent
     }
 
     /**
-     * Get the dow event dow
+     * Get the event's dow
      *
      * @return array
      */
@@ -142,6 +149,16 @@ class SimpleEvent implements IdentifiableEvent
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Get the event's ranges
+     *
+     * @return array
+     */
+    public function getRanges()
+    {
+        return $this->ranges;
     }
 
     /**
