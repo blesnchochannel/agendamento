@@ -15,7 +15,7 @@
 					<div class="profile-icon text-primary"><i class="fa {{ $module->fa_icon }}"></i></div>
 				</div>
 				<div class="col-md-9">
-					<h4 class="name">{{ $user->$view_col }}</h4>
+					<h4 class="name">{{ $usuario->$view_col }}</h4>
 				</div>
 			</div>
 		</div>
@@ -38,11 +38,11 @@
 		</div>
 		<div class="col-md-1 actions">
 			@la_access("Usuarios", "edit")
-				<a href="{{ url(config('laraadmin.adminRoute') . '/usuarios/'.$user->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+				<a href="{{ url(config('laraadmin.adminRoute') . '/usuarios/'.$usuario->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
 			
 			@la_access("Usuarios", "delete")
-				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.usuarios.destroy', $user->id], 'method' => 'delete', 'style'=>'display:inline']) }}
+				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.usuarios.destroy', $usuario->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
 				{{ Form::close() }}
 			@endla_access
