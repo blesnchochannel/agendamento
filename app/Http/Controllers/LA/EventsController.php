@@ -282,6 +282,18 @@ class EventsController extends Controller
 				if($col == $this->view_col) {
 					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/events/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
+				if($col == 'dow') {
+					$data->data[$i][$j] = str_replace("1", "Segunda", $data->data[$i][$j]);
+					$data->data[$i][$j] = str_replace("2", "Terça", $data->data[$i][$j]);
+					$data->data[$i][$j] = str_replace("3", "Quarta", $data->data[$i][$j]);
+					$data->data[$i][$j] = str_replace("4", "Quinta", $data->data[$i][$j]);
+					$data->data[$i][$j] = str_replace("5", "Sexta", $data->data[$i][$j]);
+					$data->data[$i][$j] = str_replace("6", "Sábado", $data->data[$i][$j]);
+					$data->data[$i][$j] = preg_replace("/[^-\wçá,]/", "", $data->data[$i][$j]);
+				}
+				if($col == 'tempo_de_atendimento') {
+					$data->data[$i][$j] = $data->data[$i][$j].' horas';
+				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
 				// }

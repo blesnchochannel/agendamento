@@ -8,7 +8,7 @@
 
 @section("headerElems")
 @la_access("Events", "create")
-<button class="btn btn-success btn-sm pull-right hidden-print nao-imprimir" data-toggle="modal" data-target="#AddModal">Adicionar Agendamento</button>
+<button id="adicionar_agendamento" class="btn btn-success btn-sm pull-right hidden-print nao-imprimir" data-toggle="modal" data-target="#AddModal">Adicionar Agendamento</button>
 @endla_access
 @endsection
 
@@ -161,7 +161,31 @@
 	<script>
 		$( document ).ready(function() {
 			document.getElementsByTagName("SELECT")[3].setAttribute("onchange", "buscaPacientes(this.value);");
+			document.getElementById('start_date').setAttribute("onchange", "calculaAutomatico();");
+			document.getElementById('end_date').setAttribute("onchange", "calculaAutomatico();");
+			document.getElementById('dow').setAttribute("onchange", "calculaAutomatico();");
+			document.getElementById('dow').options[0].innerHTML = "Segunda";
+			document.getElementById('dow').options[1].innerHTML = "Terça";
+			document.getElementById('dow').options[2].innerHTML = "Quarta";
+			document.getElementById('dow').options[3].innerHTML = "Quinta";
+			document.getElementById('dow').options[4].innerHTML = "Sexta";
+			document.getElementById('dow').options[5].innerHTML = "Sábado";
+			document.getElementById('adicionar_agendamento').setAttribute("onclick", "mascaraDias();");
+			
 		});
+	</script>
+
+	<script>
+		
+		function mascaraDias(){
+			document.getElementById('dow').options[0].innerHTML = "Segunda";
+			document.getElementById('dow').options[1].innerHTML = "Terça";
+			document.getElementById('dow').options[2].innerHTML = "Quarta";
+			document.getElementById('dow').options[3].innerHTML = "Quinta";
+			document.getElementById('dow').options[4].innerHTML = "Sexta";
+			document.getElementById('dow').options[5].innerHTML = "Sábado";
+		}
+
 	</script>
 
 	<script>
@@ -183,6 +207,75 @@
   			}
   			xmlhttp.open("GET","{{ url(config('laraadmin.adminRoute') . '/ajaxpacientes2?q=') }}"+str,true);
   			xmlhttp.send();
+  		}
+  	</script>
+
+  	<script>
+  		function calculaAutomatico(){
+
+  			var data_inicial = document.getElementById('start_date').value;
+  			var data_final = document.getElementById('end_date').value;
+  			var recurrencia = $('#dow').val();
+
+  			function converteData(data){
+  				var dateTime = data.split(" ");
+  				var date = dateTime[0].split("/");
+  				var time = dateTime[1].split(":");
+  				var newdate = date.reverse().join(",");
+  				var newtime = time.join(":");
+  				var novadata = newdate+' '+newtime;
+  				return novadata;
+  			}
+
+  			function converteSoAHora(data){
+  				var dateTime = data.split(" ");
+  				var time = dateTime[1].split(":");
+  				var newtime = time.join(":");
+  				return newtime;
+  			}	
+
+  			function diff_hours(dt1, dt2){
+
+  				var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+  				diff /= (60 * 60);
+  				return diff;
+  				//return Math.abs(Math.round(diff));
+
+  			}
+
+  			var hora1 = converteSoAHora(data_inicial);
+  			var hora2 = converteSoAHora(data_final);
+
+  			var dt1 = new Date("01/01/2007 " + hora1);
+  			var dt2 = new Date("01/01/2007 " + hora2);
+
+  			var total_de_horas = diff_hours(dt1, dt2);
+
+  			function countCertainDays( days, d0, d1 ) {
+  				var ndays = 1 + Math.round((d1-d0)/(24*3600*1000));
+  				var sum = function(a,b) {
+  					return a + Math.floor( ( ndays + (d0.getDay()+6-b) % 7 ) / 7 ); 
+  				};
+  				return days.reduce(sum,0);
+  			}
+
+  			function converteSoAData(data){
+  				var dateTime = data.split(" ");
+  				var date = dateTime[0].split("/");
+  				var newdate = date.reverse().join(",");
+  				return newdate;
+  			}
+
+  			var sodata1 = converteSoAData(data_inicial);
+  			var sodata2 = converteSoAData(data_final);
+
+  			var total_de_dias = countCertainDays(recurrencia,new Date(sodata1),new Date(sodata2));
+
+  			var calculototal = total_de_dias * total_de_horas;
+
+  			var tempo_de_atendimento = document.getElementById('tempo_de_atendimento');
+
+  			tempo_de_atendimento.value = calculototal;
   		}
   	</script>
 
